@@ -6,6 +6,7 @@ Node with various modules.
 ## Requirements
 
 * Node
+* and other modules
 
 ## Thank You
 
