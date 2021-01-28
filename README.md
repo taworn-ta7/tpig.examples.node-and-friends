@@ -10,9 +10,10 @@ Node with various modules.
 
 ## Thank You
 
-* winston, https://github.com/winstonjs/winston
-* mysql, https://www.mysql.com
+* express, https://expressjs.com
 * sequelize, https://sequelize.org
+* mysql, https://github.com/sidorares/node-mysql2
+* winston, https://github.com/winstonjs/winston
 * gitignore, https://github.com/github/gitignore and https://gitignore.io
 
 ## Last

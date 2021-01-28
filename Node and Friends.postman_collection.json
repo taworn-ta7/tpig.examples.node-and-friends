@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "c35e64e9-f3df-4eb8-a03b-e3cd601cedbd",
+		"name": "Node and Friends",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "with-express",
+			"item": [
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/tests/",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"tests",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
