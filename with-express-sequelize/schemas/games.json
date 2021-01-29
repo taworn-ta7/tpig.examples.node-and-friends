@@ -1,0 +1,72 @@
+{
+    "$id": "http://node-and-friends/with-express-sequelize/schemas/games.json",
+    "definitions": {
+        "Users": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "username": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 50
+                }
+            },
+            "required": [
+                "username",
+                "password"
+            ]
+        },
+        "Profiles": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "uid": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                }
+            },
+            "required": [
+                "uid",
+                "name"
+            ]
+        },
+        "Items": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "pid": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                }
+            },
+            "required": [
+                "pid",
+                "name"
+            ]
+        }
+    }
+}
