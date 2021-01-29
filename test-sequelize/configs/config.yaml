@@ -2,4 +2,4 @@ mysql:
     host: localhost
     username: user
     password: user//pass
-    database: test_sequelize
+    database: node_and_friends
