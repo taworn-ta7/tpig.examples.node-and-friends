@@ -3,9 +3,29 @@ const { DataTypes } = require('sequelize')
 const db = require('../libs/db')
 
 module.exports = db.define('Users', {
-    id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-    username: { type: DataTypes.STRING(20), allowNull: false },
-    password: { type: DataTypes.TEXT, allowNull: false, defaultValue: '' }
+    id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        validate: {
+            min: 0
+        }
+    },
+    username: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        validate: {
+            len: [4, 20]
+        }
+    },
+    password: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+            len: [4, 20]
+        }
+    }
 }, {
     tableName: 'users'
 })

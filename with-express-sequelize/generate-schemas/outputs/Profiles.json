@@ -6,10 +6,7 @@
     "properties": {
         "id": {
             "$id": "/with-express-sequelize/properties/id",
-            "type": [
-                "integer",
-                "null"
-            ],
+            "type": "integer",
             "format": "int64"
         },
         "uid": {
@@ -43,6 +40,7 @@
         }
     },
     "required": [
+        "id",
         "uid",
         "name",
         "createdAt",
