@@ -1,0 +1,45 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$id": "/with-express-sequelize/Items.json",
+    "title": "Item",
+    "type": "object",
+    "properties": {
+        "id": {
+            "$id": "/with-express-sequelize/properties/id",
+            "type": [
+                "integer",
+                "null"
+            ],
+            "format": "int64"
+        },
+        "pid": {
+            "$id": "/with-express-sequelize/properties/pid",
+            "type": "integer",
+            "format": "int64"
+        },
+        "name": {
+            "$id": "/with-express-sequelize/properties/name",
+            "type": "string",
+            "maxLength": 100
+        },
+        "createdAt": {
+            "$id": "/with-express-sequelize/properties/createdAt",
+            "type": "string",
+            "format": "date-time"
+        },
+        "updatedAt": {
+            "$id": "/with-express-sequelize/properties/updatedAt",
+            "type": "string",
+            "format": "date-time"
+        },
+        "Profile": {
+            "$ref": "#/definitions/Profiles"
+        }
+    },
+    "required": [
+        "pid",
+        "name",
+        "createdAt",
+        "updatedAt"
+    ]
+}

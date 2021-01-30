@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$id": "/with-express-sequelize/Users.json",
+    "title": "User",
+    "type": "object",
+    "properties": {
+        "id": {
+            "$id": "/with-express-sequelize/properties/id",
+            "type": [
+                "integer",
+                "null"
+            ],
+            "format": "int64"
+        },
+        "username": {
+            "$id": "/with-express-sequelize/properties/username",
+            "type": "string",
+            "maxLength": 20
+        },
+        "password": {
+            "$id": "/with-express-sequelize/properties/password",
+            "type": "string",
+            "default": ""
+        },
+        "createdAt": {
+            "$id": "/with-express-sequelize/properties/createdAt",
+            "type": "string",
+            "format": "date-time"
+        },
+        "updatedAt": {
+            "$id": "/with-express-sequelize/properties/updatedAt",
+            "type": "string",
+            "format": "date-time"
+        },
+        "profiles": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Profiles"
+            }
+        }
+    },
+    "required": [
+        "username",
+        "password",
+        "createdAt",
+        "updatedAt"
+    ]
+}

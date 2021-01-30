@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "generate": "node generate-models/generate.js",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
