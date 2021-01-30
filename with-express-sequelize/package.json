@@ -5,11 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "generate": "node generate-models/generate.js",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
   "license": "ISC",
   "dependencies": {
+    "@alt3/sequelize-to-json-schemas": "^0.3.54",
     "ajv": "^7.0.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
