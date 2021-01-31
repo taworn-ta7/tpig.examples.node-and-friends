@@ -16,7 +16,7 @@ module.exports = db.define('Users', {
         type: DataTypes.STRING(20),
         allowNull: false,
         validate: {
-            len: [4, 20]
+            len: 4
         }
     },
     password: {
