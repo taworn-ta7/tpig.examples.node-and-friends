@@ -5,19 +5,19 @@ const Ajv = require('ajv').default
 const ajv = new Ajv({
     metaSchema,
     schemas: [
-        /*
         require('./Users.json'),
         require('./Profiles.json'),
         require('./Items.json')
-        */
+        /*
         require('./allSchemas.json')
+        */
     ]
 })
 
-const baseUri = 'https://node-and-friends/with-sequelize/allSchemas.json'
-const Users = ajv.compile({ '$ref': `${baseUri}#/definitions/user` })
-const Profiles = ajv.compile({ '$ref': `${baseUri}#/definitions/profile` })
-const Items = ajv.compile({ '$ref': `${baseUri}#/definitions/item` })
+const baseUri = 'https://node-and-friends/with-sequelize'
+const Users = ajv.compile({ '$ref': `${baseUri}/Users.json#/definitions/user` })
+const Profiles = ajv.compile({ '$ref': `${baseUri}/Profiles.json#/definitions/profile` })
+const Items = ajv.compile({ '$ref': `${baseUri}/Items.json#/definitions/item` })
 
 module.exports = {
     Users,

@@ -23,7 +23,7 @@
                     "type": "string"
                 },
                 "profile": {
-                    "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
+                    "$ref": "https://node-and-friends/with-sequelize/Profiles.json#/definitions/profile"
                 }
             },
             "if": {
