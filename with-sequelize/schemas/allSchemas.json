@@ -1,0 +1,148 @@
+{
+    "$id": "https://node-and-friends/with-sequelize/allSchemas.json",
+    "definitions": {
+        "user": {
+            "$id": "#user",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "username": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 255
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
+                    }
+                }
+            },
+            "if": {
+                "properties": {
+                    "id": {
+                        "const": 0
+                    }
+                },
+                "required": [
+                    "username",
+                    "password"
+                ]
+            },
+            "then": {
+                "required": []
+            }
+        },
+        "profile": {
+            "$id": "#profile",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "uid": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "user": {
+                    "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/user"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/item"
+                    }
+                }
+            },
+            "anyOf": [
+                {
+                    "properties": {
+                        "id": {
+                            "const": 0
+                        }
+                    },
+                    "required": [
+                        "uid",
+                        "name"
+                    ]
+                }
+            ],
+            "required": [
+                "id"
+            ]
+        },
+        "item": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "uid": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "profile": {
+                    "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
+                }
+            },
+            "anyOf": [
+                {
+                    "properties": {
+                        "id": {
+                            "const": 0
+                        }
+                    },
+                    "required": [
+                        "uid",
+                        "name"
+                    ]
+                }
+            ],
+            "required": [
+                "id"
+            ]
+        }
+    }
+}

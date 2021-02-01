@@ -2,16 +2,15 @@
     "$id": "https://node-and-friends/with-sequelize/Profiles.json",
     "definitions": {
         "profile": {
+            "$id": "#profile",
             "type": "object",
             "properties": {
                 "id": {
                     "type": "integer",
-                    "format": "int64",
                     "minimum": 0
                 },
                 "uid": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "integer"
                 },
                 "name": {
                     "type": "string",
@@ -27,12 +26,12 @@
                     "format": "date-time"
                 },
                 "user": {
-                    "$ref": "#/definitions/user"
+                    "$ref": "#user"
                 },
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/item"
+                        "$ref": "#item"
                     }
                 }
             },
