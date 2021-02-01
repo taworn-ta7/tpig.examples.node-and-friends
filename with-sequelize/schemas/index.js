@@ -14,9 +14,10 @@ const ajv = new Ajv({
     ]
 })
 
-const Users = ajv.compile({ '$ref': 'https://node-and-friends/with-sequelize/allSchemas.json#/definitions/user' })
-const Profiles = ajv.compile({ '$ref': 'https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile' })
-const Items = ajv.compile({ '$ref': 'https://node-and-friends/with-sequelize/allSchemas.json#/definitions/item' })
+const baseUri = 'https://node-and-friends/with-sequelize/allSchemas.json'
+const Users = ajv.compile({ '$ref': `${baseUri}#/definitions/user` })
+const Profiles = ajv.compile({ '$ref': `${baseUri}#/definitions/profile` })
+const Items = ajv.compile({ '$ref': `${baseUri}#/definitions/item` })
 
 module.exports = {
     Users,

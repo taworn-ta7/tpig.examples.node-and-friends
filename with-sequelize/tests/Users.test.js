@@ -13,6 +13,16 @@ describe("testing Users schema", () => {
         expect(result).toBe(true)
     })
 
+    test("create: failed because username is less than minLength", () => {
+        const json = {
+            id: 0,
+            username: 'jo',
+            password: 'password'
+        }
+        const result = schemas.Users(json)
+        expect(result).toBe(false)
+    })
+
     test("create: failed because no password", () => {
         const json = {
             id: 0,
@@ -36,6 +46,14 @@ describe("testing Users schema", () => {
         const json = {
             id: 1,
             username: 'john'
+        }
+        const result = schemas.Users(json)
+        expect(result).toBe(true)
+    })
+
+    test("update: ok, even no update", () => {
+        const json = {
+            id: 1
         }
         const result = schemas.Users(json)
         expect(result).toBe(true)

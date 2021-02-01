@@ -28,7 +28,7 @@
                 "profiles": {
                     "type": "array",
                     "items": {
-                        "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
+                        "$ref": "#/definitions/profile"
                     }
                 }
             },
@@ -69,12 +69,12 @@
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/user"
+                    "$ref": "#/definitions/user"
                 },
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/item"
+                        "$ref": "#/definitions/item"
                     }
                 }
             },
@@ -114,7 +114,7 @@
                     "type": "string"
                 },
                 "profile": {
-                    "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
+                    "$ref": "#/definitions/profile"
                 }
             },
             "if": {
