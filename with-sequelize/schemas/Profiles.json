@@ -18,10 +18,12 @@
                     "maxLength": 100
                 },
                 "createdAt": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "updatedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "user": {
                     "$ref": "Users.json#/definitions/user"

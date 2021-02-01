@@ -9,6 +9,9 @@ const ajv = new Ajv({
     ]
 })
 
+const addFormats = require('ajv-formats')
+addFormats(ajv)
+
 const baseUri = 'https://node-and-friends/with-sequelize/'
 module.exports = {
     Users: ajv.compile({ '$ref': `${baseUri}Users.json#/definitions/user` }),
