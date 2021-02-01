@@ -1,7 +1,7 @@
 'use strict'
 const logger = require('./libs/logger')
 const db = require('./libs/db')
-const tests = require('./tests')
+const main = require('./main')
 
 // running
 const run = async () => {
@@ -9,8 +9,8 @@ const run = async () => {
         logger.verbose(`sequelize`)
 
         await db.sync({ force: true })
-        await tests.add()
-        await tests.list()
+        await main.add()
+        await main.list()
 
         process.exit(0)
     }
