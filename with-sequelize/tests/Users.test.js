@@ -13,6 +13,30 @@ describe("testing Users schema", () => {
         expect(result).toBe(true)
     })
 
+    test("create: ok with sub-profiles", () => {
+        const json = {
+            id: 0,
+            username: 'john',
+            password: 'password',
+            profiles: [
+                {
+                    id: 0,
+                    uid: 0,
+                    name: 'John Doe',
+                    items: [
+                        {
+                            id: 0,
+                            uid: 0,
+                            name: 'Dragon Quest'
+                        }
+                    ]
+                }
+            ]
+        }
+        const result = schemas.Users(json)
+        expect(result).toBe(true)
+    })
+
     test("create: failed because username is less than minLength", () => {
         const json = {
             id: 0,

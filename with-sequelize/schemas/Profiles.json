@@ -24,12 +24,12 @@
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "https://node-and-friends/with-sequelize/Users.json#/definitions/user"
+                    "$ref": "Users.json#/definitions/user"
                 },
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "https://node-and-friends/with-sequelize/Items.json#/definitions/item"
+                        "$ref": "Items.json#/definitions/item"
                     }
                 }
             },

@@ -2,6 +2,7 @@
     "$id": "https://node-and-friends/with-sequelize/Items.json",
     "definitions": {
         "item": {
+            "$id": "#item",
             "type": "object",
             "properties": {
                 "id": {
@@ -23,7 +24,7 @@
                     "type": "string"
                 },
                 "profile": {
-                    "$ref": "https://node-and-friends/with-sequelize/Profiles.json#/definitions/profile"
+                    "$ref": "Profiles.json#/definitions/profile"
                 }
             },
             "if": {
