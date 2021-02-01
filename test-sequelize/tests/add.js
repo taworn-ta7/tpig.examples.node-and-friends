@@ -36,8 +36,8 @@ module.exports = async () => {
     })
 
     await models.Users.create({
-        username: 'joy',
-        password: '---',
+        username: 'Bard',
+        password: '--------',
         profiles: [
             {
                 name: 'Foo',
