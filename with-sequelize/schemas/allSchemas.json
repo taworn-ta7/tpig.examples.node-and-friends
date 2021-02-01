@@ -20,12 +20,10 @@
                     "maxLength": 255
                 },
                 "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "profiles": {
                     "type": "array",
@@ -39,14 +37,13 @@
                     "id": {
                         "const": 0
                     }
-                },
+                }
+            },
+            "then": {
                 "required": [
                     "username",
                     "password"
                 ]
-            },
-            "then": {
-                "required": []
             }
         },
         "profile": {
@@ -66,12 +63,10 @@
                     "maxLength": 100
                 },
                 "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "user": {
                     "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/user"
@@ -83,22 +78,19 @@
                     }
                 }
             },
-            "anyOf": [
-                {
-                    "properties": {
-                        "id": {
-                            "const": 0
-                        }
-                    },
-                    "required": [
-                        "uid",
-                        "name"
-                    ]
+            "if": {
+                "properties": {
+                    "id": {
+                        "const": 0
+                    }
                 }
-            ],
-            "required": [
-                "id"
-            ]
+            },
+            "then": {
+                "required": [
+                    "uid",
+                    "name"
+                ]
+            }
         },
         "item": {
             "type": "object",
@@ -116,33 +108,28 @@
                     "maxLength": 100
                 },
                 "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "profile": {
                     "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
                 }
             },
-            "anyOf": [
-                {
-                    "properties": {
-                        "id": {
-                            "const": 0
-                        }
-                    },
-                    "required": [
-                        "uid",
-                        "name"
-                    ]
+            "if": {
+                "properties": {
+                    "id": {
+                        "const": 0
+                    }
                 }
-            ],
-            "required": [
-                "id"
-            ]
+            },
+            "then": {
+                "required": [
+                    "uid",
+                    "name"
+                ]
+            }
         }
     }
 }

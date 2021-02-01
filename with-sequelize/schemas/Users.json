@@ -20,36 +20,31 @@
                     "maxLength": 255
                 },
                 "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "profiles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#profile"
+                        "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/profile"
                     }
                 }
             },
-            "oneOf": [
-                {
-                    "properties": {
-                        "id": {
-                            "const": 0
-                        }
-                    },
-                    "required": [
-                        "username",
-                        "password"
-                    ]
+            "if": {
+                "properties": {
+                    "id": {
+                        "const": 0
+                    }
                 }
-            ],
-            "required": [
-                "id"
-            ]
+            },
+            "then": {
+                "required": [
+                    "username",
+                    "password"
+                ]
+            }
         }
     }
 }

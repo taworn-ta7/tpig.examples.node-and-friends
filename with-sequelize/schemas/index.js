@@ -1,6 +1,6 @@
 'use strict'
 const metaSchema = require('ajv/lib/refs/json-schema-draft-07.json')
-const Ajv = require('ajv')
+const Ajv = require('ajv').default
 
 const ajv = new Ajv({
     metaSchema,

@@ -18,39 +18,34 @@
                     "maxLength": 100
                 },
                 "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "string"
                 },
                 "user": {
-                    "$ref": "#user"
+                    "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/user"
                 },
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#item"
+                        "$ref": "https://node-and-friends/with-sequelize/allSchemas.json#/definitions/item"
                     }
                 }
             },
-            "oneOf": [
-                {
-                    "properties": {
-                        "id": {
-                            "const": 0
-                        }
-                    },
-                    "required": [
-                        "uid",
-                        "name"
-                    ]
+            "if": {
+                "properties": {
+                    "id": {
+                        "const": 0
+                    }
                 }
-            ],
-            "required": [
-                "id"
-            ]
+            },
+            "then": {
+                "required": [
+                    "uid",
+                    "name"
+                ]
+            }
         }
     }
 }
