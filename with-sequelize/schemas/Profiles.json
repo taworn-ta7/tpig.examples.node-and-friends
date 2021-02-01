@@ -1,5 +1,4 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema#",
     "$id": "https://node-and-friends/with-sequelize/Profiles.json",
     "definitions": {
         "profile": {
@@ -37,12 +36,21 @@
                     }
                 }
             },
+            "oneOf": [
+                {
+                    "properties": {
+                        "id": {
+                            "const": 0
+                        }
+                    },
+                    "required": [
+                        "uid",
+                        "name"
+                    ]
+                }
+            ],
             "required": [
-                "id",
-                "uid",
-                "name",
-                "createdAt",
-                "updatedAt"
+                "id"
             ]
         }
     }

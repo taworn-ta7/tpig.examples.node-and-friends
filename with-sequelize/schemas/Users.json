@@ -1,5 +1,4 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema#",
     "$id": "https://node-and-friends/with-sequelize/Users.json",
     "definitions": {
         "user": {
@@ -35,12 +34,21 @@
                     }
                 }
             },
+            "oneOf": [
+                {
+                    "properties": {
+                        "id": {
+                            "const": 0
+                        }
+                    },
+                    "required": [
+                        "username",
+                        "password"
+                    ]
+                }
+            ],
             "required": [
-                "id",
-                "username",
-                "password",
-                "createdAt",
-                "updatedAt"
+                "id"
             ]
         }
     }
