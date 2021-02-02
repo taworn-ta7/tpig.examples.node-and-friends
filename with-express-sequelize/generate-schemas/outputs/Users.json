@@ -1,30 +1,30 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema#",
-    "$id": "/with-express-sequelize/Users.json",
+    "$id": "https://node-and-friends/with-sequelize/Users.json",
     "title": "User",
     "type": "object",
     "properties": {
         "id": {
-            "$id": "/with-express-sequelize/properties/id",
+            "$id": "https://node-and-friends/with-sequelize/properties/id",
             "type": "integer",
             "format": "int64"
         },
         "username": {
-            "$id": "/with-express-sequelize/properties/username",
+            "$id": "https://node-and-friends/with-sequelize/properties/username",
             "type": "string",
             "maxLength": 20
         },
         "password": {
-            "$id": "/with-express-sequelize/properties/password",
+            "$id": "https://node-and-friends/with-sequelize/properties/password",
             "type": "string"
         },
         "createdAt": {
-            "$id": "/with-express-sequelize/properties/createdAt",
+            "$id": "https://node-and-friends/with-sequelize/properties/createdAt",
             "type": "string",
             "format": "date-time"
         },
         "updatedAt": {
-            "$id": "/with-express-sequelize/properties/updatedAt",
+            "$id": "https://node-and-friends/with-sequelize/properties/updatedAt",
             "type": "string",
             "format": "date-time"
         },

@@ -1,0 +1,59 @@
+{
+    "$id": "https://node-and-friends/with-sequelize/Users.json",
+    "definitions": {
+        "user": {
+            "$id": "#user",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "username": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 255
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Profiles.json#/definitions/profile"
+                    }
+                }
+            },
+            "if": {
+                "properties": {
+                    "id": {
+                        "not": {
+                            "const": 0
+                        }
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "id"
+                ]
+            },
+            "else": {
+                "required": [
+                    "username",
+                    "password"
+                ]
+            }
+        }
+    }
+}

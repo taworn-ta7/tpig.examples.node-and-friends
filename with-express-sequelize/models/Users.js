@@ -23,7 +23,7 @@ module.exports = db.define('Users', {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
-            len: [4, 20]
+            len: 8
         }
     }
 }, {
