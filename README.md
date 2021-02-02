@@ -13,6 +13,7 @@ Node with various modules.
 * express, https://expressjs.com
 * sequelize, https://sequelize.org
 * mysql, https://github.com/sidorares/node-mysql2
+* ajv, https://ajv.js.org
 * winston, https://github.com/winstonjs/winston
 * gitignore, https://github.com/github/gitignore and https://gitignore.io
 
