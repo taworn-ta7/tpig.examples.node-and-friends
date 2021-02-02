@@ -37,11 +37,18 @@
             "if": {
                 "properties": {
                     "id": {
-                        "const": 0
+                        "not": {
+                            "const": 0
+                        }
                     }
                 }
             },
             "then": {
+                "required": [
+                    "id"
+                ]
+            },
+            "else": {
                 "required": [
                     "username",
                     "password"

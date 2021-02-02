@@ -32,11 +32,19 @@
             "if": {
                 "properties": {
                     "id": {
-                        "const": 0
+                        "not": {
+                            "const": 0
+                        }
                     }
                 }
             },
             "then": {
+                "required": [
+                    "id",
+                    "uid"
+                ]
+            },
+            "else": {
                 "required": [
                     "uid",
                     "name"
