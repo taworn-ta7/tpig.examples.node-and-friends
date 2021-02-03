@@ -14,7 +14,6 @@
     "@alt3/sequelize-to-json-schemas": "^0.3.54",
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0",
-    "validator": "^13.5.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   }
