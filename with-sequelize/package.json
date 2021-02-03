@@ -1,5 +1,5 @@
 {
-  "name": "test-sequelize",
+  "name": "with-sequelize",
   "version": "0.0.1",
   "description": "",
   "main": "app.js",

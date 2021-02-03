@@ -1,5 +1,5 @@
 {
-  "name": "with-express",
+  "name": "with-express-sequelize",
   "version": "0.0.1",
   "description": "",
   "main": "app.js",
@@ -10,7 +10,6 @@
   "author": "Taworn Ta.",
   "license": "ISC",
   "dependencies": {
-    "@alt3/sequelize-to-json-schemas": "^0.3.54",
     "ajv": "^7.0.4",
     "ajv-formats": "^1.5.1",
     "cors": "^2.8.5",
@@ -20,7 +19,6 @@
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0",
     "uuid": "^8.3.2",
-    "validator": "^13.5.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   },
