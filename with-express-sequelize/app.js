@@ -50,7 +50,7 @@ const run = async () => {
     try {
         logger.verbose(`express + sequelize`)
 
-        await db.sync({ force: true })
+        await db.sync({ force: false })
 
         const port = config.get('port')
         app.listen(port, () => logger.info(`with-express server listening on port ${port}`))
