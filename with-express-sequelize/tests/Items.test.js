@@ -5,7 +5,6 @@ describe("testing Items schema", () => {
 
     test("create: ok", () => {
         const json = {
-            uid: 0,
             name: 'John Doe'
         }
         const result = schemas.createItem(json)
@@ -14,16 +13,7 @@ describe("testing Items schema", () => {
 
     test("create: fail, name too short", () => {
         const json = {
-            uid: 0,
             name: ''
-        }
-        const result = schemas.createItem(json)
-        expect(result).toBe(false)
-    })
-
-    test("create: fail, name missing", () => {
-        const json = {
-            uid: 0
         }
         const result = schemas.createItem(json)
         expect(result).toBe(false)
