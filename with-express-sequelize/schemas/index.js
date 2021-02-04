@@ -14,7 +14,10 @@ addFormats(ajv)
 
 const baseUri = 'https://node-and-friends/with-sequelize/'
 module.exports = {
-    Users: ajv.compile({ '$ref': `${baseUri}Users.json#/definitions/user` }),
-    Profiles: ajv.compile({ '$ref': `${baseUri}Profiles.json#/definitions/profile` }),
-    Items: ajv.compile({ '$ref': `${baseUri}Items.json#/definitions/item` })
+    createUser: ajv.compile({ '$ref': `${baseUri}Users.json#/definitions/createUser` }),
+    updateUser: ajv.compile({ '$ref': `${baseUri}Users.json#/definitions/updateUser` }),
+    createProfile: ajv.compile({ '$ref': `${baseUri}Profiles.json#/definitions/createProfile` }),
+    updateProfile: ajv.compile({ '$ref': `${baseUri}Profiles.json#/definitions/updateProfile` }),
+    createItem: ajv.compile({ '$ref': `${baseUri}Items.json#/definitions/createItem` }),
+    updateItem: ajv.compile({ '$ref': `${baseUri}Items.json#/definitions/updateItem` })
 }

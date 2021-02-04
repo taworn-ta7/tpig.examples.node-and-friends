@@ -44,6 +44,12 @@ const negativeOrZero = (chain) =>
         .isInt({ max: 0 })
         .toInt()
 
+const json = (schema, json) => {
+    if (!schema(json))
+        throw new RestError(JSON.stringify(schema.errors), 400)
+    return json
+}
+
 module.exports = {
     checkResult,
     id,
@@ -51,5 +57,6 @@ module.exports = {
     positive,
     positiveOrZero,
     negative,
-    negativeOrZero
+    negativeOrZero,
+    json
 }

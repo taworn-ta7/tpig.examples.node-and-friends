@@ -6,6 +6,7 @@ const config = require('../configs')
 const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
 const models = require('../models')
+const schemas = require('../schemas')
 const validate = require('../middlewares/validate')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
@@ -76,10 +77,35 @@ router.post('/add', [], asyncHandler(async (req, res, next) => {
     next()
 }))
 
-router.put('/:id', [], asyncHandler(async (req, res, next) => {
+router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
+    validate.checkResult(req)
+
+    // get request
+    const { id } = req.params
+    const json = validate.json(schemas.Users, req.body)
+
+    // load record
+    const user = await models.Users.findByPk(id, {
+        include: [
+            {
+                association: models.Users.Profiles,
+                include: [models.Profiles.Items]
+            }
+        ]
+    })
+    if (!user)
+        throw new RestError(`no records`)
+
+    // update
+    if (json.user) {
+        json.user.id = id
+        user.update(json.user)
+        user.reload()
+    }
+
     // success
     const ret = {
-        ok: 1
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
