@@ -12,7 +12,7 @@ describe("testing Users schema", () => {
         expect(result).toBe(true)
     })
 
-    test("create: fail, too short username", () => {
+    test("create: fail, username too short", () => {
         const json = {
             username: 'jo',
             password: 'password'
@@ -21,9 +21,88 @@ describe("testing Users schema", () => {
         expect(result).toBe(false)
     })
 
-    test("create: fail, missing password", () => {
+    test("create: fail, password missing", () => {
         const json = {
             username: 'john'
+        }
+        const result = schemas.createUser(json)
+        expect(result).toBe(false)
+    })
+
+    // ----------------------------------------------------------------------
+
+    test("create with children: ok", () => {
+        const json = {
+            username: 'john',
+            password: 'password',
+            profiles: [
+                {
+                    name: 'John Doe'
+                }
+            ]
+        }
+        const result = schemas.createUser(json)
+        expect(result).toBe(true)
+    })
+
+    test("create with children: ok", () => {
+        const json = {
+            username: 'john',
+            password: 'password',
+            profiles: [
+                {
+                    name: 'John Doe',
+                    items: [
+                        { name: 'Final Fantasy I' },
+                        { name: 'Final Fantasy II' },
+                        { name: 'Final Fantasy III' }
+                    ]
+                },
+                {
+                    name: 'John Smith',
+                    items: [
+                        { name: 'Dragon Quest IV' },
+                        { name: 'Dragon Quest V' }
+                    ]
+                }
+            ]
+        }
+        const result = schemas.createUser(json)
+        expect(result).toBe(true)
+    })
+
+    test("create with children: fail, name too short", () => {
+        const json = {
+            username: 'john',
+            password: 'password',
+            profiles: [
+                {
+                    name: '',
+                    items: [
+                        { name: 'Final Fantasy I' },
+                        { name: 'Final Fantasy II' },
+                        { name: 'Final Fantasy III' }
+                    ]
+                }
+            ]
+        }
+        const result = schemas.createUser(json)
+        expect(result).toBe(false)
+    })
+
+    test("create with children: fail, name too short", () => {
+        const json = {
+            username: 'john',
+            password: 'password',
+            profiles: [
+                {
+                    name: 'John Smith',
+                    items: [
+                        { name: 'Dragon Quest IV' },
+                        { name: '' }
+                    ]
+                }
+            ]
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
@@ -56,7 +135,7 @@ describe("testing Users schema", () => {
         expect(result).toBe(true)
     })
 
-    test("update: fail, too short username", () => {
+    test("update: fail, username too short", () => {
         const json = {
             username: 'jo'
         }
@@ -64,7 +143,7 @@ describe("testing Users schema", () => {
         expect(result).toBe(false)
     })
 
-    test("update: fail, too short password", () => {
+    test("update: fail, password too short", () => {
         const json = {
             password: 'pass'
         }

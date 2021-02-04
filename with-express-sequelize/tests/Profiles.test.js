@@ -12,7 +12,7 @@ describe("testing Profiles schema", () => {
         expect(result).toBe(true)
     })
 
-    test("create: fail, too short name", () => {
+    test("create: fail, name too short", () => {
         const json = {
             uid: 0,
             name: ''
@@ -21,7 +21,7 @@ describe("testing Profiles schema", () => {
         expect(result).toBe(false)
     })
 
-    test("create: fail, missing name", () => {
+    test("create: fail, name missing", () => {
         const json = {
             uid: 0
         }
@@ -39,7 +39,7 @@ describe("testing Profiles schema", () => {
         expect(result).toBe(true)
     })
 
-    test("update: fail, too short username", () => {
+    test("update: fail, name too short", () => {
         const json = {
             name: ''
         }
