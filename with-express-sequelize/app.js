@@ -23,12 +23,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('pub'))
 app.use(cors())
 
-// add more log
-app.use((req, res, next) => {
-    logger.verbose(`${req.id} req.body: ${JSON.stringify(req.body, null, 4)}`)
-    next()
-})
-
 // add routes
 app.use('/api', require('./routes'))
 
@@ -53,7 +47,7 @@ const run = async () => {
         await db.sync({ force: false })
 
         const port = config.get('port')
-        app.listen(port, () => logger.info(`with-express server listening on port ${port}`))
+        app.listen(port, () => logger.info(`with-express-sequelize server listening on port ${port}`))
     }
     catch (ex) {
         logger.error(ex)

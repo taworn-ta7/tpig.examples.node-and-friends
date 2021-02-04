@@ -1,7 +1,7 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const { param, validationResult } = require('express-validator')
+const { param } = require('express-validator')
 const config = require('../configs')
 const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
