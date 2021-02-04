@@ -4,9 +4,6 @@
         "createItem": {
             "type": "object",
             "properties": {
-                "uid": {
-                    "type": "integer"
-                },
                 "name": {
                     "type": "string",
                     "minLength": 1,
