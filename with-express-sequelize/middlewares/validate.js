@@ -8,20 +8,48 @@ const checkResult = (req) => {
         throw new RestError(JSON.stringify(errors.array()), 400)
 }
 
-const int = (chain) =>
-    chain
-        .trim()
-        .isInt()
-        .toInt()
-
 const id = (chain) =>
     chain
         .trim()
         .isInt({ min: 1 })
         .toInt()
 
+const int = (chain) =>
+    chain
+        .trim()
+        .isInt()
+        .toInt()
+
+const positive = (chain) =>
+    chain
+        .trim()
+        .isInt({ min: 1 })
+        .toInt()
+
+const positiveOrZero = (chain) =>
+    chain
+        .trim()
+        .isInt({ min: 0 })
+        .toInt()
+
+const negative = (chain) =>
+    chain
+        .trim()
+        .isInt({ max: -1 })
+        .toInt()
+
+const negativeOrZero = (chain) =>
+    chain
+        .trim()
+        .isInt({ max: 0 })
+        .toInt()
+
 module.exports = {
     checkResult,
+    id,
     int,
-    id
+    positive,
+    positiveOrZero,
+    negative,
+    negativeOrZero
 }
