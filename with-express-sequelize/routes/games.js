@@ -82,7 +82,9 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
 
     // get request
     const { id } = req.params
-    const json = validate.json(schemas.updateUser, req.body)
+    const json = {
+        user: validate.json(schemas.updateUser, req.body.user)
+    }
 
     // load record
     const user = await models.Users.findByPk(id)
