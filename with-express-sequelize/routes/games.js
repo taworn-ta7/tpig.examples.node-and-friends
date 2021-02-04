@@ -103,7 +103,14 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
     }
 
     // load record
-    const user = await models.Users.findByPk(id)
+    const user = await models.Users.findByPk(id, {
+        include: [
+            {
+                association: models.Users.Profiles,
+                include: [models.Profiles.Items]
+            }
+        ]
+    })
     if (!user)
         throw new RestError(`no records`)
 
