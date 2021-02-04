@@ -5,7 +5,7 @@ describe("testing Profiles schema", () => {
 
     test("create: ok", () => {
         const json = {
-            name: 'John Doe'
+            name: "John Doe"
         }
         const result = schemas.createProfile(json)
         expect(result).toBe(true)
@@ -13,7 +13,7 @@ describe("testing Profiles schema", () => {
 
     test("create: fail, name too short", () => {
         const json = {
-            name: ''
+            name: ""
         }
         const result = schemas.createProfile(json)
         expect(result).toBe(false)
@@ -23,11 +23,11 @@ describe("testing Profiles schema", () => {
 
     test("create with children: ok", () => {
         const json = {
-            name: 'John Doe',
+            name: "John Doe",
             items: [
-                { name: 'Final Fantasy I' },
-                { name: 'Final Fantasy II' },
-                { name: 'Final Fantasy III' }
+                { name: "Final Fantasy I" },
+                { name: "Final Fantasy II" },
+                { name: "Final Fantasy III" }
             ]
         }
         const result = schemas.createProfile(json)
@@ -36,10 +36,10 @@ describe("testing Profiles schema", () => {
 
     test("create with children: fail, name too short", () => {
         const json = {
-            name: 'John Smith',
+            name: "John Smith",
             items: [
-                { name: 'Dragon Quest IV' },
-                { name: '' }
+                { name: "Dragon Quest IV" },
+                { name: "" }
             ]
         }
         const result = schemas.createProfile(json)
@@ -50,7 +50,7 @@ describe("testing Profiles schema", () => {
 
     test("update: ok", () => {
         const json = {
-            name: 'John Doe'
+            name: "John Doe"
         }
         const result = schemas.updateProfile(json)
         expect(result).toBe(true)
@@ -58,7 +58,7 @@ describe("testing Profiles schema", () => {
 
     test("update: fail, name too short", () => {
         const json = {
-            name: ''
+            name: ""
         }
         const result = schemas.updateProfile(json)
         expect(result).toBe(false)

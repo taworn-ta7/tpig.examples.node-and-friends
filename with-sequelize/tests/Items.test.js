@@ -5,7 +5,7 @@ describe("testing Items schema", () => {
 
     test("create: ok", () => {
         const json = {
-            name: 'John Doe'
+            name: "John Doe"
         }
         const result = schemas.createItem(json)
         expect(result).toBe(true)
@@ -13,7 +13,7 @@ describe("testing Items schema", () => {
 
     test("create: fail, name too short", () => {
         const json = {
-            name: ''
+            name: ""
         }
         const result = schemas.createItem(json)
         expect(result).toBe(false)
@@ -23,7 +23,7 @@ describe("testing Items schema", () => {
 
     test("update: ok", () => {
         const json = {
-            name: 'John Doe'
+            name: "John Doe"
         }
         const result = schemas.updateItem(json)
         expect(result).toBe(true)
@@ -31,7 +31,7 @@ describe("testing Items schema", () => {
 
     test("update: fail, name too short", () => {
         const json = {
-            name: ''
+            name: ""
         }
         const result = schemas.updateItem(json)
         expect(result).toBe(false)

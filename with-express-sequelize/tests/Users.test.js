@@ -5,8 +5,8 @@ describe("testing Users schema", () => {
 
     test("create: ok", () => {
         const json = {
-            username: 'john',
-            password: 'password'
+            username: "john",
+            password: "password"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(true)
@@ -14,8 +14,8 @@ describe("testing Users schema", () => {
 
     test("create: fail, username too short", () => {
         const json = {
-            username: 'jo',
-            password: 'password'
+            username: "jo",
+            password: "password"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
@@ -23,7 +23,7 @@ describe("testing Users schema", () => {
 
     test("create: fail, password missing", () => {
         const json = {
-            username: 'john'
+            username: "john"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
@@ -33,11 +33,11 @@ describe("testing Users schema", () => {
 
     test("create with children: ok", () => {
         const json = {
-            username: 'john',
-            password: 'password',
+            username: "john",
+            password: "password",
             profiles: [
                 {
-                    name: 'John Doe'
+                    name: "John Doe"
                 }
             ]
         }
@@ -47,22 +47,22 @@ describe("testing Users schema", () => {
 
     test("create with children: ok", () => {
         const json = {
-            username: 'john',
-            password: 'password',
+            username: "john",
+            password: "password",
             profiles: [
                 {
-                    name: 'John Doe',
+                    name: "John Doe",
                     items: [
-                        { name: 'Final Fantasy I' },
-                        { name: 'Final Fantasy II' },
-                        { name: 'Final Fantasy III' }
+                        { name: "Final Fantasy I" },
+                        { name: "Final Fantasy II" },
+                        { name: "Final Fantasy III" }
                     ]
                 },
                 {
-                    name: 'John Smith',
+                    name: "John Smith",
                     items: [
-                        { name: 'Dragon Quest IV' },
-                        { name: 'Dragon Quest V' }
+                        { name: "Dragon Quest IV" },
+                        { name: "Dragon Quest V" }
                     ]
                 }
             ]
@@ -73,15 +73,15 @@ describe("testing Users schema", () => {
 
     test("create with children: fail, name too short", () => {
         const json = {
-            username: 'john',
-            password: 'password',
+            username: "john",
+            password: "password",
             profiles: [
                 {
-                    name: '',
+                    name: "",
                     items: [
-                        { name: 'Final Fantasy I' },
-                        { name: 'Final Fantasy II' },
-                        { name: 'Final Fantasy III' }
+                        { name: "Final Fantasy I" },
+                        { name: "Final Fantasy II" },
+                        { name: "Final Fantasy III" }
                     ]
                 }
             ]
@@ -92,14 +92,14 @@ describe("testing Users schema", () => {
 
     test("create with children: fail, name too short", () => {
         const json = {
-            username: 'john',
-            password: 'password',
+            username: "john",
+            password: "password",
             profiles: [
                 {
-                    name: 'John Smith',
+                    name: "John Smith",
                     items: [
-                        { name: 'Dragon Quest IV' },
-                        { name: '' }
+                        { name: "Dragon Quest IV" },
+                        { name: "" }
                     ]
                 }
             ]
@@ -112,8 +112,8 @@ describe("testing Users schema", () => {
 
     test("update: ok", () => {
         const json = {
-            username: 'john',
-            password: 'password'
+            username: "john",
+            password: "password"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(true)
@@ -121,7 +121,7 @@ describe("testing Users schema", () => {
 
     test("update: ok, update username", () => {
         const json = {
-            username: 'john'
+            username: "john"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(true)
@@ -129,7 +129,7 @@ describe("testing Users schema", () => {
 
     test("update: ok, update password", () => {
         const json = {
-            password: 'password'
+            password: "password"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(true)
@@ -137,7 +137,7 @@ describe("testing Users schema", () => {
 
     test("update: fail, username too short", () => {
         const json = {
-            username: 'jo'
+            username: "jo"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(false)
@@ -145,7 +145,7 @@ describe("testing Users schema", () => {
 
     test("update: fail, password too short", () => {
         const json = {
-            password: 'pass'
+            password: "pass"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(false)
