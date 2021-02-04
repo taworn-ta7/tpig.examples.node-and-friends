@@ -1,14 +1,9 @@
 {
     "$id": "https://node-and-friends/with-sequelize/Profiles.json",
     "definitions": {
-        "profile": {
-            "$id": "#profile",
+        "createProfile": {
             "type": "object",
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "minimum": 0
-                },
                 "uid": {
                     "type": "integer"
                 },
@@ -16,45 +11,21 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 100
-                },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "user": {
-                    "$ref": "Users.json#/definitions/user"
-                },
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "Items.json#/definitions/item"
-                    }
                 }
             },
-            "if": {
-                "properties": {
-                    "id": {
-                        "not": {
-                            "const": 0
-                        }
-                    }
+            "required": [
+                "uid",
+                "name"
+            ]
+        },
+        "updateProfile": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
                 }
-            },
-            "then": {
-                "required": [
-                    "id",
-                    "uid"
-                ]
-            },
-            "else": {
-                "required": [
-                    "uid",
-                    "name"
-                ]
             }
         }
     }

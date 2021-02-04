@@ -82,25 +82,17 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
 
     // get request
     const { id } = req.params
-    const json = validate.json(schemas.Users, req.body)
+    const json = validate.json(schemas.updateUser, req.body)
 
     // load record
-    const user = await models.Users.findByPk(id, {
-        include: [
-            {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
-            }
-        ]
-    })
+    const user = await models.Users.findByPk(id)
     if (!user)
         throw new RestError(`no records`)
 
     // update
     if (json.user) {
-        json.user.id = id
-        user.update(json.user)
-        user.reload()
+        await user.update(json.user)
+        await user.reload()
     }
 
     // success

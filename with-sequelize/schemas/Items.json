@@ -1,14 +1,9 @@
 {
     "$id": "https://node-and-friends/with-sequelize/Items.json",
     "definitions": {
-        "item": {
-            "$id": "#item",
+        "createItem": {
             "type": "object",
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "minimum": 0
-                },
                 "uid": {
                     "type": "integer"
                 },
@@ -16,39 +11,21 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 100
-                },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "profile": {
-                    "$ref": "Profiles.json#/definitions/profile"
                 }
             },
-            "if": {
-                "properties": {
-                    "id": {
-                        "not": {
-                            "const": 0
-                        }
-                    }
+            "required": [
+                "uid",
+                "name"
+            ]
+        },
+        "updateItem": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
                 }
-            },
-            "then": {
-                "required": [
-                    "id",
-                    "uid"
-                ]
-            },
-            "else": {
-                "required": [
-                    "uid",
-                    "name"
-                ]
             }
         }
     }

@@ -5,133 +5,70 @@ describe("testing Users schema", () => {
 
     test("create: ok", () => {
         const json = {
-            id: 0,
             username: 'john',
             password: 'password'
         }
-        const result = schemas.Users(json)
+        const result = schemas.createUser(json)
         expect(result).toBe(true)
     })
 
-    test("create: ok with children", () => {
+    test("create: fail, too short username", () => {
         const json = {
-            id: 0,
-            username: 'john',
-            password: 'password',
-            profiles: [
-                {
-                    id: 0,
-                    uid: 0,
-                    name: 'John Doe',
-                    items: [
-                        {
-                            id: 0,
-                            uid: 0,
-                            name: 'Dragon Quest'
-                        }
-                    ]
-                }
-            ]
-        }
-        const result = schemas.Users(json)
-        expect(result).toBe(true)
-    })
-
-    test("create: failed because username is less than minLength", () => {
-        const json = {
-            id: 0,
             username: 'jo',
             password: 'password'
         }
-        const result = schemas.Users(json)
+        const result = schemas.createUser(json)
         expect(result).toBe(false)
     })
 
-    test("create: failed because mistype username", () => {
+    test("create: fail, missing password", () => {
         const json = {
-            id: 0,
-            usernam_: 'john',
-            password: 'password'
-        }
-        const result = schemas.Users(json)
-        expect(result).toBe(false)
-    })
-
-    test("create: failed because no password", () => {
-        const json = {
-            id: 0,
             username: 'john'
         }
-        const result = schemas.Users(json)
+        const result = schemas.createUser(json)
         expect(result).toBe(false)
     })
 
-    test("create: failed with children", () => {
-        const json = {
-            id: 0,
-            username: 'john',
-            password: 'password',
-            profiles: [
-                {
-                    id: 0,
-                    uid: 0,
-                    name: 'John Doe',
-                    items: [
-                        {
-                            id: 0,
-                            uid: 0,
-                            name: ''
-                        }
-                    ]
-                }
-            ]
-        }
-        const result = schemas.Users(json)
-        expect(result).toBe(false)
-    })
+    // ----------------------------------------------------------------------
 
-    test("update: ok, update both", () => {
+    test("update: ok", () => {
         const json = {
-            id: 1,
             username: 'john',
             password: 'password'
         }
-        const result = schemas.Users(json)
+        const result = schemas.updateUser(json)
         expect(result).toBe(true)
     })
 
     test("update: ok, update username", () => {
         const json = {
-            id: 1,
             username: 'john'
         }
-        const result = schemas.Users(json)
+        const result = schemas.updateUser(json)
         expect(result).toBe(true)
     })
 
-    test("update: ok, even no update", () => {
+    test("update: ok, update password", () => {
         const json = {
-            id: 1
+            password: 'password'
         }
-        const result = schemas.Users(json)
+        const result = schemas.updateUser(json)
         expect(result).toBe(true)
     })
 
-    test("update: failed because username is less than minLength", () => {
+    test("update: fail, too short username", () => {
         const json = {
-            id: 1,
             username: 'jo'
         }
-        const result = schemas.Users(json)
+        const result = schemas.updateUser(json)
         expect(result).toBe(false)
     })
 
-    test("unknown: failed because no id", () => {
+    test("update: fail, too short password", () => {
         const json = {
-            username: 'john',
-            username: 'password'
+            password: 'pass'
         }
-        const result = schemas.Users(json)
+        const result = schemas.updateUser(json)
         expect(result).toBe(false)
     })
 
