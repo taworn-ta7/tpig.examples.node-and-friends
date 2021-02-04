@@ -16,6 +16,7 @@ Node with various modules.
 * ajv, https://ajv.js.org
 * winston, https://github.com/winstonjs/winston
 * gitignore, https://github.com/github/gitignore and https://gitignore.io
+* and other modules
 
 ## Last
 
