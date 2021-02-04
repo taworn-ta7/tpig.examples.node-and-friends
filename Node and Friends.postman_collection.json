@@ -107,7 +107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{}",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"nero\",\r\n        \"password\": \"password\",\r\n        \"profiles\": [\r\n            {\r\n                \"name\": \"Nero Doe\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Dragon Quest VI\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Dragon Quest VII\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Nero Smith\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Area 88\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

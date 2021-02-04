@@ -68,9 +68,25 @@ router.get('/list/:page', [validate.positiveOrZero(param('page'))], asyncHandler
 }))
 
 router.post('/add', [], asyncHandler(async (req, res, next) => {
+    // get request
+    const json = {
+        user: validate.json(schemas.createUser, req.body.user)
+    }
+
+    // insert
+    const user = await models.Users.create(json.user, {
+        include: [
+            {
+                association: models.Users.Profiles,
+                include: [models.Profiles.Items]
+            }
+        ]
+    })
+    await user.reload()
+
     // success
     const ret = {
-        ok: 1
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)

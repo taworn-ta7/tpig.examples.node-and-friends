@@ -4,4 +4,4 @@ mysql:
     password: user//pass
     database: node_and_friends
 port: 55555
-normalRowsPerPage: 2
+normalRowsPerPage: 3
