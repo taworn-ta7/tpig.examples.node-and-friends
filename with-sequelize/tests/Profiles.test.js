@@ -5,25 +5,42 @@ describe("testing Profiles schema", () => {
 
     test("create: ok", () => {
         const json = {
-            uid: 0,
             name: 'John Doe'
         }
         const result = schemas.createProfile(json)
         expect(result).toBe(true)
     })
 
-    test("create: fail, too short name", () => {
+    test("create: fail, name too short", () => {
         const json = {
-            uid: 0,
             name: ''
         }
         const result = schemas.createProfile(json)
         expect(result).toBe(false)
     })
 
-    test("create: fail, missing name", () => {
+    // ----------------------------------------------------------------------
+
+    test("create with children: ok", () => {
         const json = {
-            uid: 0
+            name: 'John Doe',
+            items: [
+                { name: 'Final Fantasy I' },
+                { name: 'Final Fantasy II' },
+                { name: 'Final Fantasy III' }
+            ]
+        }
+        const result = schemas.createProfile(json)
+        expect(result).toBe(true)
+    })
+
+    test("create with children: fail, name too short", () => {
+        const json = {
+            name: 'John Smith',
+            items: [
+                { name: 'Dragon Quest IV' },
+                { name: '' }
+            ]
         }
         const result = schemas.createProfile(json)
         expect(result).toBe(false)
@@ -39,7 +56,7 @@ describe("testing Profiles schema", () => {
         expect(result).toBe(true)
     })
 
-    test("update: fail, too short username", () => {
+    test("update: fail, name too short", () => {
         const json = {
             name: ''
         }
