@@ -19,12 +19,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('pub'))
 app.use(cors())
 
-// add more log
-app.use((req, res, next) => {
-    logger.verbose(`${req.id} req.body: ${JSON.stringify(req.body, null, 4)}`)
-    next()
-})
-
 // add routes
 app.use('/api', require('./routes'))
 
