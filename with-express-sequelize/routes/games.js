@@ -122,10 +122,23 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
     next()
 }))
 
-router.delete('/:id', [], asyncHandler(async (req, res, next) => {
+router.delete('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
+    validate.checkResult(req)
+
+    // get request
+    const { id } = req.params
+
+    // load record
+    const user = await models.Users.findByPk(id)
+    if (!user)
+        throw new RestError(`no records`)
+
+    // delete
+    await user.destroy()
+
     // success
     const ret = {
-        ok: 1
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
