@@ -6,9 +6,7 @@ const uuid = require('uuid')
 const config = require('./configs')
 const logger = require('./libs/logger')
 const db = require('./libs/db')
-
-// add models
-require('./models')
+const models = require('./models')
 
 // add log
 app.use((req, res, next) => {
