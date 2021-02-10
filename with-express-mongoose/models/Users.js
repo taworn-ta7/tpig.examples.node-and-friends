@@ -1,7 +1,19 @@
 'use strict'
 const db = require('../libs/db')
 
-module.exports = new db.Schema({
+const schema = new db.Schema({
     username: String,
-    password: String
+    password: String,
+    profiles: [
+        {
+            name: String,
+            items: [
+                {
+                    name: String
+                }
+            ]
+        }
+    ]
 })
+
+module.exports = db.model('Users', schema)

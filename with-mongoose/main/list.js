@@ -6,7 +6,8 @@ module.exports = async () => {
     logger.verbose(`==================================================`)
     logger.verbose(`test list`)
 
-    logger.verbose(`waiting for implement`)
+    const list = await models.Users.find()
+    logger.verbose(JSON.stringify(list, null, 4))
 
     logger.verbose(`--------------------------------------------------`)
 }
