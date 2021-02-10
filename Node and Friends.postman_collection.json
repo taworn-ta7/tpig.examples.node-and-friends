@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "04e9eebc-6804-4b92-8838-3cfd31fcbef7",
+		"_postman_id": "ee37452e-400a-4381-9775-4d78db64a318",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -147,6 +147,120 @@
 							"path": [
 								"games",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "with-express-mongoose",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"nero\",\r\n        \"password\": \"password\",\r\n        \"profiles\": [\r\n            {\r\n                \"name\": \"Nero Doe\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Dragon Quest VI\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Dragon Quest VII\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Nero Smith\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Area 88\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/games/add",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"games",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read, single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/games/6023f52e342a120e24656257",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"games",
+								"6023f52e342a120e24656257"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read, multiple",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/games/list/0",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"games",
+								"list",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"maximus\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/games/1",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/games/6023f228c913142ac0a003eb",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"games",
+								"6023f228c913142ac0a003eb"
 							]
 						}
 					},

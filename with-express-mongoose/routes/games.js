@@ -10,14 +10,16 @@ const validate = require('../middlewares/validate')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.get('/:id', [], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
+    // load record
+    const user = await models.Users.findById(id)
+
     // success
     const ret = {
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -30,8 +32,21 @@ router.get('/list/:page', [validate.positiveOrZero(param('page'))], asyncHandler
     // get request
     const { page } = req.params
 
+    // load records
+    const offset = page * normalRowsPerPage
+    const count = await models.Users.count()
+    const users = await models.Users.find().skip(offset).limit(normalRowsPerPage)
+
     // success
     const ret = {
+        paginator: {
+            pageIndex: page,
+            pageCount: Math.ceil(count / normalRowsPerPage),
+            offset,
+            limit: normalRowsPerPage,
+            count
+        },
+        users,
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -39,8 +54,19 @@ router.get('/list/:page', [validate.positiveOrZero(param('page'))], asyncHandler
 }))
 
 router.post('/add', [], asyncHandler(async (req, res, next) => {
+    // get request
+    const json = {
+        //user: validate.json(schemas.createUser, req.body.user)
+        user: req.body.user
+    }
+
+    // insert
+    const user = new models.Users(json.user)
+    await user.save()
+
     // success
     const ret = {
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -61,14 +87,23 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
     next()
 }))
 
-router.delete('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
+router.delete('/:id', [], asyncHandler(async (req, res, next) => {
     validate.checkResult(req)
 
     // get request
     const { id } = req.params
 
+    // load record
+    const user = await models.Users.findById(id).exec()
+    if (!user)
+        throw new RestError(`no records`)
+
+    // delete
+    await models.Users.deleteOne({ _id: user._id })
+
     // success
     const ret = {
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
