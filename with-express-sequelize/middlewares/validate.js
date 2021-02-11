@@ -2,10 +2,11 @@
 const { validationResult } = require('express-validator')
 const RestError = require('../libs/RestError')
 
-const checkResult = (req) => {
+const result = (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty())
         throw new RestError(JSON.stringify(errors.array()), 400)
+    next()
 }
 
 const id = (chain) =>
@@ -51,7 +52,7 @@ const json = (schema, json) => {
 }
 
 module.exports = {
-    checkResult,
+    result,
     id,
     int,
     positive,

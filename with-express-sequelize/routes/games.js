@@ -7,13 +7,12 @@ const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
 const models = require('../models')
 const schemas = require('../schemas')
+const dump = require('../middlewares/dump')
 const validate = require('../middlewares/validate')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.get('/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
@@ -36,9 +35,7 @@ router.get('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
     next()
 }))
 
-router.get('/list/:page', [validate.positiveOrZero(param('page'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { page } = req.params
 
@@ -67,7 +64,7 @@ router.get('/list/:page', [validate.positiveOrZero(param('page'))], asyncHandler
     next()
 }))
 
-router.post('/add', [], asyncHandler(async (req, res, next) => {
+router.post('/add', [dump.body], asyncHandler(async (req, res, next) => {
     // get request
     const json = {
         user: validate.json(schemas.createUser, req.body.user)
@@ -93,9 +90,11 @@ router.post('/add', [], asyncHandler(async (req, res, next) => {
     next()
 }))
 
-router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.put('/:id', [
+    dump.body,
+    validate.id(param('id')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
     const json = {
@@ -129,9 +128,7 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
     next()
 }))
 
-router.delete('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.delete('/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
