@@ -1,0 +1,13 @@
+@ECHO OFF
+FOR /D %%d IN (
+    with-express
+    with-express-mongoose
+    with-express-sequelize
+    with-mongoose
+    with-sequelize
+) DO (
+    PUSHD %%d
+    ECHO %%d
+    npm i
+    POPD %%d
+)
