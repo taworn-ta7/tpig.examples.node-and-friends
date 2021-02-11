@@ -73,14 +73,28 @@ router.post('/add', [], asyncHandler(async (req, res, next) => {
     next()
 }))
 
-router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.put('/:id', [], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
+    const json = {
+        //user: validate.json(schemas.updateUser, req.body.user)
+        user: req.body.user
+    }
+
+    // load record
+    const user = await models.Users.findById(id)
+    if (!user)
+        throw new RestError(`no records`)
+
+    // update
+    if (json.user) {
+        user.username = 'OK'
+        await user.save()
+    }
 
     // success
     const ret = {
+        user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -88,8 +102,6 @@ router.put('/:id', [validate.id(param('id'))], asyncHandler(async (req, res, nex
 }))
 
 router.delete('/:id', [], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
     // get request
     const { id } = req.params
 
