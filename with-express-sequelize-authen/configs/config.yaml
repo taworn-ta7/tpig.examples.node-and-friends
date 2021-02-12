@@ -1,0 +1,7 @@
+mysql:
+    host: localhost
+    username: user
+    password: user//pass
+    database: node_and_friends
+port: 55555
+normalRowsPerPage: 3

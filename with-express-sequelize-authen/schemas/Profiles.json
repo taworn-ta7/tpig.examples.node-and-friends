@@ -1,0 +1,34 @@
+{
+    "$id": "https://node-and-friends/with-sequelize/Profiles.json",
+    "definitions": {
+        "createProfile": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Items.json#/definitions/createItem"
+                    }
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "updateProfile": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                }
+            }
+        }
+    }
+}

@@ -3,6 +3,7 @@ FOR /D %%d IN (
     with-express
     with-express-mongoose
     with-express-sequelize
+    with-express-sequelize-authen
     with-mongoose
     with-sequelize
 ) DO (
