@@ -30,6 +30,7 @@ app.use((err, req, res, next) => {
         error: {
             status: code,
             message: err.message,
+            data: err.data,
             ref: req.id
         }
     }).send()
