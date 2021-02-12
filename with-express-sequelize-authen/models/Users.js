@@ -1,13 +1,13 @@
 'use strict'
-const { DataTypes } = require('sequelize')
+const { Sequelize, DataTypes } = require('sequelize')
 const db = require('../libs/db')
 
 module.exports = db.define('Users', {
     id: {
         type: DataTypes.STRING(50),
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        defaultValue: Sequelize.UUIDV4,
         validate: {
             isUUID: 4
         }
@@ -49,16 +49,18 @@ module.exports = db.define('Users', {
     },
 
     token: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING(4096),
+        allowNull: true
     },
     begin: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     },
     end: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     },
 
     secret: {
@@ -70,11 +72,7 @@ module.exports = db.define('Users', {
         allowNull: false
     },
     hash: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1024),
         allowNull: false
     }
 }, {

@@ -269,6 +269,176 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "with-express-sequelize-authen",
+			"item": [
+				{
+					"name": "login: admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"admin\",\r\n        \"password\": \"admin//pass\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/login",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login: user0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user0\",\r\n        \"password\": \"user0//pass\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/login",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login: user1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"user1//pass\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/login",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login: user2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user2\",\r\n        \"password\": \"user2//pass\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/login",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/logout",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/check",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

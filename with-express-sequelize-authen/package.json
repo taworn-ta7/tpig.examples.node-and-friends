@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
+    "generate": "node ./scripts/insert_test_data",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
   "license": "ISC",
   "dependencies": {
-    "ajv": "^7.0.4",
+    "ajv": "^7.1.0",
     "ajv-formats": "^1.5.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-validator": "^6.9.2",
