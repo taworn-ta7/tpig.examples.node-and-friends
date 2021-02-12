@@ -76,12 +76,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/1",
+							"raw": "{{url}}api/games/id/1",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
+								"id",
 								"1"
 							]
 						}
@@ -190,12 +191,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/6023f52e342a120e24656257",
+							"raw": "{{url}}api/games/id/6023f52e342a120e24656257",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
+								"id",
 								"6023f52e342a120e24656257"
 							]
 						}

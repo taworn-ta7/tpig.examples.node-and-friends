@@ -12,7 +12,7 @@ const validate = require('../middlewares/validate')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.get('/id/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
