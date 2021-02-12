@@ -1,5 +1,5 @@
 {
-    "$id": "https://node-and-friends/with-sequelize/Users.json",
+    "$id": "https://node-and-friends/with-express-sequelize-authen/Users.json",
     "definitions": {
         "createUser": {
             "type": "object",
@@ -9,21 +9,26 @@
                     "minLength": 4,
                     "maxLength": 20
                 },
-                "password": {
+                "displayName": {
                     "type": "string",
-                    "minLength": 8,
-                    "maxLength": 255
+                    "minLength": 4,
+                    "maxLength": 50
                 },
-                "profiles": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "Profiles.json#/definitions/createProfile"
-                    }
+                "role": {
+                    "type": "string",
+                    "enum": [
+                        "user",
+                        "admin"
+                    ]
+                },
+                "disabled": {
+                    "type": "boolean"
                 }
             },
             "required": [
                 "username",
-                "password"
+                "displayName",
+                "role"
             ]
         },
         "updateUser": {
@@ -34,10 +39,20 @@
                     "minLength": 4,
                     "maxLength": 20
                 },
-                "password": {
+                "displayName": {
                     "type": "string",
-                    "minLength": 8,
-                    "maxLength": 255
+                    "minLength": 4,
+                    "maxLength": 50
+                },
+                "role": {
+                    "type": "string",
+                    "enum": [
+                        "user",
+                        "admin"
+                    ]
+                },
+                "disabled": {
+                    "type": "boolean"
                 }
             }
         }

@@ -6,103 +6,38 @@ describe("testing Users schema", () => {
     test("create: ok", () => {
         const json = {
             username: "john",
-            password: "password"
+            displayName: "John Doe",
+            role: "admin",
+            disabled: false
         }
         const result = schemas.createUser(json)
         expect(result).toBe(true)
     })
 
-    test("create: fail, username too short", () => {
-        const json = {
-            username: "jo",
-            password: "password"
-        }
-        const result = schemas.createUser(json)
-        expect(result).toBe(false)
-    })
-
-    test("create: fail, password missing", () => {
-        const json = {
-            username: "john"
-        }
-        const result = schemas.createUser(json)
-        expect(result).toBe(false)
-    })
-
-    // ----------------------------------------------------------------------
-
-    test("create with children: ok", () => {
+    test("create: ok, omit disabled", () => {
         const json = {
             username: "john",
-            password: "password",
-            profiles: [
-                {
-                    name: "John Doe"
-                }
-            ]
+            displayName: "John Doe",
+            role: "user"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(true)
     })
 
-    test("create with children: ok", () => {
+    test("create: fail, displayName missing", () => {
         const json = {
             username: "john",
-            password: "password",
-            profiles: [
-                {
-                    name: "John Doe",
-                    items: [
-                        { name: "Final Fantasy I" },
-                        { name: "Final Fantasy II" },
-                        { name: "Final Fantasy III" }
-                    ]
-                },
-                {
-                    name: "John Smith",
-                    items: [
-                        { name: "Dragon Quest IV" },
-                        { name: "Dragon Quest V" }
-                    ]
-                }
-            ]
-        }
-        const result = schemas.createUser(json)
-        expect(result).toBe(true)
-    })
-
-    test("create with children: fail, name too short", () => {
-        const json = {
-            username: "john",
-            password: "password",
-            profiles: [
-                {
-                    name: "",
-                    items: [
-                        { name: "Final Fantasy I" },
-                        { name: "Final Fantasy II" },
-                        { name: "Final Fantasy III" }
-                    ]
-                }
-            ]
+            role: "user"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
     })
 
-    test("create with children: fail, name too short", () => {
+    test("create: fail, role misspelling", () => {
         const json = {
             username: "john",
-            password: "password",
-            profiles: [
-                {
-                    name: "John Smith",
-                    items: [
-                        { name: "Dragon Quest IV" },
-                        { name: "" }
-                    ]
-                }
-            ]
+            displayName: "John Doe",
+            role: "USER"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
@@ -112,40 +47,15 @@ describe("testing Users schema", () => {
 
     test("update: ok", () => {
         const json = {
-            username: "john",
-            password: "password"
+            displayName: "Noname"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(true)
     })
 
-    test("update: ok, update username", () => {
+    test("update: fail, role misspelling", () => {
         const json = {
-            username: "john"
-        }
-        const result = schemas.updateUser(json)
-        expect(result).toBe(true)
-    })
-
-    test("update: ok, update password", () => {
-        const json = {
-            password: "password"
-        }
-        const result = schemas.updateUser(json)
-        expect(result).toBe(true)
-    })
-
-    test("update: fail, username too short", () => {
-        const json = {
-            username: "jo"
-        }
-        const result = schemas.updateUser(json)
-        expect(result).toBe(false)
-    })
-
-    test("update: fail, password too short", () => {
-        const json = {
-            password: "pass"
+            role: "admiN"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(false)
