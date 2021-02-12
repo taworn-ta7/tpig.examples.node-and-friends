@@ -1,12 +1,17 @@
 'use strict'
 
 class RestError extends Error {
-    constructor(message, status = undefined) {
-        super(message)
+    constructor(messageOrData, status = undefined) {
+        if (typeof messageOrData === 'string') {
+            super(messageOrData)
+            this.data = null
+        }
+        else {
+            super(JSON.stringify(messageOrData))
+            this.data = messageOrData
+        }
         this.name = "RestError"
         this.status = status
-        if (typeof message !== 'string')
-            this.error = message
     }
 }
 

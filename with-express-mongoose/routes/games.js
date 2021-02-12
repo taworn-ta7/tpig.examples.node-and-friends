@@ -29,7 +29,8 @@ router.get('/:id', [validate.ids(param('id')), validate.result], asyncHandler(as
 
 router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
-    const { page } = parseInt(req.params)
+    const { page } = req.params
+    console.log(`page: ${page}, ${typeof page}`)
 
     // load records
     const offset = page * normalRowsPerPage
@@ -52,10 +53,11 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
     next()
 }))
 
-router.post('/add', [], asyncHandler(async (req, res, next) => {
+router.post('/add', [
+    dump.body
+], asyncHandler(async (req, res, next) => {
     // get request
     const json = {
-        //user: validate.json(schemas.createUser, req.body.user)
         user: req.body.user
     }
 
@@ -72,11 +74,12 @@ router.post('/add', [], asyncHandler(async (req, res, next) => {
     next()
 }))
 
-router.put('/:id', [], asyncHandler(async (req, res, next) => {
+router.put('/:id', [
+    dump.body
+], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
     const json = {
-        //user: validate.json(schemas.updateUser, req.body.user)
         user: req.body.user
     }
 
@@ -87,7 +90,9 @@ router.put('/:id', [], asyncHandler(async (req, res, next) => {
 
     // update
     if (json.user) {
-        user.username = 'OK'
+        for (let i = 0; i < user.profiles.length; i++) {
+            user.profiles[i].name = '?'
+        }
         await user.save()
     }
 
@@ -100,7 +105,7 @@ router.put('/:id', [], asyncHandler(async (req, res, next) => {
     next()
 }))
 
-router.delete('/:id', [], asyncHandler(async (req, res, next) => {
+router.delete('/:id', [validate.ids(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 

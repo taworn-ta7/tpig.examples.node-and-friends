@@ -236,13 +236,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/games/1",
+							"raw": "{{url}}api/games/6023f52d342a120e24656251",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
-								"1"
+								"6023f52d342a120e24656251"
 							]
 						}
 					},
@@ -254,13 +254,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/6023f228c913142ac0a003eb",
+							"raw": "{{url}}api/games/6023f52d342a120e24656251",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
-								"6023f228c913142ac0a003eb"
+								"6023f52d342a120e24656251"
 							]
 						}
 					},
