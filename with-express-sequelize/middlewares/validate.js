@@ -15,6 +15,12 @@ const id = (chain) =>
         .isInt({ min: 1 })
         .toInt()
 
+const ids = (chain) =>
+    chain
+        .trim()
+        .isString()
+        .notEmpty()
+
 const int = (chain) =>
     chain
         .trim()
@@ -54,6 +60,7 @@ const json = (schema, json) => {
 module.exports = {
     result,
     id,
+    ids,
     int,
     positive,
     positiveOrZero,
