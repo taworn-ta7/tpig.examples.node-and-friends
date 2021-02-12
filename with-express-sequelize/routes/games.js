@@ -1,7 +1,7 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const { param } = require('express-validator')
+const { param, body } = require('express-validator')
 const config = require('../configs')
 const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
@@ -64,10 +64,14 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
     next()
 }))
 
-router.post('/add', [dump.body], asyncHandler(async (req, res, next) => {
+router.post('/add', [
+    dump.body,
+    validate.json(body('user'), schemas.createUser),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const json = {
-        user: validate.json(schemas.createUser, req.body.user)
+        user: req.body.user
     }
 
     // insert
@@ -93,12 +97,13 @@ router.post('/add', [dump.body], asyncHandler(async (req, res, next) => {
 router.put('/:id', [
     dump.body,
     validate.id(param('id')),
+    validate.json(body('user'), schemas.updateUser),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
     const json = {
-        user: validate.json(schemas.updateUser, req.body.user)
+        user: req.body.user
     }
 
     // load record

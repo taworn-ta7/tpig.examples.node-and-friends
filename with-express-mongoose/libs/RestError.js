@@ -5,6 +5,8 @@ class RestError extends Error {
         super(message)
         this.name = "RestError"
         this.status = status
+        if (typeof message !== 'string')
+            this.error = message
     }
 }
 

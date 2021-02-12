@@ -6,11 +6,12 @@ const config = require('../configs')
 const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
 const models = require('../models')
+const dump = require('../middlewares/dump')
 const validate = require('../middlewares/validate')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/:id', [], asyncHandler(async (req, res, next) => {
+router.get('/:id', [validate.ids(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
@@ -26,11 +27,9 @@ router.get('/:id', [], asyncHandler(async (req, res, next) => {
     next()
 }))
 
-router.get('/list/:page', [validate.positiveOrZero(param('page'))], asyncHandler(async (req, res, next) => {
-    validate.checkResult(req)
-
+router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
-    const { page } = req.params
+    const { page } = parseInt(req.params)
 
     // load records
     const offset = page * normalRowsPerPage
