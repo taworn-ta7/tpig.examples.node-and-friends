@@ -50,13 +50,15 @@ module.exports = db.define('Users', {
 
     begin: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+        allowNull: true
+    },
+    end: {
+        type: DataTypes.DATE,
+        allowNull: true
     },
     expire: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+        allowNull: true
     },
 
     salt: {

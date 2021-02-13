@@ -11,6 +11,7 @@ const models = require('../models')
 const schemas = require('../schemas')
 const dump = require('../middlewares/dump')
 const validate = require('../middlewares/validate')
+const authen = require('../middlewares/authen')
 
 const validatePassword = (password, salt, hash) => {
     return hash === crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
@@ -50,7 +51,7 @@ router.post('/login', [
     if (user.unregistered)
         throw new RestError(`this user is unregistered`, 422)
     if (user.disabled)
-        throw new RestError(`this user is locked by admin`, 422)
+        throw new RestError(`this user is disabled by admin`, 422)
 
     // sign token
     const payload = {
@@ -65,6 +66,7 @@ router.post('/login', [
     const expire = now.getTime() + config.get('timeout')
     await user.update({
         begin: now,
+        end: null,
         expire: new Date(expire),
         token
     })
@@ -72,33 +74,51 @@ router.post('/login', [
 
     // success
     const ret = {
-        id: user.id,
-        username: user.username,
-        displayName: user.displayName,
-        role: user.role,
-        disabled: user.disabled,
-        unregistered: user.unregistered,
-        begin: user.begin,
-        expire: user.expire
+        user: {
+            id: user.id,
+            username: user.username,
+            displayName: user.displayName,
+            role: user.role,
+            disabled: user.disabled,
+            unregistered: user.unregistered,
+            begin: user.begin,
+            end: user.end,
+            expire: user.expire,
+            token: user.token
+        }
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
 
-router.post('/logout', [
-    dump.body,
-    //validate.json(body('logout'), schemas.logout),
-    validate.result
-], asyncHandler(async (req, res, next) => {
-    // get request
-    const json = req.body.logout
+router.post('/logout', [authen.required], asyncHandler(async (req, res, next) => {
+    // load user
+    const user = await models.Users.findByPk(req.user.id)
+    if (!user)
+        throw new RestError(`invalid user`)
 
-    // check
+    // update user
+    await user.update({
+        end: new Date(),
+        token: null
+    })
 
     // success
     const ret = {
+        user: {
+            id: user.id,
+            username: user.username,
+            displayName: user.displayName,
+            role: user.role,
+            disabled: user.disabled,
+            unregistered: user.unregistered,
+            begin: user.begin,
+            end: user.end,
+            expire: user.expire
+        }
     }
+    req.user = undefined
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()

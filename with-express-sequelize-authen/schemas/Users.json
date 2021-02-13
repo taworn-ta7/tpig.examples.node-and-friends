@@ -53,6 +53,9 @@
                 },
                 "disabled": {
                     "type": "boolean"
+                },
+                "unregistered": {
+                    "type": "boolean"
                 }
             }
         }

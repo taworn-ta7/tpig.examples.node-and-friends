@@ -5,4 +5,4 @@ mysql:
     database: node_and_friends
 port: 55555
 normalRowsPerPage: 3
-timeout: 10000
+timeout: 300000

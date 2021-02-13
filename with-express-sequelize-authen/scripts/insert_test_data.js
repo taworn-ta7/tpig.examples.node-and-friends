@@ -28,7 +28,7 @@ const run = async () => {
         password = setPassword('user0//pass')
         await models.Users.create({
             username: 'user0',
-            displayName: 'User - 00',
+            displayName: 'User 0',
             role: 'user',
             salt: password.salt,
             hash: password.hash
@@ -37,7 +37,7 @@ const run = async () => {
         password = setPassword('user1//pass')
         await models.Users.create({
             username: 'user1',
-            displayName: 'User - 01',
+            displayName: 'User 1',
             role: 'user',
             salt: password.salt,
             hash: password.hash
@@ -46,7 +46,7 @@ const run = async () => {
         password = setPassword('user2//pass')
         await models.Users.create({
             username: 'user2',
-            displayName: 'User - 02',
+            displayName: 'User 2',
             role: 'user',
             salt: password.salt,
             hash: password.hash

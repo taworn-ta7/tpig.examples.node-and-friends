@@ -275,6 +275,19 @@
 			"item": [
 				{
 					"name": "login: admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let ret = pm.response.json()\r",
+									"pm.environment.set(\"token\", ret.user.token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -302,6 +315,19 @@
 				},
 				{
 					"name": "login: user0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let ret = pm.response.json()\r",
+									"pm.environment.set(\"token\", ret.user.token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -329,6 +355,19 @@
 				},
 				{
 					"name": "login: user1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let ret = pm.response.json()\r",
+									"pm.environment.set(\"token\", ret.user.token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -356,6 +395,19 @@
 				},
 				{
 					"name": "login: user2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let ret = pm.response.json()\r",
+									"pm.environment.set(\"token\", ret.user.token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -383,6 +435,19 @@
 				},
 				{
 					"name": "login: user3_, fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let ret = pm.response.json()\r",
+									"pm.environment.set(\"token\", ret.user.token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -412,7 +477,13 @@
 					"name": "logout",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{}",
