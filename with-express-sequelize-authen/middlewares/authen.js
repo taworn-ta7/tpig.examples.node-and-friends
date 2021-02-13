@@ -20,16 +20,13 @@ const required = asyncHandler(async (req, res, next) => {
     if (!token)
         throw new RestError(`invalid token`)
 
-    // search token in current users
-    console.log(`token: ${token}`)
+    // search token
     const user = await models.Users.findOne({ where: { token } })
     if (!user)
         throw new RestError(`invalid token`)
 
-    // check if expired login
+    // check if expiry login
     const now = new Date()
-    console.log(`user: ${JSON.stringify(user, null, 4)}`)
-    console.log(`expire ${user.expire} < now ${now}`)
     if (user.expire.getTime() < now.getTime())
         throw new RestError(`timeout`)
 

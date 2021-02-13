@@ -42,7 +42,7 @@ router.post('/login', [
     // get request
     const json = req.body.login
 
-    // get user from database
+    // load user
     const user = await models.Users.findOne({ where: { username: json.username } })
     if (!user || !validatePassword(json.password, user.salt, user.hash))
         throw new RestError(`invalid username or/and password`, 422)
@@ -61,7 +61,7 @@ router.post('/login', [
     const secret = generateSecret()
     const token = await jwt.sign(payload, secret, {})
 
-    // update data
+    // update user
     const now = new Date()
     const expire = now.getTime() + config.get('timeout')
     await user.update({
@@ -103,6 +103,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
         end: new Date(),
         token: null
     })
+    req.user = undefined
 
     // success
     const ret = {
@@ -115,22 +116,19 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
             unregistered: user.unregistered,
             begin: user.begin,
             end: user.end,
-            expire: user.expire
+            expire: user.expire,
+            token: user.token
         }
     }
-    req.user = undefined
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
 
-router.get('/check', [], asyncHandler(async (req, res, next) => {
-    // get request
-
-    // check
-
+router.get('/check', [authen.required], asyncHandler(async (req, res, next) => {
     // success
     const ret = {
+        user: req.user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
