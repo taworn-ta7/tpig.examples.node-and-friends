@@ -48,25 +48,17 @@ module.exports = db.define('Users', {
         defaultValue: false
     },
 
-    token: {
-        type: DataTypes.STRING(4096),
-        allowNull: true
-    },
     begin: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.NOW
     },
-    end: {
+    expire: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.NOW
     },
 
-    secret: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     salt: {
         type: DataTypes.STRING,
         allowNull: false
@@ -74,6 +66,10 @@ module.exports = db.define('Users', {
     hash: {
         type: DataTypes.STRING(1024),
         allowNull: false
+    },
+    token: {
+        type: DataTypes.STRING(1024),
+        allowNull: true
     }
 }, {
     tableName: 'users'

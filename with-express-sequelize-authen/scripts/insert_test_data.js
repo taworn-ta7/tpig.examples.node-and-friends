@@ -5,19 +5,10 @@ const logger = require('../libs/logger')
 const db = require('../libs/db')
 const models = require('../models')
 
-const generateSecret = () => {
-    return crypto.randomBytes(4).toString('hex')
-}
-
 const setPassword = (password) => {
     const salt = crypto.randomBytes(16).toString('hex')
     const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
     return { salt, hash }
-}
-
-const validatePassword = (password, salt, hash) => {
-    const compareHash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
-    return hash === compareHash
 }
 
 // running
@@ -30,7 +21,6 @@ const run = async () => {
             username: 'admin',
             displayName: 'Administrator',
             role: 'admin',
-            secret: generateSecret(),
             salt: password.salt,
             hash: password.hash
         })
@@ -40,7 +30,6 @@ const run = async () => {
             username: 'user0',
             displayName: 'User - 00',
             role: 'user',
-            secret: generateSecret(),
             salt: password.salt,
             hash: password.hash
         })
@@ -50,7 +39,6 @@ const run = async () => {
             username: 'user1',
             displayName: 'User - 01',
             role: 'user',
-            secret: generateSecret(),
             salt: password.salt,
             hash: password.hash
         })
@@ -60,7 +48,6 @@ const run = async () => {
             username: 'user2',
             displayName: 'User - 02',
             role: 'user',
-            secret: generateSecret(),
             salt: password.salt,
             hash: password.hash
         })

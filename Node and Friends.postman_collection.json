@@ -382,6 +382,33 @@
 					"response": []
 				},
 				{
+					"name": "login: user3_, fail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user3_\",\r\n        \"password\": \"user3//pass\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/authen/login",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"authen",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "logout",
 					"request": {
 						"method": "POST",
