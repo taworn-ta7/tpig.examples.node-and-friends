@@ -7,8 +7,9 @@ describe("testing Users schema", () => {
         const json = {
             username: "john",
             displayName: "John Doe",
-            role: "admin",
-            disabled: false
+            disabled: false,
+            password: "password",
+            confirmPassword: "password"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(true)
@@ -18,7 +19,8 @@ describe("testing Users schema", () => {
         const json = {
             username: "john",
             displayName: "John Doe",
-            role: "user"
+            password: "password",
+            confirmPassword: "password"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(true)
@@ -27,17 +29,19 @@ describe("testing Users schema", () => {
     test("create: fail, displayName missing", () => {
         const json = {
             username: "john",
-            role: "user"
+            password: "password",
+            confirmPassword: "password"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
     })
 
-    test("create: fail, role misspelling", () => {
+    test("create: fail, displayName misspelling", () => {
         const json = {
             username: "john",
-            displayName: "John Doe",
-            role: "USER"
+            displayname: "John Doe",
+            password: "password",
+            confirmPassword: "password"
         }
         const result = schemas.createUser(json)
         expect(result).toBe(false)
@@ -53,9 +57,9 @@ describe("testing Users schema", () => {
         expect(result).toBe(true)
     })
 
-    test("update: fail, role misspelling", () => {
+    test("update: fail, displayName too short", () => {
         const json = {
-            role: "admiN"
+            displayName: "0"
         }
         const result = schemas.updateUser(json)
         expect(result).toBe(false)

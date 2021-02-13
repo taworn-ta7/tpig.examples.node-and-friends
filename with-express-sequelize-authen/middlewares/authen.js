@@ -1,9 +1,18 @@
 'use strict'
+const crypto = require('crypto')
 const asyncHandler = require('express-async-handler')
 const config = require('../configs')
-const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
 const models = require('../models')
+
+const validatePassword = (password, salt, hash) => {
+    return hash === crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+}
+
+const generateSecret = () => {
+    const seed = crypto.randomBytes(128).toString('hex')
+    return Buffer.from(seed).toString('base64')
+}
 
 const tokenFromHeaders = (req) => {
     const { headers: { authorization } } = req
@@ -53,6 +62,8 @@ const required = asyncHandler(async (req, res, next) => {
 })
 
 module.exports = {
+    validatePassword,
+    generateSecret,
     tokenFromHeaders,
     required
 }

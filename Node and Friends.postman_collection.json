@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ee37452e-400a-4381-9775-4d78db64a318",
+		"_postman_id": "0a7ac6dd-7692-4c66-be0a-1604d630f0d4",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -274,273 +274,397 @@
 			"name": "with-express-sequelize-authen",
 			"item": [
 				{
-					"name": "login: admin",
-					"event": [
+					"name": "authen",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let ret = pm.response.json()\r",
-									"pm.environment.set(\"token\", ret.user.token)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"admin\",\r\n        \"password\": \"admin//pass\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "login: admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}api/authen/login",
-							"host": [
-								"{{url}}api"
 							],
-							"path": [
-								"authen",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login: user0",
-					"event": [
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"admin\",\r\n        \"password\": \"admin//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let ret = pm.response.json()\r",
-									"pm.environment.set(\"token\", ret.user.token)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user0\",\r\n        \"password\": \"user0//pass\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "login: user0",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}api/authen/login",
-							"host": [
-								"{{url}}api"
 							],
-							"path": [
-								"authen",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login: user1",
-					"event": [
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user0\",\r\n        \"password\": \"user0//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let ret = pm.response.json()\r",
-									"pm.environment.set(\"token\", ret.user.token)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"user1//pass\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "login: user1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}api/authen/login",
-							"host": [
-								"{{url}}api"
 							],
-							"path": [
-								"authen",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login: user2",
-					"event": [
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"user1//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let ret = pm.response.json()\r",
-									"pm.environment.set(\"token\", ret.user.token)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user2\",\r\n        \"password\": \"user2//pass\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "login: user2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}api/authen/login",
-							"host": [
-								"{{url}}api"
 							],
-							"path": [
-								"authen",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login: user3_, fail",
-					"event": [
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user2\",\r\n        \"password\": \"user2//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let ret = pm.response.json()\r",
-									"pm.environment.set(\"token\", ret.user.token)\r",
-									""
+							"name": "login: user3_, fail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user3_\",\r\n        \"password\": \"user3//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
 								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user3_\",\r\n        \"password\": \"user3//pass\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/logout",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"logout"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{url}}api/authen/login",
-							"host": [
-								"{{url}}api"
-							],
-							"path": [
-								"authen",
-								"login"
-							]
+						{
+							"name": "check",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/check",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"check"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "logout",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "user",
+					"item": [
+						{
+							"name": "register: user4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}api/authen/logout",
-							"host": [
-								"{{url}}api"
 							],
-							"path": [
-								"authen",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "check",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"user4\",\r\n        \"displayName\": \"User 4\",\r\n        \"password\": \"user4//pass\",\r\n        \"confirmPassword\": \"user4//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/user/register",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"register"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{url}}api/authen/check",
-							"host": [
-								"{{url}}api"
+						{
+							"name": "register: user5",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
 							],
-							"path": [
-								"authen",
-								"check"
-							]
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"user5\",\r\n        \"displayName\": \"User 5\",\r\n        \"password\": \"user5//pass\",\r\n        \"confirmPassword\": \"user5//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/user/register",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register: user6",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"user6\",\r\n        \"displayName\": \"User 6\",\r\n        \"password\": \"user6//pass\",\r\n        \"confirmPassword\": \"user6//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/user/register",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		}

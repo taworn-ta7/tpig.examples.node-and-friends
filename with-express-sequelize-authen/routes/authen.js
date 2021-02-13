@@ -1,6 +1,5 @@
 'use strict'
 const jwt = require('jsonwebtoken')
-const crypto = require('crypto')
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { checkSchema } = require('express-validator')
@@ -12,15 +11,6 @@ const schemas = require('../schemas')
 const dump = require('../middlewares/dump')
 const validate = require('../middlewares/validate')
 const authen = require('../middlewares/authen')
-
-const validatePassword = (password, salt, hash) => {
-    return hash === crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
-}
-
-const generateSecret = () => {
-    const seed = crypto.randomBytes(128).toString('hex')
-    return Buffer.from(seed).toString('base64')
-}
 
 router.post('/login', [
     dump.body,
@@ -44,7 +34,7 @@ router.post('/login', [
 
     // load user
     const user = await models.Users.findOne({ where: { username: json.username } })
-    if (!user || !validatePassword(json.password, user.salt, user.hash))
+    if (!user || !authen.validatePassword(json.password, user.salt, user.hash))
         throw new RestError(`invalid username or/and password`, 422)
 
     // check if user disabled or unregistered
@@ -58,7 +48,7 @@ router.post('/login', [
         id: user.id,
         sub: user.username
     }
-    const secret = generateSecret()
+    const secret = authen.generateSecret()
     const token = await jwt.sign(payload, secret, {})
 
     // update user
