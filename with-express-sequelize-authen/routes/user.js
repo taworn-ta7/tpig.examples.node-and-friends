@@ -37,18 +37,67 @@ router.post('/register', [
 
     // success
     const ret = {
-        user: {
-            id: user.id,
-            username: user.username,
-            displayName: user.displayName,
-            role: user.role,
-            disabled: user.disabled,
-            unregistered: user.unregistered,
-            begin: user.begin,
-            end: user.end,
-            expire: user.expire,
-            token: user.token
-        }
+        user: authen.extractUser(user)
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
+router.put('/update/displayName', [
+    authen.required,
+    validate.json(body('user'), schemas.updateUser),
+    validate.result
+], asyncHandler(async (req, res, next) => {
+    // get request
+    const json = req.body.user
+    const user = await authen.get(req)
+
+    // check field(s)
+    if (!json.displayName)
+        throw new RestError(`missing field(s)`)
+
+    // update user
+    await user.update({
+        displayName: json.displayName
+    })
+
+    // success
+    const ret = {
+        user: authen.extractUser(user)
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
+router.put('/update/password', [
+    authen.required,
+    validate.json(body('user'), schemas.updateUser),
+    validate.result
+], asyncHandler(async (req, res, next) => {
+    // get request
+    const json = req.body.user
+    const user = await authen.get(req)
+
+    // check field(s)
+    if (!json.password)
+        throw new RestError(`missing field(s)`)
+
+    // update user
+    const salt = crypto.randomBytes(16).toString('hex')
+    const hash = crypto.pbkdf2Sync(json.password, salt, 10000, 512, 'sha512').toString('hex')
+    await user.update({
+        salt,
+        hash,
+        end: new Date(),
+        token: null
+    })
+    req.user = undefined
+
+    // success
+    const ret = {
+        user: authen.extractUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -56,10 +105,8 @@ router.post('/register', [
 }))
 
 router.post('/unregister', [authen.required], asyncHandler(async (req, res, next) => {
-    // load user
-    const user = await models.Users.findByPk(req.user.id)
-    if (!user)
-        throw new RestError(`not exists`)
+    // get request
+    const user = await authen.get(req)
 
     // update user unregistered flag
     await user.update({
@@ -71,18 +118,7 @@ router.post('/unregister', [authen.required], asyncHandler(async (req, res, next
 
     // success
     const ret = {
-        user: {
-            id: user.id,
-            username: user.username,
-            displayName: user.displayName,
-            role: user.role,
-            disabled: user.disabled,
-            unregistered: user.unregistered,
-            begin: user.begin,
-            end: user.end,
-            expire: user.expire,
-            token: user.token
-        }
+        user: authen.extractUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)

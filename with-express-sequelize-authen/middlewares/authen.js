@@ -24,6 +24,21 @@ const tokenFromHeaders = (req) => {
     return null
 }
 
+const extractUser = (user) => {
+    return {
+        id: user.id,
+        username: user.username,
+        displayName: user.displayName,
+        role: user.role,
+        disabled: user.disabled,
+        unregistered: user.unregistered,
+        begin: user.begin,
+        end: user.end,
+        expire: user.expire,
+        token: user.token
+    }
+}
+
 const required = asyncHandler(async (req, res, next) => {
     const token = tokenFromHeaders(req)
     if (!token)
@@ -46,24 +61,22 @@ const required = asyncHandler(async (req, res, next) => {
     })
     await user.reload()
 
-    req.user = {
-        id: user.id,
-        username: user.username,
-        displayName: user.displayName,
-        role: user.role,
-        disabled: user.disabled,
-        unregistered: user.unregistered,
-        begin: user.begin,
-        end: user.end,
-        expire: user.expire,
-        token: user.token
-    }
+    req.user = extractUser(user)
     next()
 })
+
+const get = async (req) => {
+    const user = await models.Users.findByPk(req.user.id)
+    if (!user)
+        throw new RestError(`not exists`)
+    return user
+}
 
 module.exports = {
     validatePassword,
     generateSecret,
     tokenFromHeaders,
-    required
+    extractUser,
+    required,
+    get
 }

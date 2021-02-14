@@ -60,22 +60,10 @@ router.post('/login', [
         expire: new Date(expire),
         token
     })
-    await user.reload()
 
     // success
     const ret = {
-        user: {
-            id: user.id,
-            username: user.username,
-            displayName: user.displayName,
-            role: user.role,
-            disabled: user.disabled,
-            unregistered: user.unregistered,
-            begin: user.begin,
-            end: user.end,
-            expire: user.expire,
-            token: user.token
-        }
+        user: authen.extractUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -83,10 +71,8 @@ router.post('/login', [
 }))
 
 router.post('/logout', [authen.required], asyncHandler(async (req, res, next) => {
-    // load user
-    const user = await models.Users.findByPk(req.user.id)
-    if (!user)
-        throw new RestError(`not exists`)
+    // get request
+    const user = await authen.get(req)
 
     // update user
     await user.update({
@@ -97,18 +83,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
 
     // success
     const ret = {
-        user: {
-            id: user.id,
-            username: user.username,
-            displayName: user.displayName,
-            role: user.role,
-            disabled: user.disabled,
-            unregistered: user.unregistered,
-            begin: user.begin,
-            end: user.end,
-            expire: user.expire,
-            token: user.token
-        }
+        user: authen.extractUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
