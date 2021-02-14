@@ -86,7 +86,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
     // load user
     const user = await models.Users.findByPk(req.user.id)
     if (!user)
-        throw new RestError(`invalid user`)
+        throw new RestError(`not exists`)
 
     // update user
     await user.update({

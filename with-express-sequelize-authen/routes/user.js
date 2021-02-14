@@ -55,4 +55,38 @@ router.post('/register', [
     next()
 }))
 
+router.post('/unregister', [authen.required], asyncHandler(async (req, res, next) => {
+    // load user
+    const user = await models.Users.findByPk(req.user.id)
+    if (!user)
+        throw new RestError(`not exists`)
+
+    // update user unregistered flag
+    await user.update({
+        unregistered: true,
+        end: new Date(),
+        token: null
+    })
+    req.user = undefined
+
+    // success
+    const ret = {
+        user: {
+            id: user.id,
+            username: user.username,
+            displayName: user.displayName,
+            role: user.role,
+            disabled: user.disabled,
+            unregistered: user.unregistered,
+            begin: user.begin,
+            end: user.end,
+            expire: user.expire,
+            token: user.token
+        }
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
 module.exports = router

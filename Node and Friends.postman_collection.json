@@ -477,6 +477,126 @@
 							"response": []
 						},
 						{
+							"name": "login: user4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user4\",\r\n        \"password\": \"user4//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user5",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user5\",\r\n        \"password\": \"user5//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user6",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user6\",\r\n        \"password\": \"user6//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "logout",
 							"request": {
 								"method": "POST",
@@ -659,6 +779,39 @@
 									"path": [
 										"user",
 										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unregister",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/user/unregister",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"unregister"
 									]
 								}
 							},
