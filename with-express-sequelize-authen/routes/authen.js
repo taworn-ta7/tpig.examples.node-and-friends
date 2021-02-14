@@ -52,6 +52,7 @@ router.post('/login', [
         exp: expire
     }
     const secret = authen.generateSecret()
+    logger.debug(`secret: ${secret}`)
     const token = await jwt.sign(payload, secret, {})
 
     // update user
