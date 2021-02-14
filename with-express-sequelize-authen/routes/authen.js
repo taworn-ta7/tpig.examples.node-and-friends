@@ -44,16 +44,17 @@ router.post('/login', [
         throw new RestError(`this user is disabled by admin`, 422)
 
     // sign token
+    const now = new Date()
+    const expire = now.getTime() + config.get('timeout')
     const payload = {
         id: user.id,
-        sub: user.username
+        sub: user.username,
+        exp: expire
     }
     const secret = authen.generateSecret()
     const token = await jwt.sign(payload, secret, {})
 
     // update user
-    const now = new Date()
-    const expire = now.getTime() + config.get('timeout')
     await user.update({
         begin: now,
         end: null,

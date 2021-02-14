@@ -59,7 +59,6 @@ const required = asyncHandler(async (req, res, next) => {
     await user.update({
         expire: new Date(expire)
     })
-    await user.reload()
 
     req.user = extractUser(user)
     next()
