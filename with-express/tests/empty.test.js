@@ -10,7 +10,7 @@ describe("testing empty", () => {
         expect(false).toBe(false)
     })
 
-    test("unexpect", () => {
+    test("unexpect, it produce error", () => {
         expect(false).toBe(true)
     })
 

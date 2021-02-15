@@ -1,7 +1,7 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const logger = require('../libs/logger')
+const { logger } = require('../libs')
 
 router.get('/', [], asyncHandler(async (req, res, next) => {
     // success
