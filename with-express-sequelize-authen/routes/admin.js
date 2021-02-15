@@ -6,7 +6,7 @@ const config = require('../configs')
 const { logger, RestError } = require('../libs')
 const models = require('../models')
 const schemas = require('../schemas')
-const { validate, authen } = require('../middlewares')
+const { validate, paginator, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
@@ -39,12 +39,11 @@ router.get('/list/:page', [
     const { page } = req.params
 
     // load records
-    const offset = page * normalRowsPerPage
     const query = {
         where: {
             role: 'user'
         },
-        offset,
+        offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
     const count = await models.Users.count(query)
@@ -52,13 +51,7 @@ router.get('/list/:page', [
 
     // success
     const ret = {
-        paginator: {
-            pageIndex: page,
-            pageCount: Math.ceil(count / normalRowsPerPage),
-            offset,
-            limit: normalRowsPerPage,
-            count
-        },
+        paginate: paginator.get(page, normalRowsPerPage, count),
         users,
     }
     res.status(200).send(ret)
