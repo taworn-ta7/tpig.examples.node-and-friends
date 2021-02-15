@@ -25,7 +25,10 @@
                 "confirmPassword": {
                     "type": "string",
                     "minLength": 4,
-                    "maxLength": 20
+                    "maxLength": 20,
+                    "const": {
+                        "$data": "1/password"
+                    }
                 }
             },
             "required": [
@@ -60,7 +63,12 @@
                 },
                 "unregistered": {
                     "type": "boolean"
-                },
+                }
+            }
+        },
+        "updateUserPassword": {
+            "type": "object",
+            "properties": {
                 "password": {
                     "type": "string",
                     "minLength": 4,
@@ -69,9 +77,16 @@
                 "confirmPassword": {
                     "type": "string",
                     "minLength": 4,
-                    "maxLength": 20
+                    "maxLength": 20,
+                    "const": {
+                        "$data": "1/password"
+                    }
                 }
-            }
+            },
+            "required": [
+                "password",
+                "confirmPassword"
+            ]
         }
     }
 }
