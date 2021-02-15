@@ -1,10 +1,12 @@
 'use strict'
 const logger = require('./logger')
-const db = require('./db')
 const RestError = require('./RestError')
+const paginator = require('./paginator')
+const db = require('./db')
 
 module.exports = {
     logger,
+    RestError,
     db,
-    RestError
+    paginator
 }

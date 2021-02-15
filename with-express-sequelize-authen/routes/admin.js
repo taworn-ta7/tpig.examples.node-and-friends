@@ -3,10 +3,10 @@ const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { param, body } = require('express-validator')
 const config = require('../configs')
-const { logger, RestError } = require('../libs')
+const { logger, RestError, paginator } = require('../libs')
 const models = require('../models')
 const schemas = require('../schemas')
-const { validate, paginator, authen } = require('../middlewares')
+const { validate, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
