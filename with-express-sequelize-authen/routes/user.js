@@ -48,7 +48,7 @@ router.put('/update/displayName', [
     const user = await authen.getUserFromDb(req)
 
     // check field(s)
-    if (!json.displayName)
+    if (typeof json.displayName !== 'string')
         throw new RestError(`missing field(s)`)
 
     // update user
@@ -75,7 +75,7 @@ router.put('/update/password', [
     const user = await authen.getUserFromDb(req)
 
     // check field(s)
-    if (!json.password)
+    if (typeof json.password !== 'string')
         throw new RestError(`missing field(s)`)
 
     // update user password

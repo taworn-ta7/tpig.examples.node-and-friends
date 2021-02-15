@@ -74,9 +74,7 @@ router.post('/disable/:username', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { username } = req.params
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // load record
     const user = await models.Users.findOne({ where: { username, role: 'user' } })
@@ -84,9 +82,9 @@ router.post('/disable/:username', [
         throw new RestError(`not exists`)
 
     // update
-    if (typeof json.user.disabled === 'boolean') {
+    if (typeof json.disabled === 'boolean') {
         await user.update({
-            disabled: json.user.disabled,
+            disabled: json.disabled,
             end: new Date(),
             token: null
         })
