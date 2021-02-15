@@ -1003,14 +1003,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/id/602a98b0a23f6e2c50d620ea",
+							"raw": "{{url}}api/games/id/602a9e55e06b9d07d8e190a4",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
 								"id",
-								"602a98b0a23f6e2c50d620ea"
+								"602a9e55e06b9d07d8e190a4"
 							]
 						}
 					},
@@ -1050,13 +1050,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/games/602a98b0a23f6e2c50d620ea",
+							"raw": "{{url}}api/games/602a9e55e06b9d07d8e190a4",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
-								"602a98b0a23f6e2c50d620ea"
+								"602a9e55e06b9d07d8e190a4"
 							]
 						}
 					},
@@ -1068,13 +1068,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/602a98b0a23f6e2c50d620ea",
+							"raw": "{{url}}api/games/602a9e55e06b9d07d8e190a4",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
-								"602a98b0a23f6e2c50d620ea"
+								"602a9e55e06b9d07d8e190a4"
 							]
 						}
 					},

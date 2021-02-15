@@ -29,7 +29,6 @@ router.get('/id/:id', [validate.ids(param('id')), validate.result], asyncHandler
 router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { page } = req.params
-    console.log(`page: ${page}, ${typeof page}`)
 
     // load records
     const count = await models.Users.count()
@@ -51,12 +50,10 @@ router.post('/add', [
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // insert
-    const user = new models.Users(json.user)
+    const user = new models.Users(json)
     await user.save()
 
     // success
@@ -76,9 +73,7 @@ router.put('/:id', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // load record
     const user = await models.Users.findById(id)
@@ -86,7 +81,7 @@ router.put('/:id', [
         throw new RestError(`no records`)
 
     // update
-    if (json.user) {
+    if (json) {
         for (let i = 0; i < user.profiles.length; i++) {
             user.profiles[i].name = '?'
         }
