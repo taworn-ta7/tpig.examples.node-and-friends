@@ -27,5 +27,5 @@ module.exports = db.define('Users', {
         }
     }
 }, {
-    tableName: 'users'
+    tableName: 'with-express-sequelize-users'
 })

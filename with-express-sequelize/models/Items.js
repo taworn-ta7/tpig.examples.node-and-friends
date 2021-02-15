@@ -24,5 +24,5 @@ module.exports = db.define('Items', {
         }
     }
 }, {
-    tableName: 'items'
+    tableName: 'with-express-sequelize-items'
 })
