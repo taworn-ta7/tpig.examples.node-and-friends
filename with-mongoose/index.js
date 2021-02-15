@@ -1,7 +1,5 @@
 'use strict'
-const logger = require('./libs/logger')
-const db = require('./libs/db')
-const models = require('./models')
+const { logger } = require('./libs')
 const main = require('./main')
 
 // running

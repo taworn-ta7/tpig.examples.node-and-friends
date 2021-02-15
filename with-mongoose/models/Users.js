@@ -16,4 +16,4 @@ const schema = new db.Schema({
     ]
 })
 
-module.exports = db.model('Users', schema)
+module.exports = db.model('with-mongoose-users', schema)
