@@ -69,4 +69,39 @@ router.get('/list/:page', [
     next()
 }))
 
+router.post('/disable/:username', [
+    authen.adminRequired,
+    validate.ids(param('username')),
+    validate.json(body('user'), schemas.updateUser),
+    validate.result
+], asyncHandler(async (req, res, next) => {
+    // get request
+    const { username } = req.params
+    const json = {
+        user: req.body.user
+    }
+
+    // load record
+    const user = await models.Users.findOne({ where: { username, role: 'user' } })
+    if (!user)
+        throw new RestError(`not exists`)
+
+    // update
+    if (typeof json.user.disabled === 'boolean') {
+        await user.update({
+            disabled: json.user.disabled,
+            end: new Date(),
+            token: null
+        })
+    }
+
+    // success
+    const ret = {
+        user
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
 module.exports = router

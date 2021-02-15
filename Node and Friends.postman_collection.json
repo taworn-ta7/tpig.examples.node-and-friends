@@ -823,6 +823,40 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "disable/enable",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"disabled\": true\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/admin/disable/user0",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"admin",
+										"disable",
+										"user0"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
