@@ -4,12 +4,9 @@ const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { checkSchema } = require('express-validator')
 const config = require('../configs')
-const logger = require('../libs/logger')
-const RestError = require('../libs/RestError')
+const { logger, RestError } = require('../libs')
 const models = require('../models')
-const dump = require('../middlewares/dump')
-const validate = require('../middlewares/validate')
-const authen = require('../middlewares/authen')
+const { dump, validate, authen } = require('../middlewares')
 
 router.post('/login', [
     dump.body,
