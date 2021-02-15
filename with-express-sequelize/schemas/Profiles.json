@@ -1,5 +1,5 @@
 {
-    "$id": "https://node-and-friends/with-sequelize/Profiles.json",
+    "$id": "https://node-and-friends/with-express-sequelize/Profiles.json",
     "definitions": {
         "createProfile": {
             "type": "object",
