@@ -61,12 +61,10 @@ router.post('/add', [
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // insert
-    const user = await models.Users.create(json.user, {
+    const user = await models.Users.create(json, {
         include: [
             {
                 association: models.Users.Profiles,
@@ -93,9 +91,7 @@ router.put('/:id', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // load record
     const user = await models.Users.findByPk(id, {
@@ -111,7 +107,7 @@ router.put('/:id', [
 
     // update
     if (json.user) {
-        await user.update(json.user)
+        await user.update(json)
         await user.reload()
     }
 
