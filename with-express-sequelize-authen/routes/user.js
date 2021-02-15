@@ -1,9 +1,7 @@
 'use strict'
-const crypto = require('crypto')
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { body } = require('express-validator')
-const config = require('../configs')
 const logger = require('../libs/logger')
 const RestError = require('../libs/RestError')
 const models = require('../models')
@@ -84,11 +82,10 @@ router.put('/update/password', [
         throw new RestError(`missing field(s)`)
 
     // update user password
-    const salt = crypto.randomBytes(16).toString('hex')
-    const hash = crypto.pbkdf2Sync(json.password, salt, 10000, 512, 'sha512').toString('hex')
+    const password = authen.setPassword(json.password)
     await user.update({
-        salt,
-        hash,
+        salt: password.salt,
+        hash: password.hash,
         end: new Date(),
         token: null
     })
