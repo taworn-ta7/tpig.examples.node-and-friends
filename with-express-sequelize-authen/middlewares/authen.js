@@ -53,7 +53,7 @@ const getUserFromDb = async (req) => {
     return user
 }
 
-const required = asyncHandler(async (req, res, next) => {
+const getCurrentUser = async (req) => {
     const token = tokenFromHeaders(req)
     if (!token)
         throw new RestError(`invalid token`)
@@ -74,7 +74,19 @@ const required = asyncHandler(async (req, res, next) => {
         expire: new Date(expire)
     })
 
-    req.user = getUser(user)
+    return getUser(user)
+}
+
+const required = asyncHandler(async (req, res, next) => {
+    req.user = await getCurrentUser(req)
+    next()
+})
+
+const adminRequired = asyncHandler(async (req, res, next) => {
+    const user = await getCurrentUser(req)
+    if (user.role !== 'admin')
+        throw new RestError(`require admin rights`)
+    req.user = user
     next()
 })
 
@@ -85,5 +97,6 @@ module.exports = {
     tokenFromHeaders,
     getUser,
     getUserFromDb,
-    required
+    required,
+    adminRequired
 }

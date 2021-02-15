@@ -2,7 +2,7 @@
 const router = require('express').Router()
 
 router.use('/authen', require('./authen'))
+router.use('/admin', require('./admin'))
 router.use('/user', require('./user'))
-router.use('/games', require('./games'))
 
 module.exports = router

@@ -9,5 +9,64 @@ const models = require('../models')
 const schemas = require('../schemas')
 const dump = require('../middlewares/dump')
 const validate = require('../middlewares/validate')
+const authen = require('../middlewares/authen')
+
+const normalRowsPerPage = config.get('normalRowsPerPage')
+
+router.get('/id/:username', [
+    authen.adminRequired,
+    validate.ids(param('username')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
+    // get request
+    const { username } = req.params
+
+    // load record
+    const user = await models.Users.findOne({ where: { username } })
+
+    // success
+    const ret = {
+        user
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
+router.get('/list/:page', [
+    authen.adminRequired,
+    validate.positiveOrZero(param('page')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
+    // get request
+    const { page } = req.params
+
+    // load records
+    const offset = page * normalRowsPerPage
+    const query = {
+        where: {
+            role: 'user'
+        },
+        offset,
+        limit: normalRowsPerPage
+    }
+    const count = await models.Users.count(query)
+    const users = await models.Users.findAll(query)
+
+    // success
+    const ret = {
+        paginator: {
+            pageIndex: page,
+            pageCount: Math.ceil(count / normalRowsPerPage),
+            offset,
+            limit: normalRowsPerPage,
+            count
+        },
+        users,
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
 
 module.exports = router

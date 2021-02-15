@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a7cb2572-311e-4f58-af25-8d37c7a064fd",
+		"_postman_id": "7d81634b-2a7e-4098-8c3d-a681a3dd5d48",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -740,6 +740,85 @@
 									"path": [
 										"authen",
 										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/admin/id/user0",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"admin",
+										"id",
+										"user0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/admin/list/0",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"admin",
+										"list",
+										"0"
 									]
 								}
 							},
