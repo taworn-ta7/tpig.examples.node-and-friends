@@ -25,19 +25,18 @@ router.post('/register', [
         throw new RestError(`already exists`)
 
     // insert
-    const salt = crypto.randomBytes(16).toString('hex')
-    const hash = crypto.pbkdf2Sync(json.password, salt, 10000, 512, 'sha512').toString('hex')
+    const password = authen.setPassword(json.password)
     const user = await models.Users.create({
         username: json.username,
         displayName: json.displayName,
         role: 'user',
-        salt,
-        hash
+        salt: password.salt,
+        hash: password.hash
     })
 
     // success
     const ret = {
-        user: authen.extractUser(user)
+        user: authen.getUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -51,7 +50,7 @@ router.put('/update/displayName', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = req.body.user
-    const user = await authen.get(req)
+    const user = await authen.getUserFromDb(req)
 
     // check field(s)
     if (!json.displayName)
@@ -64,7 +63,7 @@ router.put('/update/displayName', [
 
     // success
     const ret = {
-        user: authen.extractUser(user)
+        user: authen.getUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -78,13 +77,13 @@ router.put('/update/password', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = req.body.user
-    const user = await authen.get(req)
+    const user = await authen.getUserFromDb(req)
 
     // check field(s)
     if (!json.password)
         throw new RestError(`missing field(s)`)
 
-    // update user
+    // update user password
     const salt = crypto.randomBytes(16).toString('hex')
     const hash = crypto.pbkdf2Sync(json.password, salt, 10000, 512, 'sha512').toString('hex')
     await user.update({
@@ -97,7 +96,7 @@ router.put('/update/password', [
 
     // success
     const ret = {
-        user: authen.extractUser(user)
+        user: authen.getUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -106,7 +105,7 @@ router.put('/update/password', [
 
 router.post('/unregister', [authen.required], asyncHandler(async (req, res, next) => {
     // get request
-    const user = await authen.get(req)
+    const user = await authen.getUserFromDb(req)
 
     // update user unregistered flag
     await user.update({
@@ -118,7 +117,7 @@ router.post('/unregister', [authen.required], asyncHandler(async (req, res, next
 
     // success
     const ret = {
-        user: authen.extractUser(user)
+        user: authen.getUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)

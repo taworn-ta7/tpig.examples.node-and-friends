@@ -5,8 +5,15 @@ const config = require('../configs')
 const RestError = require('../libs/RestError')
 const models = require('../models')
 
+const setPassword = (password) => {
+    const salt = crypto.randomBytes(16).toString('hex')
+    const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+    return { salt, hash }
+}
+
 const validatePassword = (password, salt, hash) => {
-    return hash === crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+    const computeHash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+    return hash === computeHash
 }
 
 const generateSecret = () => {
@@ -24,7 +31,7 @@ const tokenFromHeaders = (req) => {
     return null
 }
 
-const extractUser = (user) => {
+const getUser = (user) => {
     return {
         id: user.id,
         username: user.username,
@@ -37,6 +44,13 @@ const extractUser = (user) => {
         expire: user.expire,
         token: user.token
     }
+}
+
+const getUserFromDb = async (req) => {
+    const user = await models.Users.findByPk(req.user.id)
+    if (!user)
+        throw new RestError(`not exists`)
+    return user
 }
 
 const required = asyncHandler(async (req, res, next) => {
@@ -60,22 +74,16 @@ const required = asyncHandler(async (req, res, next) => {
         expire: new Date(expire)
     })
 
-    req.user = extractUser(user)
+    req.user = getUser(user)
     next()
 })
 
-const get = async (req) => {
-    const user = await models.Users.findByPk(req.user.id)
-    if (!user)
-        throw new RestError(`not exists`)
-    return user
-}
-
 module.exports = {
+    setPassword,
     validatePassword,
     generateSecret,
     tokenFromHeaders,
-    extractUser,
-    required,
-    get
+    getUser,
+    getUserFromDb,
+    required
 }

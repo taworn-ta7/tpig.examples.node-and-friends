@@ -65,7 +65,7 @@ router.post('/login', [
 
     // success
     const ret = {
-        user: authen.extractUser(user)
+        user: authen.getUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -74,7 +74,7 @@ router.post('/login', [
 
 router.post('/logout', [authen.required], asyncHandler(async (req, res, next) => {
     // get request
-    const user = await authen.get(req)
+    const user = await authen.getUserFromDb(req)
 
     // update user
     await user.update({
@@ -85,7 +85,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
 
     // success
     const ret = {
-        user: authen.extractUser(user)
+        user: authen.getUser(user)
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
