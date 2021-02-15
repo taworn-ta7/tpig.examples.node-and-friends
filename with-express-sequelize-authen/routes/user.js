@@ -72,7 +72,7 @@ router.put('/update/displayName', [
 
 router.put('/update/password', [
     authen.required,
-    validate.json(body('user'), schemas.updateUser),
+    validate.json(body('user'), schemas.updateUserPassword),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request

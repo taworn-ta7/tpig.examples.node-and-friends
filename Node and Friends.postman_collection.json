@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0a7ac6dd-7692-4c66-be0a-1604d630f0d4",
+		"_postman_id": "a7cb2572-311e-4f58-af25-8d37c7a064fd",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -357,6 +357,46 @@
 							"response": []
 						},
 						{
+							"name": "login: user0 change password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user0\",\r\n        \"password\": \"PASSWORD\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "login: user1",
 							"event": [
 								{
@@ -377,6 +417,46 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"user1//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/authen/login",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user1 change password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"PASSWORD\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -831,7 +911,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n        \"password\": \"PASSWORD\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"user\": {\r\n        \"password\": \"PASSWORD\",\r\n        \"confirmPassword\": \"PASSWORD\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
