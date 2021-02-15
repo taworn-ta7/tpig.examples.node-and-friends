@@ -1003,14 +1003,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/id/6023f52e342a120e24656257",
+							"raw": "{{url}}api/games/id/602a98b0a23f6e2c50d620ea",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"games",
 								"id",
-								"6023f52e342a120e24656257"
+								"602a98b0a23f6e2c50d620ea"
 							]
 						}
 					},

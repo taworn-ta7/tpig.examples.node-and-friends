@@ -10,7 +10,7 @@ const ajv = new Ajv({
 const addFormats = require('ajv-formats')
 addFormats(ajv)
 
-const baseUri = 'https://node-and-friends/with-mongoose/'
+const baseUri = 'https://node-and-friends/with-express-mongoose/'
 module.exports = {
     createUser: ajv.compile({ '$ref': `${baseUri}Users.json#/definitions/createUser` }),
     updateUser: ajv.compile({ '$ref': `${baseUri}Users.json#/definitions/updateUser` })

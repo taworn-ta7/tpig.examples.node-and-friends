@@ -1,13 +1,12 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const { param } = require('express-validator')
+const { param, body } = require('express-validator')
 const config = require('../configs')
-const logger = require('../libs/logger')
-const RestError = require('../libs/RestError')
+const { logger, RestError, paginator } = require('../libs')
 const models = require('../models')
-const dump = require('../middlewares/dump')
-const validate = require('../middlewares/validate')
+const schemas = require('../schemas')
+const { dump, validate } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
@@ -33,19 +32,12 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
     console.log(`page: ${page}, ${typeof page}`)
 
     // load records
-    const offset = page * normalRowsPerPage
     const count = await models.Users.count()
-    const users = await models.Users.find().skip(offset).limit(normalRowsPerPage)
+    const users = await models.Users.find().skip(page * normalRowsPerPage).limit(normalRowsPerPage)
 
     // success
     const ret = {
-        paginator: {
-            pageIndex: page,
-            pageCount: Math.ceil(count / normalRowsPerPage),
-            offset,
-            limit: normalRowsPerPage,
-            count
-        },
+        paginate: paginator.get(page, normalRowsPerPage, count),
         users,
     }
     res.status(200).send(ret)
@@ -54,7 +46,9 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
 }))
 
 router.post('/add', [
-    dump.body
+    dump.body,
+    validate.json(body('user'), schemas.createUser),
+    validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = {
@@ -75,7 +69,10 @@ router.post('/add', [
 }))
 
 router.put('/:id', [
-    dump.body
+    dump.body,
+    validate.ids(param('id')),
+    validate.json(body('user'), schemas.updateUser),
+    validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
