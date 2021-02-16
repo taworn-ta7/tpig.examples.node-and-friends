@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0f2884fa-05fa-46f3-bead-58a1dd82d440",
+		"_postman_id": "8c11dfd9-7e87-4a29-a7cd-2b69a3834a8f",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -26,9 +26,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/tests/",
+							"raw": "{{with-express-uri}}api/tests/",
 							"host": [
-								"{{url}}api"
+								"{{with-express-uri}}api"
 							],
 							"path": [
 								"tests",
@@ -50,7 +50,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"nero\",\r\n        \"password\": \"password\",\r\n        \"profiles\": [\r\n            {\r\n                \"name\": \"Nero Doe\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Dragon Quest VI\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Dragon Quest VII\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Nero Smith\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Area 88\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"john\",\r\n        \"password\": \"password\",\r\n        \"profiles\": [\r\n            {\r\n                \"name\": \"John Doe\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Dragon Quest VI\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Dragon Quest VII\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"John Smith\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Area 88\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,9 +58,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/games/add",
+							"raw": "{{with-express-sequelize-uri}}api/games/add",
 							"host": [
-								"{{url}}api"
+								"{{with-express-sequelize-uri}}api"
 							],
 							"path": [
 								"games",
@@ -76,9 +76,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/id/1",
+							"raw": "{{with-express-sequelize-uri}}api/games/id/1",
 							"host": [
-								"{{url}}api"
+								"{{with-express-sequelize-uri}}api"
 							],
 							"path": [
 								"games",
@@ -95,9 +95,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/list/0",
+							"raw": "{{with-express-sequelize-uri}}api/games/list/0",
 							"host": [
-								"{{url}}api"
+								"{{with-express-sequelize-uri}}api"
 							],
 							"path": [
 								"games",
@@ -123,9 +123,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/games/1",
+							"raw": "{{with-express-sequelize-uri}}api/games/1",
 							"host": [
-								"{{url}}api"
+								"{{with-express-sequelize-uri}}api"
 							],
 							"path": [
 								"games",
@@ -141,9 +141,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/1",
+							"raw": "{{with-express-sequelize-uri}}api/games/1",
 							"host": [
-								"{{url}}api"
+								"{{with-express-sequelize-uri}}api"
 							],
 							"path": [
 								"games",
@@ -169,7 +169,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -189,9 +189,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -209,7 +209,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -229,9 +229,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -249,7 +249,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -269,9 +269,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -289,7 +289,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -309,9 +309,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -329,7 +329,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -349,9 +349,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -369,7 +369,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -389,9 +389,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -409,7 +409,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -429,9 +429,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -449,7 +449,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -469,9 +469,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -489,7 +489,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -509,9 +509,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -529,7 +529,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -549,9 +549,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -568,7 +568,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -582,9 +582,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/logout",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/logout",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -604,7 +604,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -618,9 +618,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/check",
+									"raw": "{{with-express-sequelize-authen-uri}}api/authen/check",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -645,7 +645,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -659,9 +659,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/admin/id/user0",
+									"raw": "{{with-express-sequelize-authen-uri}}api/admin/id/user0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"admin",
@@ -682,7 +682,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -696,9 +696,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/admin/list/0",
+									"raw": "{{with-express-sequelize-authen-uri}}api/admin/list/0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"admin",
@@ -716,7 +716,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -730,9 +730,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/admin/disable/user0",
+									"raw": "{{with-express-sequelize-authen-uri}}api/admin/disable/user0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"admin",
@@ -774,9 +774,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/register",
+									"raw": "{{with-express-sequelize-authen-uri}}api/user/register",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"user",
@@ -812,9 +812,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/register",
+									"raw": "{{with-express-sequelize-authen-uri}}api/user/register",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"user",
@@ -850,9 +850,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/register",
+									"raw": "{{with-express-sequelize-authen-uri}}api/user/register",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"user",
@@ -869,7 +869,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -883,9 +883,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/update/displayName",
+									"raw": "{{with-express-sequelize-authen-uri}}api/user/update/displayName",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"user",
@@ -903,7 +903,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -917,9 +917,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/update/password",
+									"raw": "{{with-express-sequelize-authen-uri}}api/user/update/password",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"user",
@@ -937,7 +937,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -951,9 +951,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/unregister",
+									"raw": "{{with-express-sequelize-authen-uri}}api/user/unregister",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"user",
@@ -975,7 +975,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -989,9 +989,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/games/add",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/add",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1008,14 +1008,14 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{url}}api/games/id/1",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/id/1",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1033,14 +1033,14 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{url}}api/games/list/0",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/list/0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1058,7 +1058,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
@@ -1072,9 +1072,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/games/1",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/1",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1091,14 +1091,14 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{url}}api/games/1",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/1",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1126,7 +1126,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1146,9 +1146,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1166,7 +1166,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1186,9 +1186,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1206,7 +1206,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1226,9 +1226,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1246,7 +1246,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1266,9 +1266,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1286,7 +1286,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1306,9 +1306,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1326,7 +1326,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1346,9 +1346,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1366,7 +1366,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1386,9 +1386,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1406,7 +1406,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1426,9 +1426,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1446,7 +1446,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1466,9 +1466,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1486,7 +1486,7 @@
 									"script": {
 										"exec": [
 											"let ret = pm.response.json()\r",
-											"pm.environment.set(\"token\", ret.user.token)\r",
+											"pm.environment.set(\"with-express-sequelize-authen-tests-token\", ret.user.token)\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1506,9 +1506,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/login",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/login",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1525,7 +1525,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1539,9 +1539,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/logout",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/logout",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1561,7 +1561,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1575,9 +1575,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/authen/check",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/authen/check",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"authen",
@@ -1602,7 +1602,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1616,9 +1616,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/admin/id/user0",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/admin/id/user0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"admin",
@@ -1639,7 +1639,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1653,9 +1653,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/admin/list/0",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/admin/list/0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"admin",
@@ -1673,7 +1673,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1687,9 +1687,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/admin/disable/user0",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/admin/disable/user0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"admin",
@@ -1731,9 +1731,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/register",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/user/register",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"user",
@@ -1769,9 +1769,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/register",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/user/register",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"user",
@@ -1807,9 +1807,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/register",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/user/register",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"user",
@@ -1826,7 +1826,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1840,9 +1840,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/update/displayName",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/user/update/displayName",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"user",
@@ -1860,7 +1860,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1874,9 +1874,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/update/password",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/user/update/password",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"user",
@@ -1894,7 +1894,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1908,9 +1908,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/user/unregister",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/user/unregister",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"user",
@@ -1932,7 +1932,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -1946,9 +1946,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/games/add",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/add",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1965,14 +1965,14 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{url}}api/games/id/1",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/id/1",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"games",
@@ -1990,14 +1990,14 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{url}}api/games/list/0",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/list/0",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"games",
@@ -2015,7 +2015,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
@@ -2029,9 +2029,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}api/games/1",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/1",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"games",
@@ -2048,14 +2048,14 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{url}}api/games/1",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/1",
 									"host": [
-										"{{url}}api"
+										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"games",

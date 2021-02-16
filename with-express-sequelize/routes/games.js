@@ -106,7 +106,7 @@ router.put('/:id', [
         throw new RestError(`no records`)
 
     // update
-    if (json.user) {
+    if (json) {
         await user.update(json)
         await user.reload()
     }

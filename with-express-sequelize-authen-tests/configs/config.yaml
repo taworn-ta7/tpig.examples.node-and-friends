@@ -3,6 +3,6 @@ mysql:
     username: user
     password: user//pass
     database: node_and_friends
-port: 55555
+port: 4003
 normalRowsPerPage: 3
 timeout: 300000

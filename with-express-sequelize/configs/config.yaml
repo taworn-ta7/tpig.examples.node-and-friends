@@ -3,5 +3,5 @@ mysql:
     username: user
     password: user//pass
     database: node_and_friends
-port: 55555
+port: 4001
 normalRowsPerPage: 3
