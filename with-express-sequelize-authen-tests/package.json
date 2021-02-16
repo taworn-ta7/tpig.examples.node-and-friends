@@ -1,0 +1,32 @@
+{
+  "name": "with-express-sequelize-authen-tests",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "generate": "node ./scripts/insert_test_data",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "author": "Taworn Ta.",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^7.1.0",
+    "ajv-formats": "^1.5.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-validator": "^6.9.2",
+    "jsonwebtoken": "^8.5.1",
+    "merge-config": "^2.0.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}

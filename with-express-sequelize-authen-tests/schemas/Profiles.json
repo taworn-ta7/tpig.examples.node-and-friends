@@ -1,0 +1,42 @@
+{
+    "$id": "https://node-and-friends/with-express-sequelize-authen-tests/Profiles.json",
+    "definitions": {
+        "createProfile": {
+            "type": "object",
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Items.json#/definitions/createItem"
+                    }
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "updateProfile": {
+            "type": "object",
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                }
+            }
+        }
+    }
+}

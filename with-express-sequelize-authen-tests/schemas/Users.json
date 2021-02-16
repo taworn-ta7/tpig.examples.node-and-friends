@@ -1,0 +1,92 @@
+{
+    "$id": "https://node-and-friends/with-express-sequelize-authen-tests/Users.json",
+    "definitions": {
+        "createUser": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "displayName": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 50
+                },
+                "disabled": {
+                    "type": "boolean"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "confirmPassword": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20,
+                    "const": {
+                        "$data": "1/password"
+                    }
+                }
+            },
+            "required": [
+                "username",
+                "displayName",
+                "password",
+                "confirmPassword"
+            ]
+        },
+        "updateUser": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "displayName": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 50
+                },
+                "role": {
+                    "type": "string",
+                    "enum": [
+                        "user",
+                        "admin"
+                    ]
+                },
+                "disabled": {
+                    "type": "boolean"
+                },
+                "unregistered": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "updateUserPassword": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20
+                },
+                "confirmPassword": {
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 20,
+                    "const": {
+                        "$data": "1/password"
+                    }
+                }
+            },
+            "required": [
+                "password",
+                "confirmPassword"
+            ]
+        }
+    }
+}
