@@ -3,12 +3,10 @@ const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { param, body } = require('express-validator')
 const config = require('../configs')
-const logger = require('../libs/logger')
-const RestError = require('../libs/RestError')
+const { logger, RestError, paginator } = require('../libs')
 const models = require('../models')
 const schemas = require('../schemas')
-const dump = require('../middlewares/dump')
-const validate = require('../middlewares/validate')
+const { dump, validate } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
@@ -40,9 +38,8 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
     const { page } = req.params
 
     // load records
-    const offset = page * normalRowsPerPage
     const query = {
-        offset,
+        offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
     const count = await models.Users.count(query)
@@ -50,13 +47,7 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
 
     // success
     const ret = {
-        paginator: {
-            pageIndex: page,
-            pageCount: Math.ceil(count / normalRowsPerPage),
-            offset,
-            limit: normalRowsPerPage,
-            count
-        },
+        paginate: paginator.get(page, normalRowsPerPage, count),
         users,
     }
     res.status(200).send(ret)
@@ -70,12 +61,10 @@ router.post('/add', [
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // insert
-    const user = await models.Users.create(json.user, {
+    const user = await models.Users.create(json, {
         include: [
             {
                 association: models.Users.Profiles,
@@ -102,9 +91,7 @@ router.put('/:id', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
-    const json = {
-        user: req.body.user
-    }
+    const json = req.body.user
 
     // load record
     const user = await models.Users.findByPk(id, {
@@ -120,7 +107,7 @@ router.put('/:id', [
 
     // update
     if (json.user) {
-        await user.update(json.user)
+        await user.update(json)
         await user.reload()
     }
 
