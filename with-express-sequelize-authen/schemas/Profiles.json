@@ -21,7 +21,6 @@
                 }
             },
             "required": [
-                "uid",
                 "name"
             ]
         },
@@ -37,10 +36,7 @@
                     "minLength": 1,
                     "maxLength": 100
                 }
-            },
-            "required": [
-                "uid"
-            ]
+            }
         }
     }
 }

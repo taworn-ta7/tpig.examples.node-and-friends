@@ -37,7 +37,7 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        users,
+        users
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)

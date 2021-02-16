@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "77b4695a-10bd-4da2-9d05-b8185f6c241a",
+		"_postman_id": "a2bffd8d-e2b0-4383-971f-788d892b0d30",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -958,6 +958,151 @@
 									"path": [
 										"user",
 										"unregister"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "games",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Nero Doe\",\r\n        \"items\": [\r\n            {\r\n                \"name\": \"Dragon Quest VI\"\r\n            },\r\n            {\r\n                \"name\": \"Dragon Quest VII\"\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/games/add",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"games",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read, single",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}api/games/id/1",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"games",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read, multiple",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}api/games/list/0",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"games",
+										"list",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Aaa\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/games/1",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"games",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}api/games/1",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"games",
+										"1"
 									]
 								}
 							},

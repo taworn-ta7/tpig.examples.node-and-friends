@@ -6,34 +6,37 @@ const config = require('../configs')
 const { logger, RestError, paginator } = require('../libs')
 const models = require('../models')
 const schemas = require('../schemas')
-const { dump, validate } = require('../middlewares')
+const { dump, validate, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/id/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.get('/id/:id', [
+    authen.required,
+    validate.id(param('id')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
     // load record
-    const user = await models.Users.findByPk(id, {
-        include: [
-            {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
-            }
-        ]
+    const profile = await models.Profiles.findByPk(id, {
+        include: [models.Profiles.Items]
     })
 
     // success
     const ret = {
-        user
+        profile
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
 
-router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
+router.get('/list/:page', [
+    authen.required,
+    validate.positiveOrZero(param('page')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const { page } = req.params
 
@@ -42,13 +45,13 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
-    const count = await models.Users.count(query)
-    const users = await models.Users.findAll(query)
+    const count = await models.Profiles.count(query)
+    const profiles = await models.Profiles.findAll(query)
 
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        users,
+        profiles
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -56,27 +59,25 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
 }))
 
 router.post('/add', [
+    authen.required,
     dump.body,
-    validate.json(body('user'), schemas.createUser),
+    validate.json(body('profile'), schemas.createProfile),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const json = req.body.user
+    const json = req.body.profile
 
     // insert
-    const user = await models.Users.create(json, {
-        include: [
-            {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
-            }
-        ]
+    json.uid = req.user.id
+    console.log(`json: ${JSON.stringify(json, null, 3)}`)
+    const profile = await models.Profiles.create(json, {
+        include: [models.Profiles.Items]
     })
-    await user.reload()
+    await profile.reload()
 
     // success
     const ret = {
-        user
+        profile
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -84,57 +85,58 @@ router.post('/add', [
 }))
 
 router.put('/:id', [
+    authen.required,
     dump.body,
     validate.id(param('id')),
-    validate.json(body('user'), schemas.updateUser),
+    validate.json(body('profile'), schemas.updateProfile),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
-    const json = req.body.user
+    const json = req.body.profile
 
     // load record
-    const user = await models.Users.findByPk(id, {
-        include: [
-            {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
-            }
-        ]
+    json.uid = req.user.id
+    const profile = await models.Profiles.findByPk(id, {
+        include: [models.Profiles.Items]
     })
-    if (!user)
+    if (!profile)
         throw new RestError(`no records`)
 
     // update
-    if (json.user) {
-        await user.update(json)
-        await user.reload()
+    if (Object.keys(json).length > 0) {
+        await profile.update(json)
+        await profile.reload()
     }
 
     // success
     const ret = {
-        user
+        profile
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
 
-router.delete('/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.delete('/:id', [
+    authen.required,
+    validate.id(param('id')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
     // load record
-    const user = await models.Users.findByPk(id)
-    if (!user)
+    const profile = await models.Profiles.findByPk(id)
+    if (!profile)
         throw new RestError(`no records`)
 
     // delete
-    await user.destroy()
+    await profile.destroy()
 
     // success
     const ret = {
-        user
+        profile
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
