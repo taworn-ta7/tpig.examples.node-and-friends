@@ -90,6 +90,14 @@ const adminRequired = asyncHandler(async (req, res, next) => {
     next()
 })
 
+const checkPermission = (req, item, uid = 'uid') => {
+    if (item === null)
+        throw new RestError(`not found`)
+    if (item[uid] !== req.user.id)
+        throw new RestError(`not enough permission`)
+    return item
+}
+
 module.exports = {
     setPassword,
     validatePassword,
@@ -98,5 +106,6 @@ module.exports = {
     getUser,
     getUserFromDb,
     required,
-    adminRequired
+    adminRequired,
+    checkPermission
 }

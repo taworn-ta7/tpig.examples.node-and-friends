@@ -10,11 +10,7 @@ const { dump, validate, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/id/:id', [
-    authen.required,
-    validate.id(param('id')),
-    validate.result
-], asyncHandler(async (req, res, next) => {
+router.get('/id/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
@@ -42,6 +38,7 @@ router.get('/list/:page', [
 
     // load records
     const query = {
+        where: { uid: req.user.id },
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
@@ -69,7 +66,6 @@ router.post('/add', [
 
     // insert
     json.uid = req.user.id
-    console.log(`json: ${JSON.stringify(json, null, 3)}`)
     const profile = await models.Profiles.create(json, {
         include: [models.Profiles.Items]
     })
@@ -96,12 +92,10 @@ router.put('/:id', [
     const json = req.body.profile
 
     // load record
-    json.uid = req.user.id
     const profile = await models.Profiles.findByPk(id, {
         include: [models.Profiles.Items]
     })
-    if (!profile)
-        throw new RestError(`no records`)
+    authen.checkPermission(req, profile)
 
     // update
     if (Object.keys(json).length > 0) {
@@ -128,8 +122,7 @@ router.delete('/:id', [
 
     // load record
     const profile = await models.Profiles.findByPk(id)
-    if (!profile)
-        throw new RestError(`no records`)
+    authen.checkPermission(req, profile)
 
     // delete
     await profile.destroy()
