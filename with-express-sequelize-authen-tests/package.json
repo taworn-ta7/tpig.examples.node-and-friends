@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "generate": "node ./scripts/insert_test_data",
+    "create": "node ./scripts/create_database",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
@@ -14,13 +14,12 @@
     "ajv": "^7.1.0",
     "ajv-formats": "^1.5.1",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-validator": "^6.9.2",
-    "jsonwebtoken": "^8.5.1",
     "merge-config": "^2.0.0",
     "mysql2": "^2.2.5",
+    "node-fetch": "^2.6.1",
     "sequelize": "^6.5.0",
     "uuid": "^8.3.2",
     "winston": "^3.3.3",

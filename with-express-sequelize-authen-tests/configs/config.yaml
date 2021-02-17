@@ -6,3 +6,4 @@ mysql:
 port: 4003
 normalRowsPerPage: 3
 timeout: 300000
+authenUri: http://localhost:4002/
