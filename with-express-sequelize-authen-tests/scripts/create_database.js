@@ -1,7 +1,6 @@
 'use strict'
-const fetch = require('node-fetch')
 const config = require('../configs')
-const { logger, db } = require('../libs')
+const { logger, http, db } = require('../libs')
 const models = require('../models')
 
 const authenUri = config.get('authenUri')
@@ -9,59 +8,44 @@ const authenUri = config.get('authenUri')
 // running
 const run = async () => {
     try {
-        await db.sync({ force: false })
+        await db.sync({ force: true })
 
         let token
 
         {
-            const uri = `${authenUri}api/authen/login`
-            const options = {
+            // login with admin
+            const result = await http.json(`${authenUri}api/authen/login`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
+                headers: http.jsonHeaders(),
                 body: JSON.stringify({
                     login: {
                         username: 'admin',
                         password: 'admin//pass'
                     }
                 })
-            }
-            logger.info(`fetch: ${uri} ${JSON.stringify(options, null, 4)}`)
-            const response = await fetch(uri, options)
-            const result = await response.json()
-            logger.verbose(`result: ${JSON.stringify(result, null, 4)}`)
+            })
             token = result.user.token
         }
 
         {
-            const uri = `${authenUri}api/authen/check`
-            const options = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                    'Authorization': `Bearer ${token}`
+            // list users, round by round
+            let round = 0
+            while (true) {
+                const result = await http.json(`${authenUri}api/admin/list/${round++}`, {
+                    method: 'GET',
+                    headers: http.jsonHeaders(token)
+                })
+                if (result.paginate.pageSize <= 0)
+                    break
+                for (let i = 0; i < result.paginate.pageSize; i++) {
+                    const item = result.users[i]
+                    await models.Users.create({
+                        id: item.id,
+                        username: item.username,
+                        displayName: item.displayName
+                    })
                 }
             }
-            logger.info(`fetch: ${uri} ${JSON.stringify(options, null, 4)}`)
-            const response = await fetch(uri, options)
-            const result = await response.json()
-            logger.verbose(`result: ${JSON.stringify(result, null, 4)}`)
-        }
-
-        {
-            const uri = `${authenUri}api/authen/logout`
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-            logger.info(`fetch: ${uri} ${JSON.stringify(options, null, 4)}`)
-            const response = await fetch(uri, options)
-            const result = await response.json()
-            logger.verbose(`result: ${JSON.stringify(result, null, 4)}`)
         }
     }
     catch (ex) {

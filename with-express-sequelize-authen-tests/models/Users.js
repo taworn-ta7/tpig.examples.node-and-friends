@@ -1,5 +1,5 @@
 'use strict'
-const { Sequelize, DataTypes } = require('sequelize')
+const { DataTypes } = require('sequelize')
 const db = require('../libs/db')
 
 module.exports = db.define('Users', {
@@ -7,7 +7,6 @@ module.exports = db.define('Users', {
         type: DataTypes.STRING(50),
         allowNull: false,
         primaryKey: true,
-        defaultValue: Sequelize.UUIDV4,
         validate: {
             isUUID: 4
         }
