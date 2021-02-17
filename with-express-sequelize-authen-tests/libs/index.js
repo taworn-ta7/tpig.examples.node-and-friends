@@ -1,8 +1,8 @@
 'use strict'
 module.exports = {
     logger: require('./logger'),
-    http: require('./http'),
     RestError: require('./RestError'),
+    http: require('./http'),
     paginator: require('./paginator'),
     db: require('./db')
 }
