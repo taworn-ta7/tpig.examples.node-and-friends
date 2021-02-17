@@ -1,51 +1,73 @@
 'use strict'
-const fetch = require('node-fetch')
+const asyncHandler = require('express-async-handler')
 const config = require('../configs')
-const RestError = require('../libs/RestError')
-const models = require('../models')
+const { RestError, http } = require('../libs')
 
 const authenUri = config.get('authenUri')
 
-const login = (username, password) => {
-    var options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-            login: {
-                username,
-                password
+const tokenFromHeaders = (req) => {
+    const { headers: { authorization } } = req
+    if (authorization) {
+        const a = authorization.split(' ')
+        if (a.length >= 2) {
+            if (a[0].toLowerCase() === 'bearer') {
+                return a[1]
             }
+        }
+    }
+    return null
+}
+
+const checkToken = async (req) => {
+    const token = tokenFromHeaders(req)
+    if (token) {
+        const result = await http.json(`${authenUri}api/authen/check`, {
+            method: 'GET',
+            headers: http.jsonHeaders(token)
         })
+        if (result && result.user)
+            return result.user
     }
-    return fetch(`${authenUri}api/authen/login`, options)
+    return null
 }
 
-const logout = (token) => {
-    var options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Authorization': 'Bearer ' + token
-        }
-    }
-    return fetch(`${authenUri}api/authen/logout`, options)
-}
+const optional = asyncHandler(async (req, res, next) => {
+    const user = await checkToken(req)
+    req.user = user
+    next()
+})
 
-const check = (token) => {
-    var options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Authorization': 'Bearer ' + token
-        }
-    }
-    return fetch(`${authenUri}api/authen/check`, options)
-}
+const required = asyncHandler(async (req, res, next) => {
+    const user = await checkToken(req)
+    if (!user)
+        throw new RestError(`invalid token`)
+    req.user = user
+    next()
+})
+
+const userRequired = asyncHandler(async (req, res, next) => {
+    const user = await checkToken(req)
+    if (!user)
+        throw new RestError(`invalid token`)
+    if (user.role !== 'user')
+        throw new RestError(`not user role`)
+    req.user = user
+    next()
+})
+
+const adminRequired = asyncHandler(async (req, res, next) => {
+    const user = await checkToken(req)
+    if (!user)
+        throw new RestError(`invalid token`)
+    if (user.role !== 'admin')
+        throw new RestError(`not admin role`)
+    req.user = user
+    next()
+})
 
 module.exports = {
-    login,
-    logout,
-    check,
+    optional,
+    required,
+    userRequired,
+    adminRequired
 }
