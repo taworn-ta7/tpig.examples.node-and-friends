@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8c11dfd9-7e87-4a29-a7cd-2b69a3834a8f",
+		"_postman_id": "53ecef52-1556-419f-abf9-4ba5ea361c46",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1938,7 +1938,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Nero Doe\",\r\n        \"items\": [\r\n            {\r\n                \"name\": \"Dragon Quest VI\"\r\n            },\r\n            {\r\n                \"name\": \"Dragon Quest VII\"\r\n            }\r\n        ]\r\n    }\r\n}",
+									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Nero Burn\",\r\n        \"items\": [\r\n            {\r\n                \"name\": \"Dragon Quest VI\"\r\n            },\r\n            {\r\n                \"name\": \"Dragon Quest VII\"\r\n            }\r\n        ]\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1946,13 +1946,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/add",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/",
 									"host": [
 										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"games",
-										"add"
+										""
 									]
 								}
 							},
