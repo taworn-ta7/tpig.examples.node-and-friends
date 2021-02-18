@@ -1,6 +1,7 @@
 'use strict'
 const fetch = require('node-fetch')
 const logger = require('./logger')
+const RestError = require('./RestError')
 
 const jsonHeaders = (token) => {
     const headers = {

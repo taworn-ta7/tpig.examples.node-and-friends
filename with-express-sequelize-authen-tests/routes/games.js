@@ -13,7 +13,8 @@ const normalRowsPerPage = config.get('normalRowsPerPage')
 router.post('/', [
     authen.userRequired,
     dump.body,
-    validate.checkBodyJson('profile', schemas.createProfile)
+    validate.json(body('profile'), schemas.createProfile),
+    validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = req.body.profile
@@ -37,9 +38,9 @@ router.post('/', [
 router.put('/:id', [
     authen.userRequired,
     dump.body,
-    validate.checkBodyJson('profile', schemas.updateProfile),
     validate.id(param('id')),
-    validate.result,
+    validate.json(body('profile'), schemas.updateProfile),
+    validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params

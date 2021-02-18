@@ -2,24 +2,6 @@
 const { validationResult } = require('express-validator')
 const RestError = require('../libs/RestError')
 
-const checkBodyJson = (path, schema) => {
-    return (req, res, next) => {
-        if (!schema(req.body[path]))
-            throw new RestError(schema.errors, 400)
-        next()
-        return true
-    }
-}
-
-const json = (chain, schema) =>
-    chain
-        .exists()
-        .custom((value, { req, location, path }) => {
-            if (!schema(value))
-                throw new RestError(schema.errors, 400)
-            return true
-        })
-
 const id = (chain) =>
     chain
         .exists()
@@ -69,6 +51,15 @@ const negativeOrZero = (chain) =>
         .isInt({ max: 0 })
         .toInt()
 
+const json = (chain, schema) =>
+    chain
+        .exists()
+        .custom((value, { req, location, path }) => {
+            if (!schema(value))
+                throw new RestError(schema.errors, 400)
+            return true
+        })
+
 const result = (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty())
@@ -77,8 +68,6 @@ const result = (req, res, next) => {
 }
 
 module.exports = {
-    checkBodyJson,
-    json,
     id,
     ids,
     int,
@@ -86,5 +75,6 @@ module.exports = {
     positiveOrZero,
     negative,
     negativeOrZero,
+    json,
     result
 }
