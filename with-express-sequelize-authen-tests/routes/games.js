@@ -10,12 +10,10 @@ const { dump, validate, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.post('/add', [
-    //authen.required,
+router.post('/', [
+    authen.userRequired,
     dump.body,
-    //validate.json(body('profile'), schemas.createProfile),
-    validate.result,
-    validate.checkJson('profile', schemas.createProfile)
+    validate.checkBodyJson('profile', schemas.createProfile)
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = req.body.profile

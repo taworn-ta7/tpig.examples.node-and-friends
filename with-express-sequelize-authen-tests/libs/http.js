@@ -24,18 +24,34 @@ const json = async (uri, options, jsonOptions) => {
     logger.info(`fetch: ${uri}`)
     const response = await fetch(uri, options)
     const result = await response.json()
-    if (jsonOptions && jsonOptions.outputResult) {
-        const style = Number(jsonOptions.outputResult)
-        logger.debug(`style: ${style}`)
-        if (style === 1)
-            logger.verbose(`result: ${JSON.stringify(result)}`)
-        else if (style >= 2)
-            logger.verbose(`result: ${JSON.stringify(result, null, style)}`)
+
+    if (jsonOptions) {
+        if (jsonOptions.outputResult) {
+            const style = Number(jsonOptions.outputResult)
+            logger.debug(`style: ${style}`)
+            if (style === 1)
+                logger.verbose(`result: ${JSON.stringify(result)}`)
+            else if (style >= 2)
+                logger.verbose(`result: ${JSON.stringify(result, null, style)}`)
+        }
+    }
+    return result
+}
+
+const handleErrors = (result, item) => {
+    if (typeof result !== 'object' || !result)
+        throw new RestError(`not JSON`)
+    if (result.error)
+        throw new RestError(result.error.message, result.error.status)
+    if (item) {
+        if (typeof result[item] !== 'object' || !result[item])
+            throw new RestError(`not found JSON`)
     }
     return result
 }
 
 module.exports = {
     jsonHeaders,
-    json
+    json,
+    handleErrors
 }

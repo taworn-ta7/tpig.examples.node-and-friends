@@ -67,7 +67,7 @@ const result = (req, res, next) => {
     next()
 }
 
-const checkJson = (path, schema) => {
+const checkBodyJson = (path, schema) => {
     return (req, res, next) => {
         if (!schema(req.body[path]))
             throw new RestError(schema.errors, 400)
@@ -86,5 +86,5 @@ module.exports = {
     negativeOrZero,
     json,
     result,
-    checkJson
+    checkBodyJson
 }

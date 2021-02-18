@@ -3,7 +3,7 @@ const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { checkSchema } = require('express-validator')
 const config = require('../configs')
-const { logger, RestError, http } = require('../libs')
+const { logger, http } = require('../libs')
 const { dump, validate, authen } = require('../middlewares')
 
 const authenUri = config.get('authenUri')
@@ -39,10 +39,7 @@ router.post('/login', [
             }
         })
     })
-    if (!result)
-        throw new RestError(`not JSON data`)
-    if (result.error)
-        throw new RestError(result.error.message, result.error.status)
+    http.handleErrors(result, 'user')
 
     // success
     const ret = {
@@ -59,10 +56,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
         method: 'POST',
         headers: http.jsonHeaders(req.user.token)
     })
-    if (!result)
-        throw new RestError(`not JSON data`)
-    if (result.error)
-        throw new RestError(result.error.message, result.error.status)
+    http.handleErrors(result, 'user')
 
     // success
     const ret = {
