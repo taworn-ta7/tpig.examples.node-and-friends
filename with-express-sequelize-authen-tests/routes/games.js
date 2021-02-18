@@ -10,6 +10,37 @@ const { dump, validate, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
+router.get('/:page?', [
+    authen.userRequired,
+    validate.intOrEmpty(param('page')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
+    // get request
+    let page = Number(req.params.page)
+    if (!page || page < 0)
+        page = 0
+
+    // select
+    const query = {
+        where: {
+            uid: req.user.id
+        },
+        offset: page * normalRowsPerPage,
+        limit: normalRowsPerPage
+    }
+    const count = await models.Profiles.count(query)
+    const profiles = await models.Profiles.findAll(query)
+
+    // success
+    const ret = {
+        paginate: paginator.get(page, normalRowsPerPage, count),
+        profiles
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
 router.post('/', [
     authen.userRequired,
     dump.body,
@@ -38,7 +69,7 @@ router.post('/', [
 router.put('/:id', [
     authen.userRequired,
     dump.body,
-    validate.id(param('id')),
+    validate.int(param('id')),
     validate.json(body('profile'), schemas.updateProfile),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -49,8 +80,8 @@ router.put('/:id', [
     // select
     const profile = await models.Profiles.findOne({
         where: {
-            id,
-            uid: req.user.id
+            uid: req.user.id,
+            id
         },
         include: [models.Profiles.Items]
     })
@@ -73,7 +104,7 @@ router.put('/:id', [
 
 router.delete('/:id', [
     authen.userRequired,
-    validate.id(param('id')),
+    validate.int(param('id')),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
@@ -82,8 +113,8 @@ router.delete('/:id', [
     // select
     const profile = await models.Profiles.findOne({
         where: {
-            id,
-            uid: req.user.id
+            uid: req.user.id,
+            id
         },
     })
     if (!profile)
