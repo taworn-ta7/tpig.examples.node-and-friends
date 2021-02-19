@@ -34,4 +34,23 @@ router.post('/register', [dump.body], asyncHandler(async (req, res, next) => {
     next()
 }))
 
+router.post('/unregister', [authen.userRequired], asyncHandler(async (req, res, next) => {
+    // fetch
+    const result = http.handleErrors(await http.json(`${authenUri}api/user/unregister`, {
+        method: 'POST',
+        headers: http.jsonHeaders(req.user.token)
+    }, { outputResult: 4 }))
+
+    // logout
+    req.user = undefined
+
+    // success
+    const ret = {
+        user: result.user
+    }
+    res.status(200).send(ret)
+    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
+    next()
+}))
+
 module.exports = router
