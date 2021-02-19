@@ -29,7 +29,6 @@ const json = async (uri, options, jsonOptions) => {
     if (jsonOptions) {
         if (jsonOptions.outputResult) {
             const style = Number(jsonOptions.outputResult)
-            logger.debug(`style: ${style}`)
             if (style === 1)
                 logger.verbose(`result: ${JSON.stringify(result)}`)
             else if (style >= 2)
@@ -44,10 +43,6 @@ const handleErrors = (result, item) => {
         throw new RestError(`not JSON`)
     if (result.error)
         throw new RestError(result.error.message, result.error.status)
-    if (item) {
-        if (typeof result[item] !== 'object' || !result[item])
-            throw new RestError(`not found JSON`)
-    }
     return result
 }
 

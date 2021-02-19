@@ -3,7 +3,7 @@ const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { checkSchema } = require('express-validator')
 const config = require('../configs')
-const { logger, http } = require('../libs')
+const { logger, http, RestError } = require('../libs')
 const { dump, validate, authen } = require('../middlewares')
 
 const authenUri = config.get('authenUri')
@@ -29,7 +29,7 @@ router.post('/login', [
     const json = req.body.login
 
     // fetch
-    const result = await http.json(`${authenUri}api/authen/login`, {
+    const result = http.handleErrors(await http.json(`${authenUri}api/authen/login`, {
         method: 'POST',
         headers: http.jsonHeaders(),
         body: JSON.stringify({
@@ -38,8 +38,9 @@ router.post('/login', [
                 password: json.password
             }
         })
-    })
-    http.handleErrors(result, 'user')
+    }))
+    if (!result.user)
+        throw new RestError(`not found`)
 
     // success
     const ret = {
@@ -52,11 +53,12 @@ router.post('/login', [
 
 router.post('/logout', [authen.required], asyncHandler(async (req, res, next) => {
     // fetch
-    const result = await http.json(`${authenUri}api/authen/logout`, {
+    const result = http.handleErrors(await http.json(`${authenUri}api/authen/logout`, {
         method: 'POST',
         headers: http.jsonHeaders(req.user.token)
-    })
-    http.handleErrors(result, 'user')
+    }))
+    if (!result.user)
+        throw new RestError(`not found`)
 
     // success
     const ret = {
