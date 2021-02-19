@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e260666c-9b70-4162-af75-8e09a3af0998",
+		"_postman_id": "ab5e159a-19d9-4eeb-8e14-ef5a053c1f57",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1959,7 +1959,7 @@
 							"response": []
 						},
 						{
-							"name": "read, page",
+							"name": "read",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -1977,31 +1977,6 @@
 									"path": [
 										"games",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "read, multiple",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{with-express-sequelize-authen-tests-token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{with-express-sequelize-authen-tests-uri}}api/games/list/0",
-									"host": [
-										"{{with-express-sequelize-authen-tests-uri}}api"
-									],
-									"path": [
-										"games",
-										"list",
-										"0"
 									]
 								}
 							},
