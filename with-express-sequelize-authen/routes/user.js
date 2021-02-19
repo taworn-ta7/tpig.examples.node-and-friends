@@ -40,6 +40,7 @@ router.post('/register', [
 
 router.put('/update/displayName', [
     authen.required,
+    dump.body,
     validate.json(body('user'), schemas.updateUser),
     validate.result
 ], asyncHandler(async (req, res, next) => {

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ab5e159a-19d9-4eeb-8e14-ef5a053c1f57",
+		"_postman_id": "9919f5f3-48f2-45a6-ac1b-c38e6d3e08ec",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1832,7 +1832,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n        \"displayName\": \"Jenius\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"user\": {\r\n        \"displayName\": \"Maxim\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

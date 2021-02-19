@@ -15,25 +15,30 @@ const jsonHeaders = (token) => {
 
 /*
  * jsonOptions
- * - outputResult: 
- *   0: no output
- *   1: one line
- *   >= 2: more lines, with specify indents
- *   NaN: no output
+ * - input:
+ *   0: one line
+ *   1: multiline
+ * - output: 
+ *   0: one line
+ *   1: multiline
  */
 const json = async (uri, options, jsonOptions) => {
     logger.info(`fetch: ${uri}`)
+    if (jsonOptions && jsonOptions.input) {
+        const style = Number(jsonOptions.input)
+        if (style === 0)
+            logger.verbose(`options: ${JSON.stringify(options)}`)
+        else if (style === 1)
+            logger.verbose(`options: ${JSON.stringify(options, null, 4)}`)
+    }
     const response = await fetch(uri, options)
     const result = await response.json()
-
-    if (jsonOptions) {
-        if (jsonOptions.outputResult) {
-            const style = Number(jsonOptions.outputResult)
-            if (style === 1)
-                logger.verbose(`result: ${JSON.stringify(result)}`)
-            else if (style >= 2)
-                logger.verbose(`result: ${JSON.stringify(result, null, style)}`)
-        }
+    if (jsonOptions && jsonOptions.output) {
+        const style = Number(jsonOptions.output)
+        if (style === 0)
+            logger.verbose(`result: ${JSON.stringify(result)}`)
+        else if (style === 1)
+            logger.verbose(`result: ${JSON.stringify(result, null, 4)}`)
     }
     return result
 }
