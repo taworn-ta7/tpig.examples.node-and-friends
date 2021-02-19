@@ -25,6 +25,7 @@ router.get('/:page?', [
         where: {
             uid: req.user.id
         },
+        include: [models.Users, models.Items],
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
@@ -53,7 +54,7 @@ router.post('/', [
     // insert
     json.uid = req.user.id
     const profile = await models.Profiles.create(json, {
-        include: [models.Profiles.Items]
+        include: [models.Items]
     })
     await profile.reload()
 
@@ -83,7 +84,7 @@ router.put('/:id', [
             uid: req.user.id,
             id
         },
-        include: [models.Profiles.Items]
+        include: [models.Users, models.Items]
     })
     if (!profile)
         throw new RestError(`not found or permission denied`)
@@ -116,6 +117,7 @@ router.delete('/:id', [
             uid: req.user.id,
             id
         },
+        include: [models.Users, models.Items]
     })
     if (!profile)
         throw new RestError(`not found or permission denied`)

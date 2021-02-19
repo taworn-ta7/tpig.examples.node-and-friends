@@ -21,5 +21,9 @@ module.exports = db.define('Users', {
         field: 'display_name'
     }
 }, {
+    name: {
+        singular: 'user',
+        plural: 'users'
+    },
     tableName: 'with-express-sequelize-authen-tests-users'
 })

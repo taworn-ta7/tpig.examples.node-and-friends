@@ -27,5 +27,9 @@ module.exports = db.define('Profiles', {
         }
     }
 }, {
+    name: {
+        singular: 'profile',
+        plural: 'profiles'
+    },
     tableName: 'with-express-sequelize-authen-tests-profiles'
 })
