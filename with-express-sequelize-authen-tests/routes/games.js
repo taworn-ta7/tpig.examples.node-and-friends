@@ -22,20 +22,25 @@ router.get('/:page?', [
 
     // select
     const query = {
-        where: {
-            uid: req.user.id
+        include: {
+            model: models.Profiles,
+            where: {
+                uid: req.user.id
+            },
+            include: {
+                model: models.Users
+            }
         },
-        include: [models.Users, models.Items],
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
-    const count = await models.Profiles.count(query)
-    const profiles = await models.Profiles.findAll(query)
+    const count = await models.Items.count(query)
+    const items = await models.Items.findAll(query)
 
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        profiles
+        items
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
