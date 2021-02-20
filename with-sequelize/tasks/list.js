@@ -10,8 +10,8 @@ module.exports = async () => {
     const items0 = await models.Users.findAll({
         include: [
             {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
+                model: models.Profiles,
+                include: [models.Items]
             }
         ]
     })
@@ -27,8 +27,8 @@ module.exports = async () => {
                 where: {
                     name: ['Foo', 'Bar']
                 },
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
+                model: models.Profiles,
+                include: [models.Items]
             }
         ]
     })
@@ -41,14 +41,14 @@ module.exports = async () => {
         },
         include: [
             {
-                association: models.Users.Profiles,
+                model: models.Profiles,
                 required: true,
                 include: [
                     {
                         where: {
                             name: { [Op.like]: '%Final%' }
                         },
-                        association: models.Profiles.Items
+                        model: models.Items
                     }
                 ]
             }

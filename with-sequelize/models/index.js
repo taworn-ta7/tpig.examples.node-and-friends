@@ -3,11 +3,11 @@ const Users = require('./Users')
 const Profiles = require('./Profiles')
 const Items = require('./Items')
 
-Users.Profiles = Users.hasMany(Profiles, { as: 'profiles', foreignKey: 'uid' })
-Profiles.Users = Profiles.belongsTo(Users, { foreignKey: 'uid' })
+Users.hasMany(Profiles, { foreignKey: 'uid' })
+Profiles.belongsTo(Users, { foreignKey: 'uid' })
 
-Profiles.Items = Profiles.hasMany(Items, { as: 'items', foreignKey: 'pid' })
-Items.Profiles = Items.belongsTo(Profiles, { foreignKey: 'pid' })
+Profiles.hasMany(Items, { foreignKey: 'pid' })
+Items.belongsTo(Profiles, { foreignKey: 'pid' })
 
 module.exports = {
     Users,

@@ -1,8 +1,5 @@
 'use strict'
-const logger = require('./logger')
-const db = require('./db')
-
 module.exports = {
-    logger,
-    db
+    logger: require('./logger'),
+    db: require('./db')
 }

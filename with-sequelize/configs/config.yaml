@@ -1,3 +1,5 @@
+db:
+    logging: false
 mysql:
     host: localhost
     username: user

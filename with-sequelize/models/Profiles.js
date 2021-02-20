@@ -24,5 +24,9 @@ module.exports = db.define('Profiles', {
         }
     }
 }, {
+    name: {
+        singular: 'profile',
+        plural: 'profiles'
+    },
     tableName: 'with-sequelize-profiles'
 })

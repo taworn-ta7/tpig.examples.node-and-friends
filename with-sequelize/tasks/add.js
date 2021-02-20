@@ -29,8 +29,8 @@ module.exports = async () => {
     }, {
         include: [
             {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
+                model: models.Profiles,
+                include: [models.Items]
             }
         ]
     })
@@ -54,8 +54,8 @@ module.exports = async () => {
     }, {
         include: [
             {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
+                model: models.Profiles,
+                include: [models.Items]
             }
         ]
     })
