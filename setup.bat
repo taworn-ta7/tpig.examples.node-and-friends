@@ -1,12 +1,12 @@
 @ECHO OFF
 FOR /D %%d IN (
+    with-sequelize
+    with-mongoose
     with-express
-    with-express-mongoose
     with-express-sequelize
     with-express-sequelize-authen
     with-express-sequelize-authen-tests
-    with-mongoose
-    with-sequelize
+    with-express-mongoose
 ) DO (
     PUSHD %%d
     ECHO %%d

@@ -1,6 +1,7 @@
 'use strict'
 const fs = require('fs')
-const models = require('../models')
+const mkdirp = require('mkdirp')
+const models = require('./models')
 const { JsonSchemaManager, JsonSchema7Strategy, OpenApi3Strategy } = require('@alt3/sequelize-to-json-schemas')
 const schemaManager = new JsonSchemaManager({
     baseUri: 'https://node-and-friends/with-sequelize/',
@@ -18,6 +19,9 @@ const save = (manager, strategy, model, file) => {
 // now generate a JSON Schema Draft-07 model schema
 const strategy = new JsonSchema7Strategy()
 //const strategy = new OpenApi3Strategy()
-save(schemaManager, strategy, models.Users, 'outputs/Users.json')
-save(schemaManager, strategy, models.Profiles, 'outputs/Profiles.json')
-save(schemaManager, strategy, models.Items, 'outputs/Items.json')
+console.log(`output to ${__dirname}/outputs`)
+mkdirp(`${__dirname}/outputs`).then((dir) => {
+    save(schemaManager, strategy, models.Users, `${__dirname}/outputs/Users.json`)
+    save(schemaManager, strategy, models.Profiles, `${__dirname}/outputs/Profiles.json`)
+    save(schemaManager, strategy, models.Items, `${__dirname}/outputs/Items.json`)
+})
