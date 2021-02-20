@@ -7,8 +7,8 @@
     "start": "node .",
     "debug": "set NODE_ENV=development&&node .",
     "release": "set NODE_ENV=production&&node .",
-    "create": "set NODE_ENV=production&&node ./scripts/createDb",
-    "sync": "set NODE_ENV=production&&node ./scripts/syncDbs",
+    "create": "set NODE_ENV=production&&node ./scripts/create-db",
+    "sync": "set NODE_ENV=production&&node ./scripts/sync-dbs",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
