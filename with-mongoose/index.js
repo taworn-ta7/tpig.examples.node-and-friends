@@ -1,14 +1,14 @@
 'use strict'
 const { logger } = require('./libs')
-const main = require('./main')
+const tasks = require('./tasks')
 
 // running
 const run = async () => {
     try {
         logger.verbose(`mongoose`)
 
-        await main.add()
-        await main.list()
+        await tasks.add()
+        await tasks.list()
 
         process.exit(0)
     }
