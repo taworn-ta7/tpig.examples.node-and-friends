@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "create": "node ./scripts/create_database",
+    "debug": "set NODE_ENV=development&&node .",
+    "release": "set NODE_ENV=production&&node .",
+    "create": "set NODE_ENV=production&&node ./scripts/createDb",
+    "sync": "set NODE_ENV=production&&node ./scripts/syncDbs",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
