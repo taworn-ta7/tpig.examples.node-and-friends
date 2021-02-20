@@ -4,7 +4,8 @@ const app = express()
 const cors = require('cors')
 const uuid = require('uuid')
 const config = require('./configs')
-const { logger } = require('./libs')
+const { logger, db } = require('./libs')
+require('./models')
 
 // add log
 app.use((req, res, next) => {

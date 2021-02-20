@@ -7,6 +7,7 @@ const username = config.get('mongo:username')
 const password = config.get('mongo:password')
 const database = config.get('mongo:database')
 const url = `mongodb://${host}/${database}`
+
 mongoose.connect(url, {
     // user: username,
     // pass: password,

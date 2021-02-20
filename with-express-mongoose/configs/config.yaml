@@ -1,7 +1,9 @@
+db:
+    logging: false
 mongo:
     host: localhost:27017
     username: user
     password: user//pass
     database: node_and_friends
-port: 55555
+port: 4011
 normalRowsPerPage: 3

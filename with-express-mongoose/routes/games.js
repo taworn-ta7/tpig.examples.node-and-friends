@@ -10,7 +10,10 @@ const { dump, validate } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/id/:id', [validate.ids(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.get('/id/:id', [
+    param('id').exists().trim().isString(),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
@@ -26,9 +29,14 @@ router.get('/id/:id', [validate.ids(param('id')), validate.result], asyncHandler
     next()
 }))
 
-router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
+router.get('/list/:page?', [
+    validate.intOrEmpty(param('page')),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
-    const { page } = req.params
+    let page = Number(req.params.page)
+    if (!page || page < 0)
+        page = 0
 
     // load records
     const count = await models.Users.count()
@@ -44,7 +52,7 @@ router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.resu
     next()
 }))
 
-router.post('/add', [
+router.post('/', [
     dump.body,
     validate.json(body('user'), schemas.createUser),
     validate.result
@@ -67,7 +75,7 @@ router.post('/add', [
 
 router.put('/:id', [
     dump.body,
-    validate.ids(param('id')),
+    param('id').exists().trim().isString(),
     validate.json(body('user'), schemas.updateUser),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -97,7 +105,10 @@ router.put('/:id', [
     next()
 }))
 
-router.delete('/:id', [validate.ids(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.delete('/:id', [
+    param('id').exists().trim().isString(),
+    validate.result
+], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 

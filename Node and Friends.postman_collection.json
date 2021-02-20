@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2e17b2ca-d678-4019-a450-1c7e38cd4b40",
+		"_postman_id": "d257a64c-c0bf-472a-bec7-77676ae7e9c9",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -2007,7 +2007,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"nero\",\r\n        \"password\": \"password\",\r\n        \"profiles\": [\r\n            {\r\n                \"name\": \"Nero Doe\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Dragon Quest VI\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Dragon Quest VII\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Nero Smith\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Area 88\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"maxman\",\r\n        \"password\": \"password\",\r\n        \"profiles\": [\r\n            {\r\n                \"name\": \"Nero Doe\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Dragon Quest VI\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Dragon Quest VII\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Nero Smith\",\r\n                \"items\": [\r\n                    {\r\n                        \"name\": \"Area 88\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2015,13 +2015,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/games/add",
+							"raw": "{{with-express-mongoose-uri}}api/games/",
 							"host": [
-								"{{url}}api"
+								"{{with-express-mongoose-uri}}api"
 							],
 							"path": [
 								"games",
-								"add"
+								""
 							]
 						}
 					},
@@ -2033,14 +2033,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/id/602a9e55e06b9d07d8e190a4",
+							"raw": "{{with-express-mongoose-uri}}api/games/id/60316242b35fbb30d068e2e7",
 							"host": [
-								"{{url}}api"
+								"{{with-express-mongoose-uri}}api"
 							],
 							"path": [
 								"games",
 								"id",
-								"602a9e55e06b9d07d8e190a4"
+								"60316242b35fbb30d068e2e7"
 							]
 						}
 					},
@@ -2052,14 +2052,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/list/0",
+							"raw": "{{with-express-mongoose-uri}}api/games/list/",
 							"host": [
-								"{{url}}api"
+								"{{with-express-mongoose-uri}}api"
 							],
 							"path": [
 								"games",
 								"list",
-								"0"
+								""
 							]
 						}
 					},
@@ -2080,13 +2080,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/games/602a9e55e06b9d07d8e190a4",
+							"raw": "{{with-express-mongoose-uri}}api/games/60316242b35fbb30d068e2e7",
 							"host": [
-								"{{url}}api"
+								"{{with-express-mongoose-uri}}api"
 							],
 							"path": [
 								"games",
-								"602a9e55e06b9d07d8e190a4"
+								"60316242b35fbb30d068e2e7"
 							]
 						}
 					},
@@ -2098,13 +2098,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}api/games/602a9e55e06b9d07d8e190a4",
+							"raw": "{{with-express-mongoose-uri}}api/games/60316242b35fbb30d068e2e7",
 							"host": [
-								"{{url}}api"
+								"{{with-express-mongoose-uri}}api"
 							],
 							"path": [
 								"games",
-								"602a9e55e06b9d07d8e190a4"
+								"60316242b35fbb30d068e2e7"
 							]
 						}
 					},
