@@ -1653,14 +1653,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{with-express-sequelize-authen-tests-uri}}api/admin/list/0",
+									"raw": "{{with-express-sequelize-authen-tests-uri}}api/admin/list/",
 									"host": [
 										"{{with-express-sequelize-authen-tests-uri}}api"
 									],
 									"path": [
 										"admin",
 										"list",
-										"0"
+										""
 									]
 								}
 							},

@@ -42,23 +42,22 @@ router.get('/list/:page?', [
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const { page } = req.params
+    let page = Number(req.params.page)
+    if (!page || page < 0)
+        page = 0
 
-    // load records
-    const query = {
-        where: {
-            role: 'user'
-        },
-        offset: page * normalRowsPerPage,
-        limit: normalRowsPerPage
-    }
-    const count = await models.Users.count(query)
-    const users = await models.Users.findAll(query)
+    // fetch
+    const result = http.handleErrors(await http.json(`${authenUri}api/admin/list/${page}`, {
+        method: 'GET',
+        headers: http.jsonHeaders(req.user.token)
+    }, { input: 1, output: 1 }))
+    if (!result.paginate || !result.users)
+        throw new RestError(`not found`)
 
     // success
     const ret = {
-        paginate: paginator.get(page, normalRowsPerPage, count),
-        users,
+        paginate: result.paginate,
+        users: result.users
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
