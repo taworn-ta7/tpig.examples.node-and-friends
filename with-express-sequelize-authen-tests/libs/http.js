@@ -43,6 +43,23 @@ const json = async (uri, options, jsonOptions) => {
     return result
 }
 
+const text = async (uri, options, jsonOptions) => {
+    logger.info(`fetch: ${uri}`)
+    if (jsonOptions && jsonOptions.input) {
+        const style = Number(jsonOptions.input)
+        if (style === 0)
+            logger.verbose(`options: ${JSON.stringify(options)}`)
+        else if (style === 1)
+            logger.verbose(`options: ${JSON.stringify(options, null, 4)}`)
+    }
+    const response = await fetch(uri, options)
+    const result = await response.text()
+    if (jsonOptions && jsonOptions.output) {
+        logger.verbose(`result: ${result}`)
+    }
+    return result
+}
+
 const handleErrors = (result, item) => {
     if (typeof result !== 'object' || !result)
         throw new RestError(`not JSON`)
@@ -54,5 +71,6 @@ const handleErrors = (result, item) => {
 module.exports = {
     jsonHeaders,
     json,
+    text,
     handleErrors
 }

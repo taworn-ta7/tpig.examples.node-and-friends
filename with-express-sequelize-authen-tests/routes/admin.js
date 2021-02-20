@@ -1,7 +1,7 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const { param, body } = require('express-validator')
+const { param, body, checkSchema } = require('express-validator')
 const config = require('../configs')
 const { logger, RestError, http, paginator } = require('../libs')
 const models = require('../models')
@@ -67,30 +67,29 @@ router.get('/list/:page?', [
 router.post('/disable/:username', [
     authen.adminRequired,
     param('username').exists().trim().isString(),
-    validate.json(body('user'), schemas.updateUser),
+    checkSchema({
+        'user.disabled': {
+            in: ['body'],
+            isBoolean: {}
+        }
+    }),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { username } = req.params
-    const json = req.body.user
 
-    // load record
-    const user = await models.Users.findOne({ where: { username, role: 'user' } })
-    if (!user)
-        throw new RestError(`not exists`)
-
-    // update
-    if (typeof json.disabled === 'boolean') {
-        await user.update({
-            disabled: json.disabled,
-            end: new Date(),
-            token: null
-        })
-    }
+    // fetch
+    const result = http.handleErrors(await http.json(`${authenUri}api/admin/disable/${username}`, {
+        method: 'POST',
+        headers: http.jsonHeaders(req.user.token),
+        body: JSON.stringify(req.body)
+    }, { input: 1, output: 1 }))
+    if (!result.user)
+        throw new RestError(`not found`)
 
     // success
     const ret = {
-        user
+        user: result.user
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
