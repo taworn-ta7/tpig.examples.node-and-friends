@@ -12,7 +12,7 @@ const normalRowsPerPage = config.get('normalRowsPerPage')
 
 router.get('/id/:username', [
     authen.adminRequired,
-    validate.ids(param('username')),
+    param('username').exists().trim().isString(),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
@@ -30,19 +30,22 @@ router.get('/id/:username', [
     next()
 }))
 
-router.get('/list/:page', [
+router.get('/list/:page?', [
     authen.adminRequired,
-    validate.positiveOrZero(param('page')),
+    validate.intOrEmpty(param('page')),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const { page } = req.params
+    let page = Number(req.params.page)
+    if (!page || page < 0)
+        page = 0
 
     // load records
     const query = {
         where: {
             role: 'user'
         },
+        order: [['createdAt', 'ASC']],
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
@@ -61,7 +64,7 @@ router.get('/list/:page', [
 
 router.post('/disable/:username', [
     authen.adminRequired,
-    validate.ids(param('username')),
+    param('username').exists().trim().isString(),
     validate.json(body('user'), schemas.updateUser),
     validate.result
 ], asyncHandler(async (req, res, next) => {

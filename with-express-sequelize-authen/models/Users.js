@@ -74,5 +74,9 @@ module.exports = db.define('Users', {
         allowNull: true
     }
 }, {
+    name: {
+        singular: 'user',
+        plural: 'users'
+    },
     tableName: 'with-express-sequelize-authen-users'
 })

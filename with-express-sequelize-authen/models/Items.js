@@ -24,5 +24,9 @@ module.exports = db.define('Items', {
         }
     }
 }, {
+    name: {
+        singular: 'item',
+        plural: 'items'
+    },
     tableName: 'with-express-sequelize-authen-items'
 })

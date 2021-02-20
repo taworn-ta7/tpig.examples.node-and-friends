@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "generate": "node ./scripts/insert_test_data",
+    "debug": "set NODE_ENV=development&&node .",
+    "release": "set NODE_ENV=production&&node .",
+    "create": "set NODE_ENV=production&&node ./scripts/create-db",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",

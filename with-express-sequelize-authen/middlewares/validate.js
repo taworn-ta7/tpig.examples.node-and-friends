@@ -2,23 +2,16 @@
 const { validationResult } = require('express-validator')
 const RestError = require('../libs/RestError')
 
-const id = (chain) =>
-    chain
-        .exists()
-        .trim()
-        .isInt({ min: 1 })
-        .toInt()
-
-const ids = (chain) =>
-    chain
-        .exists()
-        .trim()
-        .isString()
-        .notEmpty()
-
 const int = (chain) =>
     chain
         .exists()
+        .trim()
+        .isInt()
+        .toInt()
+
+const intOrEmpty = (chain) =>
+    chain
+        .optional({ nullable: true, checkFalsy: true })
         .trim()
         .isInt()
         .toInt()
@@ -68,9 +61,8 @@ const result = (req, res, next) => {
 }
 
 module.exports = {
-    id,
-    ids,
     int,
+    intOrEmpty,
     positive,
     positiveOrZero,
     negative,

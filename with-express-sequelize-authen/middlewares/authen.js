@@ -25,11 +25,16 @@ const tokenFromHeaders = (req) => {
     const { headers: { authorization } } = req
     if (authorization) {
         const a = authorization.split(' ')
-        if (a[0].toLowerCase() === 'bearer')
-            return a[1]
+        if (a.length >= 2) {
+            if (a[0].toLowerCase() === 'bearer') {
+                return a[1]
+            }
+        }
     }
     return null
 }
+
+// ----------------------------------------------------------------------
 
 const getUser = (user) => {
     return {
@@ -52,6 +57,8 @@ const getUserFromDb = async (req) => {
         throw new RestError(`not exists`)
     return user
 }
+
+// ----------------------------------------------------------------------
 
 const getCurrentUser = async (req) => {
     const token = tokenFromHeaders(req)
@@ -77,8 +84,26 @@ const getCurrentUser = async (req) => {
     return getUser(user)
 }
 
+const optional = asyncHandler(async (req, res, next) => {
+    try {
+        req.user = await getCurrentUser(req)
+    }
+    catch (ex) {
+        req.user = null
+    }
+    next()
+})
+
 const required = asyncHandler(async (req, res, next) => {
     req.user = await getCurrentUser(req)
+    next()
+})
+
+const userRequired = asyncHandler(async (req, res, next) => {
+    const user = await getCurrentUser(req)
+    if (user.role !== 'user')
+        throw new RestError(`require user rights`)
+    req.user = user
     next()
 })
 
@@ -89,6 +114,8 @@ const adminRequired = asyncHandler(async (req, res, next) => {
     req.user = user
     next()
 })
+
+// ----------------------------------------------------------------------
 
 const checkPermission = (req, item, uid = 'uid') => {
     if (item === null)
@@ -105,7 +132,9 @@ module.exports = {
     tokenFromHeaders,
     getUser,
     getUserFromDb,
+    optional,
     required,
+    userRequired,
     adminRequired,
     checkPermission
 }

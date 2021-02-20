@@ -1,10 +1,6 @@
 'use strict'
-const dump = require('./dump')
-const validate = require('./validate')
-const authen = require('./authen')
-
 module.exports = {
-    dump,
-    validate,
-    authen
+    dump: require('./dump'),
+    validate: require('./validate'),
+    authen: require('./authen')
 }

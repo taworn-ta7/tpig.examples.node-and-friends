@@ -10,53 +10,45 @@ const { dump, validate, authen } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/id/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
-    // get request
-    const { id } = req.params
-
-    // load record
-    const profile = await models.Profiles.findByPk(id, {
-        include: [models.Profiles.Items]
-    })
-
-    // success
-    const ret = {
-        profile
-    }
-    res.status(200).send(ret)
-    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
-    next()
-}))
-
-router.get('/list/:page', [
-    authen.required,
-    validate.positiveOrZero(param('page')),
+router.get('/:page?', [
+    authen.userRequired,
+    validate.intOrEmpty(param('page')),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
-    const { page } = req.params
+    let page = Number(req.params.page)
+    if (!page || page < 0)
+        page = 0
 
-    // load records
+    // select
     const query = {
-        where: { uid: req.user.id },
+        include: {
+            model: models.Profiles,
+            where: {
+                uid: req.user.id
+            },
+            include: {
+                model: models.Users
+            }
+        },
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
-    const count = await models.Profiles.count(query)
-    const profiles = await models.Profiles.findAll(query)
+    const count = await models.Items.count(query)
+    const items = await models.Items.findAll(query)
 
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        profiles
+        items
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
 
-router.post('/add', [
-    authen.required,
+router.post('/', [
+    authen.userRequired,
     dump.body,
     validate.json(body('profile'), schemas.createProfile),
     validate.result
@@ -67,7 +59,7 @@ router.post('/add', [
     // insert
     json.uid = req.user.id
     const profile = await models.Profiles.create(json, {
-        include: [models.Profiles.Items]
+        include: [models.Items]
     })
     await profile.reload()
 
@@ -81,9 +73,9 @@ router.post('/add', [
 }))
 
 router.put('/:id', [
-    authen.required,
+    authen.userRequired,
     dump.body,
-    validate.id(param('id')),
+    validate.int(param('id')),
     validate.json(body('profile'), schemas.updateProfile),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -93,7 +85,7 @@ router.put('/:id', [
 
     // load record
     const profile = await models.Profiles.findByPk(id, {
-        include: [models.Profiles.Items]
+        include: [models.Items]
     })
     authen.checkPermission(req, profile)
 
@@ -113,8 +105,8 @@ router.put('/:id', [
 }))
 
 router.delete('/:id', [
-    authen.required,
-    validate.id(param('id')),
+    authen.userRequired,
+    validate.int(param('id')),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request

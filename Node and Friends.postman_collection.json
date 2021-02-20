@@ -981,7 +981,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Nero Doe\",\r\n        \"items\": [\r\n            {\r\n                \"name\": \"Dragon Quest VI\"\r\n            },\r\n            {\r\n                \"name\": \"Dragon Quest VII\"\r\n            }\r\n        ]\r\n    }\r\n}",
+									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"John Doe\",\r\n        \"items\": [\r\n            {\r\n                \"name\": \"Dragon Quest VI\"\r\n            },\r\n            {\r\n                \"name\": \"Dragon Quest VII\"\r\n            }\r\n        ]\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -989,20 +989,20 @@
 									}
 								},
 								"url": {
-									"raw": "{{with-express-sequelize-authen-uri}}api/games/add",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/",
 									"host": [
 										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
-										"add"
+										""
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "read, single",
+							"name": "read",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -1013,39 +1013,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{with-express-sequelize-authen-uri}}api/games/id/1",
+									"raw": "{{with-express-sequelize-authen-uri}}api/games/",
 									"host": [
 										"{{with-express-sequelize-authen-uri}}api"
 									],
 									"path": [
 										"games",
-										"id",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "read, multiple",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{with-express-sequelize-authen-token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{with-express-sequelize-authen-uri}}api/games/list/0",
-									"host": [
-										"{{with-express-sequelize-authen-uri}}api"
-									],
-									"path": [
-										"games",
-										"list",
-										"0"
+										""
 									]
 								}
 							},

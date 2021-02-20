@@ -39,7 +39,7 @@ router.post('/register', [
 }))
 
 router.put('/update/displayName', [
-    authen.required,
+    authen.userRequired,
     dump.body,
     validate.json(body('user'), schemas.updateUser),
     validate.result
@@ -67,7 +67,8 @@ router.put('/update/displayName', [
 }))
 
 router.put('/update/password', [
-    authen.required,
+    authen.userRequired,
+    dump.body,
     validate.json(body('user'), schemas.updateUserPassword),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -98,7 +99,7 @@ router.put('/update/password', [
     next()
 }))
 
-router.post('/unregister', [authen.required], asyncHandler(async (req, res, next) => {
+router.post('/unregister', [authen.userRequired], asyncHandler(async (req, res, next) => {
     // get request
     const user = await authen.getUserFromDb(req)
 
