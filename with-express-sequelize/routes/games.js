@@ -10,52 +10,37 @@ const { dump, validate } = require('../middlewares')
 
 const normalRowsPerPage = config.get('normalRowsPerPage')
 
-router.get('/id/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.get('/:page?', [validate.intOrEmpty(param('page')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
-    const { id } = req.params
+    let page = Number(req.params.page)
+    if (!page || page < 0)
+        page = 0
 
-    // load record
-    const user = await models.Users.findByPk(id, {
-        include: [
-            {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
-            }
-        ]
-    })
-
-    // success
-    const ret = {
-        user
-    }
-    res.status(200).send(ret)
-    logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
-    next()
-}))
-
-router.get('/list/:page', [validate.positiveOrZero(param('page')), validate.result], asyncHandler(async (req, res, next) => {
-    // get request
-    const { page } = req.params
-
-    // load records
+    // select
     const query = {
+        include: {
+            model: models.Profiles,
+            include: {
+                model: models.Users
+            }
+        },
         offset: page * normalRowsPerPage,
         limit: normalRowsPerPage
     }
-    const count = await models.Users.count(query)
-    const users = await models.Users.findAll(query)
+    const count = await models.Items.count(query)
+    const items = await models.Items.findAll(query)
 
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        users
+        items
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
 
-router.post('/add', [
+router.post('/', [
     dump.body,
     validate.json(body('user'), schemas.createUser),
     validate.result
@@ -67,8 +52,8 @@ router.post('/add', [
     const user = await models.Users.create(json, {
         include: [
             {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
+                model: models.Profiles,
+                include: [models.Items]
             }
         ]
     })
@@ -85,7 +70,7 @@ router.post('/add', [
 
 router.put('/:id', [
     dump.body,
-    validate.id(param('id')),
+    validate.int(param('id')),
     validate.json(body('user'), schemas.updateUser),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -97,8 +82,8 @@ router.put('/:id', [
     const user = await models.Users.findByPk(id, {
         include: [
             {
-                association: models.Users.Profiles,
-                include: [models.Profiles.Items]
+                model: models.Profiles,
+                include: [models.Items]
             }
         ]
     })
@@ -120,7 +105,7 @@ router.put('/:id', [
     next()
 }))
 
-router.delete('/:id', [validate.id(param('id')), validate.result], asyncHandler(async (req, res, next) => {
+router.delete('/:id', [validate.int(param('id')), validate.result], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 

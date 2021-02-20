@@ -9,7 +9,7 @@ if (!fs.existsSync(logDir)) {
 }
 
 const logger = createLogger({
-    level: (process.env.NODE_ENV || 'development') === 'production' ? 'debug' : 'silly',  // change log level output
+    level: process.env.NODE_ENV === 'production' ? 'debug' : 'silly',
     format: format.combine(
         format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         format.printf(info => `${info.timestamp} ${info.level.substring(0, 3).toUpperCase()} ${info.message}`)
