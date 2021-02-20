@@ -1,15 +1,12 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const { param, body, checkSchema } = require('express-validator')
+const { param, checkSchema } = require('express-validator')
 const config = require('../configs')
-const { logger, RestError, http, paginator } = require('../libs')
-const models = require('../models')
-const schemas = require('../schemas')
+const { logger, RestError, http } = require('../libs')
 const { validate, authen } = require('../middlewares')
 
 const authenUri = config.get('authenUri')
-const normalRowsPerPage = config.get('normalRowsPerPage')
 
 router.get('/id/:username', [
     authen.adminRequired,

@@ -1,12 +1,10 @@
 'use strict'
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
-const { body } = require('express-validator')
 const config = require('../configs')
 const { logger, http } = require('../libs')
 const models = require('../models')
-const schemas = require('../schemas')
-const { dump, validate, authen } = require('../middlewares')
+const { dump, authen } = require('../middlewares')
 
 const authenUri = config.get('authenUri')
 
