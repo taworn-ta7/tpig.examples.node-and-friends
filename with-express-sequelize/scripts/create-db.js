@@ -1,5 +1,6 @@
 'use strict'
 const { logger, db } = require('../libs')
+require('../models')
 
 // running
 const run = async () => {
