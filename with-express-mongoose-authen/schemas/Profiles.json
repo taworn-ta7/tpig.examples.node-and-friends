@@ -1,0 +1,52 @@
+{
+    "$id": "https://node-and-friends/with-express-mongoose-authen/Profiles.json",
+    "definitions": {
+        "createProfile": {
+            "type": "object",
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 100
+                            }
+                        },
+                        "required": [
+                            "name"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "updateProfile": {
+            "type": "object",
+            "properties": {
+                "uid": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                }
+            }
+        }
+    }
+}

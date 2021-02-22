@@ -3003,13 +3003,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{with-express-mongoose-authen-uri}}api/games/1",
+									"raw": "{{with-express-mongoose-authen-uri}}api/games/603359631e7e3233042850f9",
 									"host": [
 										"{{with-express-mongoose-authen-uri}}api"
 									],
 									"path": [
 										"games",
-										"1"
+										"603359631e7e3233042850f9"
 									]
 								}
 							},
@@ -3027,13 +3027,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{with-express-mongoose-authen-uri}}api/games/1",
+									"raw": "{{with-express-mongoose-authen-uri}}api/games/603359631e7e3233042850f9",
 									"host": [
 										"{{with-express-mongoose-authen-uri}}api"
 									],
 									"path": [
 										"games",
-										"1"
+										"603359631e7e3233042850f9"
 									]
 								}
 							},

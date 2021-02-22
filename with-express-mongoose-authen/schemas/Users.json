@@ -29,38 +29,6 @@
                     "const": {
                         "$data": "1/password"
                     }
-                },
-                "profiles": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 100
-                            },
-                            "items": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string",
-                                            "minLength": 1,
-                                            "maxLength": 100
-                                        }
-                                    },
-                                    "required": [
-                                        "name"
-                                    ]
-                                }
-                            }
-                        },
-                        "required": [
-                            "name"
-                        ]
-                    }
                 }
             },
             "required": [

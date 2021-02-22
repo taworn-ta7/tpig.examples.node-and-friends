@@ -22,15 +22,15 @@ router.get('/:page?', [
 
     // select
     const query = {
-        id: req.user.id
+        uid: req.user.id
     }
-    const count = await models.Users.count(query)
-    const items = await models.Users.find(query).skip(page * normalRowsPerPage).limit(normalRowsPerPage)
+    const count = await models.Profiles.count(query)
+    const profiles = await models.Profiles.find(query).skip(page * normalRowsPerPage).limit(normalRowsPerPage)
 
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        items
+        profiles
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -48,10 +48,7 @@ router.post('/', [
 
     // insert
     json.uid = req.user.id
-    const profile = await models.Profiles.create(json, {
-        include: [models.Items]
-    })
-    await profile.reload()
+    const profile = await models.Profiles.create(json)
 
     // success
     const ret = {
@@ -65,7 +62,7 @@ router.post('/', [
 router.put('/:id', [
     authen.userRequired,
     dump.body,
-    validate.int(param('id')),
+    param('id').exists().trim().isString(),
     validate.json(body('profile'), schemas.updateProfile),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -74,15 +71,13 @@ router.put('/:id', [
     const json = req.body.profile
 
     // load record
-    const profile = await models.Profiles.findByPk(id, {
-        include: [models.Items]
-    })
+    let profile = await models.Profiles.findById(id)
     authen.checkPermission(req, profile)
 
     // update
     if (Object.keys(json).length > 0) {
         await profile.update(json)
-        await profile.reload()
+        profile = await models.Profiles.findById(profile._id)
     }
 
     // success
@@ -96,18 +91,18 @@ router.put('/:id', [
 
 router.delete('/:id', [
     authen.userRequired,
-    validate.int(param('id')),
+    param('id').exists().trim().isString(),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
     const { id } = req.params
 
     // load record
-    const profile = await models.Profiles.findByPk(id)
+    const profile = await models.Profiles.findById(id)
     authen.checkPermission(req, profile)
 
     // delete
-    await profile.destroy()
+    await profile.deleteOne()
 
     // success
     const ret = {

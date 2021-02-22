@@ -12,17 +12,7 @@ const schema = new db.Schema({
     expire: Date,
     salt: String,
     hash: String,
-    token: String,
-    profiles: [
-        {
-            name: String,
-            items: [
-                {
-                    name: String
-                }
-            ]
-        }
-    ]
+    token: String
 })
 
 module.exports = db.model('with-express-mongoose-authen-users', schema)
