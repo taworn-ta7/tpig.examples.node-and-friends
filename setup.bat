@@ -8,6 +8,7 @@ FOR /D %%d IN (
     with-express-sequelize-authen-tests
     with-express-mongoose
     with-express-mongoose-authen
+    with-express-mongoose-authen-tests
 ) DO (
     PUSHD %%d
     ECHO %%d

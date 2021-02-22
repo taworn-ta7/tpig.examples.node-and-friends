@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3004e379-5595-4a51-9ad8-1d33c963213a",
+		"_postman_id": "2ff9e63c-933f-4e89-8483-bca0589f88bb",
 		"name": "Node and Friends",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -3034,6 +3034,937 @@
 									"path": [
 										"games",
 										"603364a82222901a70d435a5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "with-express-mongoose-authen-tests",
+			"item": [
+				{
+					"name": "authen",
+					"item": [
+						{
+							"name": "login: admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"admin\",\r\n        \"password\": \"admin//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user0",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user0\",\r\n        \"password\": \"user0//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user0 change password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user0\",\r\n        \"password\": \"PASSWORD\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"user1//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user1 change password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user1\",\r\n        \"password\": \"PASSWORD\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user2\",\r\n        \"password\": \"user2//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user3_, fail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user3_\",\r\n        \"password\": \"user3//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user4\",\r\n        \"password\": \"user4//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user5",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user5\",\r\n        \"password\": \"user5//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login: user6",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let ret = pm.response.json()\r",
+											"pm.environment.set(\"with-express-mongoose-authen-tests-token\", ret.user.token)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": {\r\n        \"username\": \"user6\",\r\n        \"password\": \"user6//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/login",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/logout",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/authen/check",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"authen",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/admin/id/user0",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"admin",
+										"id",
+										"user0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/admin/list/",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"admin",
+										"list",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disable/enable",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"disabled\": true\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/admin/disable/user0",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"admin",
+										"disable",
+										"user0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "register: user4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"user4\",\r\n        \"displayName\": \"User 4\",\r\n        \"password\": \"user4//pass\",\r\n        \"confirmPassword\": \"user4//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/user/register",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register: user5",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"user5\",\r\n        \"displayName\": \"User 5\",\r\n        \"password\": \"user5//pass\",\r\n        \"confirmPassword\": \"user5//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/user/register",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register: user6",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"user6\",\r\n        \"displayName\": \"User 6\",\r\n        \"password\": \"user6//pass\",\r\n        \"confirmPassword\": \"user6//pass\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/user/register",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update displayName",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"displayName\": \"Maxim\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/user/update/displayName",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"user",
+										"update",
+										"displayName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update password",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"password\": \"PASSWORD\",\r\n        \"confirmPassword\": \"PASSWORD\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/user/update/password",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"user",
+										"update",
+										"password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unregister",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/user/unregister",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"user",
+										"unregister"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "games",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Nero Burn\",\r\n        \"items\": [\r\n            {\r\n                \"name\": \"Dragon Quest VI\"\r\n            },\r\n            {\r\n                \"name\": \"Dragon Quest VII\"\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/games/",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"games",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/games/",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"games",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profile\": {\r\n        \"name\": \"Aaa\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/games/1",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"games",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{with-express-mongoose-authen-tests-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{with-express-mongoose-authen-tests-uri}}api/games/1",
+									"host": [
+										"{{with-express-mongoose-authen-tests-uri}}api"
+									],
+									"path": [
+										"games",
+										"1"
 									]
 								}
 							},
