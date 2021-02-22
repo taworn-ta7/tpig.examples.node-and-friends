@@ -16,7 +16,7 @@ router.post('/register', [
     const json = req.body.user
 
     // load user
-    if (await models.Users.findOne({ where: { username: json.username } }))
+    if (await models.Users.findOne({ username: json.username }))
         throw new RestError(`already exists`)
 
     // insert
@@ -46,7 +46,7 @@ router.put('/update/displayName', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = req.body.user
-    const user = await authen.getUserFromDb(req)
+    let user = await authen.getUserFromDb(req)
 
     // check field(s)
     if (typeof json.displayName !== 'string')
@@ -56,6 +56,7 @@ router.put('/update/displayName', [
     await user.update({
         displayName: json.displayName
     })
+    user = await models.Users.findById(user._id)
 
     // success
     const ret = {
@@ -74,7 +75,7 @@ router.put('/update/password', [
 ], asyncHandler(async (req, res, next) => {
     // get request
     const json = req.body.user
-    const user = await authen.getUserFromDb(req)
+    let user = await authen.getUserFromDb(req)
 
     // check field(s)
     if (typeof json.password !== 'string')
@@ -88,6 +89,7 @@ router.put('/update/password', [
         end: new Date(),
         token: null
     })
+    user = await models.Users.findById(user._id)
     req.user = undefined
 
     // success
@@ -101,7 +103,7 @@ router.put('/update/password', [
 
 router.post('/unregister', [authen.userRequired], asyncHandler(async (req, res, next) => {
     // get request
-    const user = await authen.getUserFromDb(req)
+    let user = await authen.getUserFromDb(req)
 
     // update user unregistered flag
     await user.update({
@@ -109,6 +111,7 @@ router.post('/unregister', [authen.userRequired], asyncHandler(async (req, res, 
         end: new Date(),
         token: null
     })
+    user = await models.Users.findById(user._id)
     req.user = undefined
 
     // success
