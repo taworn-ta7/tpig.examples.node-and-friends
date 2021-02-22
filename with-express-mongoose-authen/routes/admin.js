@@ -19,7 +19,7 @@ router.get('/id/:username', [
     const { username } = req.params
 
     // load record
-    const user = await models.Users.findOne({ where: { username } })
+    const user = await models.Users.findOne({ username })
 
     // success
     const ret = {
@@ -42,15 +42,10 @@ router.get('/list/:page?', [
 
     // load records
     const query = {
-        where: {
-            role: 'user'
-        },
-        order: [['createdAt', 'ASC']],
-        offset: page * normalRowsPerPage,
-        limit: normalRowsPerPage
+        role: 'user'
     }
     const count = await models.Users.count(query)
-    const users = await models.Users.findAll(query)
+    const users = await models.Users.find(query).skip(page * normalRowsPerPage).limit(normalRowsPerPage)
 
     // success
     const ret = {
@@ -73,7 +68,7 @@ router.post('/disable/:username', [
     const json = req.body.user
 
     // load record
-    const user = await models.Users.findOne({ where: { username, role: 'user' } })
+    let user = await models.Users.findOne({ username, role: 'user' })
     if (!user)
         throw new RestError(`not exists`)
 
@@ -84,6 +79,7 @@ router.post('/disable/:username', [
             end: new Date(),
             token: null
         })
+        user = await models.Users.findById(user._id)
     }
 
     // success
