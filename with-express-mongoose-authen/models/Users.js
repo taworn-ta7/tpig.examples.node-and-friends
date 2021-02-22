@@ -3,7 +3,16 @@ const db = require('../libs/db')
 
 const schema = new db.Schema({
     username: String,
-    password: String,
+    displayName: String,
+    role: String,
+    disabled: Number,
+    unregistered: Number,
+    begin: Date,
+    end: Date,
+    expire: Date,
+    salt: String,
+    hash: String,
+    token: String,
     profiles: [
         {
             name: String,

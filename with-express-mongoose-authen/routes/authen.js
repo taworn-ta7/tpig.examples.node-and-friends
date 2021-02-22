@@ -29,7 +29,7 @@ router.post('/login', [
     const json = req.body.login
 
     // load user
-    const user = await models.Users.findOne({ where: { username: json.username } })
+    const user = await models.Users.findOne({ username: json.username })
     if (!user || !authen.validatePassword(json.password, user.salt, user.hash))
         throw new RestError(`invalid username or/and password`, 422)
 
@@ -52,7 +52,7 @@ router.post('/login', [
     const token = await jwt.sign(payload, secret, {})
 
     // update user
-    await user.update({
+    await user.updateOne({
         begin: now,
         end: null,
         expire: new Date(expire),
@@ -73,7 +73,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
     const user = await authen.getUserFromDb(req)
 
     // update user
-    await user.update({
+    await user.updateOne({
         end: new Date(),
         token: null
     })

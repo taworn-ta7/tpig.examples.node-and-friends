@@ -52,7 +52,7 @@ const getUser = (user) => {
 }
 
 const getUserFromDb = async (req) => {
-    const user = await models.Users.findByPk(req.user.id)
+    const user = await models.Users.findById(req.user.id)
     if (!user)
         throw new RestError(`not exists`)
     return user
@@ -66,9 +66,11 @@ const getCurrentUser = async (req) => {
         throw new RestError(`invalid token`)
 
     // search token
-    const user = await models.Users.findOne({ where: { token } })
+    console.log(`token: ${token}`)
+    const user = await models.Users.findOne({ token })
     if (!user)
         throw new RestError(`invalid token`)
+    console.log(`user: ${JSON.stringify(user, null, 4)}`)
 
     // check if expiry login
     const now = new Date()
