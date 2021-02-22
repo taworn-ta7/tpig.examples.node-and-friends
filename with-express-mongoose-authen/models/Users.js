@@ -2,6 +2,7 @@
 const db = require('../libs/db')
 
 const schema = new db.Schema({
+    id: String,
     username: String,
     displayName: String,
     role: String,

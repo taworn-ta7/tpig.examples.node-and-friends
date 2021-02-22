@@ -52,7 +52,7 @@ const getUser = (user) => {
 }
 
 const getUserFromDb = async (req) => {
-    const user = await models.Users.findById(req.user.id)
+    const user = await models.Users.findOne({ id: req.user.id })
     if (!user)
         throw new RestError(`not exists`)
     return user
@@ -80,7 +80,7 @@ const getCurrentUser = async (req) => {
     await user.updateOne({
         expire: new Date(expire)
     })
-    user = await models.Users.findById(user._id)    
+    user = await models.Users.findById(user._id)
 
     return getUser(user)
 }

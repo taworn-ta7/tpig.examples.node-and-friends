@@ -1,4 +1,5 @@
 'use strict'
+const uuid = require('uuid')
 const router = require('express').Router()
 const asyncHandler = require('express-async-handler')
 const { body } = require('express-validator')
@@ -22,6 +23,7 @@ router.post('/register', [
     // insert
     const password = authen.setPassword(json.password)
     const user = await models.Users.create({
+        id: uuid.v4(),
         username: json.username,
         displayName: json.displayName,
         role: 'user',
