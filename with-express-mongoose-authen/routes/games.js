@@ -22,20 +22,10 @@ router.get('/:page?', [
 
     // select
     const query = {
-        include: {
-            model: models.Profiles,
-            where: {
-                uid: req.user.id
-            },
-            include: {
-                model: models.Users
-            }
-        },
-        offset: page * normalRowsPerPage,
-        limit: normalRowsPerPage
+        id: req.user.id
     }
-    const count = await models.Items.count(query)
-    const items = await models.Items.findAll(query)
+    const count = await models.Users.count(query)
+    const items = await models.Users.find(query).skip(page * normalRowsPerPage).limit(normalRowsPerPage)
 
     // success
     const ret = {
