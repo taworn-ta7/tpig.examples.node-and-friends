@@ -66,11 +66,9 @@ const getCurrentUser = async (req) => {
         throw new RestError(`invalid token`)
 
     // search token
-    console.log(`token: ${token}`)
-    const user = await models.Users.findOne({ token })
+    let user = await models.Users.findOne({ token })
     if (!user)
         throw new RestError(`invalid token`)
-    console.log(`user: ${JSON.stringify(user, null, 4)}`)
 
     // check if expiry login
     const now = new Date()
@@ -79,9 +77,10 @@ const getCurrentUser = async (req) => {
 
     // update expiry login
     const expire = now.getTime() + config.get('timeout')
-    await user.update({
+    await user.updateOne({
         expire: new Date(expire)
     })
+    user = await models.Users.findById(user._id)    
 
     return getUser(user)
 }
