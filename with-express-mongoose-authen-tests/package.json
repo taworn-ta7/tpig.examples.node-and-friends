@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
+    "startx": "set CROSS_TEST=1&&node .",
     "debug": "set NODE_ENV=development&&node .",
     "release": "set NODE_ENV=production&&node .",
     "create": "set NODE_ENV=production&&node ./scripts/create-db",
     "sync": "set NODE_ENV=production&&node ./scripts/sync-dbs",
+    "syncweb": "set NODE_ENV=production&&set CROSS_TEST=1&&node ./scripts/sync-web",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
