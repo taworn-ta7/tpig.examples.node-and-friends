@@ -17,7 +17,4 @@ else {
     config.set('DEBUG', true)
 }
 
-if (process.env.TESTING)
-    config.file(path.join(__dirname, 'config.test.yaml'))
-
 module.exports = config
