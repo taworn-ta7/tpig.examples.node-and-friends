@@ -76,7 +76,7 @@ router.put('/:id', [
 
     // update
     if (Object.keys(json).length > 0) {
-        await profile.update(json)
+        await profile.updateOne(json)
         profile = await models.Profiles.findById(profile._id)
     }
 

@@ -22,25 +22,15 @@ router.get('/:page?', [
 
     // select
     const query = {
-        include: {
-            model: models.Profiles,
-            where: {
-                uid: req.user.id
-            },
-            include: {
-                model: models.Users
-            }
-        },
-        offset: page * normalRowsPerPage,
-        limit: normalRowsPerPage
+        uid: req.user.id
     }
-    const count = await models.Items.count(query)
-    const items = await models.Items.findAll(query)
+    const count = await models.Profiles.countDocuments(query)
+    const profiles = await models.Profiles.find(query).skip(page * normalRowsPerPage).limit(normalRowsPerPage)
 
     // success
     const ret = {
         paginate: paginator.get(page, normalRowsPerPage, count),
-        items
+        profiles
     }
     res.status(200).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
@@ -58,10 +48,7 @@ router.post('/', [
 
     // insert
     json.uid = req.user.id
-    const profile = await models.Profiles.create(json, {
-        include: [models.Items]
-    })
-    await profile.reload()
+    const profile = await models.Profiles.create(json)
 
     // success
     const ret = {
@@ -75,7 +62,7 @@ router.post('/', [
 router.put('/:id', [
     authen.userRequired,
     dump.body,
-    validate.int(param('id')),
+    param('id').exists().trim().isString(),
     validate.json(body('profile'), schemas.updateProfile),
     validate.result
 ], asyncHandler(async (req, res, next) => {
@@ -84,19 +71,17 @@ router.put('/:id', [
     const json = req.body.profile
 
     // select
-    const profile = await models.Profiles.findOne({
-        where: {
-            uid: req.user.id,
-            id
-        },
-        include: [models.Users, models.Items]
+    let profile = await models.Profiles.findOne({
+        uid: req.user.id,
+        _id: id
     })
     if (!profile)
         throw new RestError(`not found or permission denied`)
 
     // update
     if (Object.keys(json).length > 0) {
-        await profile.update(json)
+        await profile.updateOne(json)
+        profile = await models.Profiles.findById(profile._id)
     }
 
     // success
@@ -110,7 +95,7 @@ router.put('/:id', [
 
 router.delete('/:id', [
     authen.userRequired,
-    validate.int(param('id')),
+    param('id').exists().trim().isString(),
     validate.result
 ], asyncHandler(async (req, res, next) => {
     // get request
@@ -118,17 +103,14 @@ router.delete('/:id', [
 
     // select
     const profile = await models.Profiles.findOne({
-        where: {
-            uid: req.user.id,
-            id
-        },
-        include: [models.Users, models.Items]
+        uid: req.user.id,
+        _id: id
     })
     if (!profile)
         throw new RestError(`not found or permission denied`)
 
     // delete
-    await profile.destroy()
+    await profile.deleteOne()
 
     // success
     const ret = {
