@@ -17,4 +17,8 @@ else {
     config.set('DEBUG', true)
 }
 
+if (process.env.CROSS_TEST !== undefined && process.env.CROSS_TEST) {
+    config.file(path.join(__dirname, 'config.cross-test.yaml'))
+}
+
 module.exports = config
