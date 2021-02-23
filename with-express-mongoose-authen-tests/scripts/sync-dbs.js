@@ -17,10 +17,8 @@ const run = async () => {
         while (true) {
             // select source
             const query = {
-                offset: page * rowsPerPage,
-                limit: rowsPerPage
             }
-            await SourceUsers.count(query)
+            await SourceUsers.countDocuments(query)
             const items = await SourceUsers.find(query).skip(page * rowsPerPage).limit(rowsPerPage)
             if (items.length <= 0)
                 break
@@ -29,20 +27,30 @@ const run = async () => {
             // upsert target
             for (let i = 0; i < items.length; i++) {
                 const source = items[i]
-                const target = await TargetUsers.updateOne({
-                    id: source.id,
-                    username: source.username,
-                    displayName: source.displayName
-                }, null, {
-                    upsert: true
-                })
+                let target = await TargetUsers.findOne({ id: source.id })
+                if (target) {
+                    await target.updateOne({
+                        username: source.username,
+                        displayName: source.displayName
+                    })
+                    target = await TargetUsers.findById(target._id)
+                }
+                else {
+                    target = await TargetUsers.create({
+                        id: source.id,
+                        username: source.username,
+                        displayName: source.displayName
+                    })
+                }
                 logger.verbose(`${counter}: ${JSON.stringify(target)}`)
                 counter++
             }
         }
+        process.exit(0)
     }
     catch (ex) {
         logger.error(ex)
+        process.exit(1)
     }
 }
 run()
