@@ -52,10 +52,11 @@ router.put('/update/displayName', [authen.userRequired], asyncHandler(async (req
     }, { input: 1, output: 1 }))
 
     // update
-    const user = await models.Users.findByPk(req.user.id)
+    let user = await models.Users.findOne({ id: req.user.id })
     await user.update({
         displayName: json.displayName
     })
+    user = await models.Users.findById(user._id)
 
     // success
     const ret = {
@@ -87,10 +88,11 @@ router.put('/update/password', [authen.userRequired], asyncHandler(async (req, r
     }, { input: 1, output: 1 }))
 
     // update
-    const user = await models.Users.findByPk(req.user.id)
+    let user = await models.Users.findOne({ id: req.user.id })
     await user.update({
         password: json.password
     })
+    user = await models.Users.findById(user._id)
 
     // logout
     req.user = undefined
