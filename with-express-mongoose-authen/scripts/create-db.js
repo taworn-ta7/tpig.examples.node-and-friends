@@ -49,9 +49,13 @@ const run = async () => {
             salt: password.salt,
             hash: password.hash
         })
+
+        process.exit(0)
     }
     catch (ex) {
         logger.error(ex)
+
+        process.exit(1)
     }
 }
 run()

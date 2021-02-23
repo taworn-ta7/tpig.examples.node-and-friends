@@ -11,6 +11,8 @@ const run = async () => {
     }
     catch (ex) {
         logger.error(ex)
+
+        process.exit(1)
     }
 }
 run()
