@@ -1,0 +1,16 @@
+{
+  "name": "with-i18next",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "author": "Taworn Ta.",
+  "license": "ISC",
+  "dependencies": {
+    "i18next": "^19.9.2",
+    "i18next-fs-backend": "^1.1.0"
+  }
+}

@@ -9,6 +9,7 @@ FOR /D %%d IN (
     with-express-mongoose
     with-express-mongoose-authen
     with-express-mongoose-authen-tests
+    with-i18next
 ) DO (
     PUSHD %%d
     ECHO %%d
