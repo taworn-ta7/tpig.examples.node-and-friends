@@ -40,7 +40,7 @@ router.post('/login', [
         })
     }))
     if (!result.user)
-        throw new RestError(`not found`)
+        throw new RestError(`not found`, 404)
 
     // success
     const ret = {
@@ -58,7 +58,7 @@ router.post('/logout', [authen.required], asyncHandler(async (req, res, next) =>
         headers: http.jsonHeaders(req.user.token)
     }))
     if (!result.user)
-        throw new RestError(`not found`)
+        throw new RestError(`not found`, 404)
 
     // success
     const ret = {

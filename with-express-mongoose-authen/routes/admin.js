@@ -70,7 +70,7 @@ router.post('/disable/:username', [
     // load record
     let user = await models.Users.findOne({ username, role: 'user' })
     if (!user)
-        throw new RestError(`not exists`)
+        throw new RestError(`not exists`, 404)
 
     // update
     if (typeof json.disabled === 'boolean') {

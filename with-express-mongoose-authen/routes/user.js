@@ -18,7 +18,7 @@ router.post('/register', [
 
     // load user
     if (await models.Users.findOne({ username: json.username }))
-        throw new RestError(`already exists`)
+        throw new RestError(`already exists`, 403)
 
     // insert
     const password = authen.setPassword(json.password)
@@ -52,7 +52,7 @@ router.put('/update/displayName', [
 
     // check field(s)
     if (typeof json.displayName !== 'string')
-        throw new RestError(`missing field(s)`)
+        throw new RestError(`missing field(s)`, 400)
 
     // update user
     await user.update({
@@ -81,7 +81,7 @@ router.put('/update/password', [
 
     // check field(s)
     if (typeof json.password !== 'string')
-        throw new RestError(`missing field(s)`)
+        throw new RestError(`missing field(s)`, 400)
 
     // update user password
     const password = authen.setPassword(json.password)

@@ -54,7 +54,7 @@ router.post('/', [
     const ret = {
         profile
     }
-    res.status(200).send(ret)
+    res.status(201).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
@@ -76,7 +76,7 @@ router.put('/:id', [
         _id: id
     })
     if (!profile)
-        throw new RestError(`not found or permission denied`)
+        throw new RestError(`not found or permission denied`, 403)
 
     // update
     if (Object.keys(json).length > 0) {
@@ -107,7 +107,7 @@ router.delete('/:id', [
         _id: id
     })
     if (!profile)
-        throw new RestError(`not found or permission denied`)
+        throw new RestError(`not found or permission denied`, 403)
 
     // delete
     await profile.deleteOne()

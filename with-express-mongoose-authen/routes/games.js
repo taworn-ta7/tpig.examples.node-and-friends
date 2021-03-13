@@ -54,7 +54,7 @@ router.post('/', [
     const ret = {
         profile
     }
-    res.status(200).send(ret)
+    res.status(201).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))

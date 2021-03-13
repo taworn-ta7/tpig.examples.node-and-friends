@@ -38,7 +38,7 @@ router.put('/update/displayName', [authen.userRequired], asyncHandler(async (req
 
     // check field(s)
     if (!json || typeof json.displayName !== 'string')
-        throw new RestError(`missing field(s)`)
+        throw new RestError(`missing field(s)`, 400)
 
     // fetch
     const result = http.handleErrors(await http.json(`${authenUri}api/user/update/displayName`, {
@@ -72,7 +72,7 @@ router.put('/update/password', [authen.userRequired], asyncHandler(async (req, r
 
     // check field(s)
     if (!json || typeof json.password !== 'string')
-        throw new RestError(`missing field(s)`)
+        throw new RestError(`missing field(s)`, 400)
 
     // fetch
     const result = http.handleErrors(await http.json(`${authenUri}api/user/update/password`, {

@@ -22,7 +22,7 @@ router.get('/id/:username', [
         headers: http.jsonHeaders(req.user.token)
     }, { input: 1, output: 1 }))
     if (!result.user)
-        throw new RestError(`not found`)
+        throw new RestError(`not found`, 404)
 
     // success
     const ret = {
@@ -49,7 +49,7 @@ router.get('/list/:page?', [
         headers: http.jsonHeaders(req.user.token)
     }, { input: 1, output: 1 }))
     if (!result.paginate || !result.users)
-        throw new RestError(`not found`)
+        throw new RestError(`not found`, 404)
 
     // success
     const ret = {
@@ -82,7 +82,7 @@ router.post('/disable/:username', [
         body: JSON.stringify(req.body)
     }, { input: 1, output: 1 }))
     if (!result.user)
-        throw new RestError(`not found`)
+        throw new RestError(`not found`, 404)
 
     // success
     const ret = {

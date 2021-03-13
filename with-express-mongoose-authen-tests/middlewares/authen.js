@@ -40,7 +40,7 @@ const optional = asyncHandler(async (req, res, next) => {
 const required = asyncHandler(async (req, res, next) => {
     const user = await checkToken(req)
     if (!user)
-        throw new RestError(`invalid token`)
+        throw new RestError(`invalid token`, 401)
     req.user = user
     next()
 })
@@ -48,9 +48,9 @@ const required = asyncHandler(async (req, res, next) => {
 const userRequired = asyncHandler(async (req, res, next) => {
     const user = await checkToken(req)
     if (!user)
-        throw new RestError(`invalid token`)
+        throw new RestError(`invalid token`, 401)
     if (user.role !== 'user')
-        throw new RestError(`not user role`)
+        throw new RestError(`not user role`, 403)
     req.user = user
     next()
 })
@@ -58,9 +58,9 @@ const userRequired = asyncHandler(async (req, res, next) => {
 const adminRequired = asyncHandler(async (req, res, next) => {
     const user = await checkToken(req)
     if (!user)
-        throw new RestError(`invalid token`)
+        throw new RestError(`invalid token`, 401)
     if (user.role !== 'admin')
-        throw new RestError(`not admin role`)
+        throw new RestError(`not admin role`, 403)
     req.user = user
     next()
 })

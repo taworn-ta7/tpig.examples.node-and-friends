@@ -54,7 +54,7 @@ const getUser = (user) => {
 const getUserFromDb = async (req) => {
     const user = await models.Users.findByPk(req.user.id)
     if (!user)
-        throw new RestError(`not exists`)
+        throw new RestError(`not exists`, 401)
     return user
 }
 
@@ -63,12 +63,12 @@ const getUserFromDb = async (req) => {
 const getCurrentUser = async (req) => {
     const token = tokenFromHeaders(req)
     if (!token)
-        throw new RestError(`invalid token`)
+        throw new RestError(`invalid token`, 401)
 
     // search token
     const user = await models.Users.findOne({ where: { token } })
     if (!user)
-        throw new RestError(`invalid token`)
+        throw new RestError(`invalid token`, 401)
 
     // check if expiry login
     const now = new Date()
@@ -102,7 +102,7 @@ const required = asyncHandler(async (req, res, next) => {
 const userRequired = asyncHandler(async (req, res, next) => {
     const user = await getCurrentUser(req)
     if (user.role !== 'user')
-        throw new RestError(`require user rights`)
+        throw new RestError(`require user rights`, 403)
     req.user = user
     next()
 })
@@ -110,7 +110,7 @@ const userRequired = asyncHandler(async (req, res, next) => {
 const adminRequired = asyncHandler(async (req, res, next) => {
     const user = await getCurrentUser(req)
     if (user.role !== 'admin')
-        throw new RestError(`require admin rights`)
+        throw new RestError(`require admin rights`, 403)
     req.user = user
     next()
 })
@@ -119,9 +119,9 @@ const adminRequired = asyncHandler(async (req, res, next) => {
 
 const checkPermission = (req, item, uid = 'uid') => {
     if (item === null)
-        throw new RestError(`not found`)
+        throw new RestError(`not found`, 404)
     if (item[uid] !== req.user.id)
-        throw new RestError(`not enough permission`)
+        throw new RestError(`not enough permission`, 403)
     return item
 }
 

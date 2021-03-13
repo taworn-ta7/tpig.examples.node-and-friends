@@ -68,7 +68,7 @@ router.post('/', [
     const ret = {
         user
     }
-    res.status(200).send(ret)
+    res.status(201).send(ret)
     logger.info(`${req.id} successful, output: ${JSON.stringify(ret, null, 4)}`)
     next()
 }))
@@ -86,7 +86,7 @@ router.put('/:id', [
     // load record
     const user = await models.Users.findById(id)
     if (!user)
-        throw new RestError(`no records`)
+        throw new RestError(`no records`, 404)
 
     // update
     if (json) {
@@ -115,7 +115,7 @@ router.delete('/:id', [
     // load record
     const user = await models.Users.findById(id).exec()
     if (!user)
-        throw new RestError(`no records`)
+        throw new RestError(`no records`, 404)
 
     // delete
     await models.Users.deleteOne({ _id: user._id })
