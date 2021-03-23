@@ -3,7 +3,9 @@ const i18next = require('i18next')
 const Backend = require('i18next-fs-backend')
 const path = require('path')
 
-// running
+/**
+ * Main function.
+ */
 const run = async () => {
     try {
         await i18next.use(Backend).init({

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
+    "doc": "jsdoc . -d doc",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "author": "Taworn Ta.",
@@ -12,5 +13,8 @@
   "dependencies": {
     "i18next": "^19.9.2",
     "i18next-fs-backend": "^1.1.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.6"
   }
 }
